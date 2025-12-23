@@ -55,12 +55,16 @@ Data will be saved to `data/raw/` in date-partitioned Parquet files.
 
 ## Project Status
 
-**Phase 1: Foundation** ✅ (In Progress)
+**Phase 1: Foundation** 
 - [x] Project structure
-- [x] Data ingestion pipeline
-- [ ] Historical data collection (30+ days)
+  [x] Core project files & config
+  [x] Environment setup 
 
-**Phase 2: Feature Engineering** 
+**Phase 2: Feature Engineering**
+- [] 1. Time Series Feature Extractor
+- [] 2. Domain Feature Extractor
+- [] 3. Feature Pipeline
+- [] 4. Feature Selection Tools
 
 **Phase 3: Core ML Models** 
 
