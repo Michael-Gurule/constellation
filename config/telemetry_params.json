@@ -1,0 +1,200 @@
+{
+    "USLAB000084": {
+        "name": "RWA_1_Speed",
+        "description": "Reaction Wheel Assembly 1 Speed",
+        "unit": "RPM",
+        "subsystem": "attitude_control",
+        "type": "float",
+        "normal_range": [
+            0,
+            6000
+        ]
+    },
+    "USLAB000085": {
+        "name": "RWA_2_Speed",
+        "description": "Reaction Wheel Assembly 2 Speed",
+        "unit": "RPM",
+        "subsystem": "attitude_control",
+        "type": "float",
+        "normal_range": [
+            0,
+            6000
+        ]
+    },
+    "USLAB000086": {
+        "name": "RWA_3_Speed",
+        "description": "Reaction Wheel Assembly 3 Speed",
+        "unit": "RPM",
+        "subsystem": "attitude_control",
+        "type": "float",
+        "normal_range": [
+            0,
+            6000
+        ]
+    },
+    "USLAB000087": {
+        "name": "RWA_4_Speed",
+        "description": "Reaction Wheel Assembly 4 Speed",
+        "unit": "RPM",
+        "subsystem": "attitude_control",
+        "type": "float",
+        "normal_range": [
+            0,
+            6000
+        ]
+    },
+    "NODE3000001": {
+        "name": "CMG_1_Momentum",
+        "description": "Control Moment Gyroscope 1 Momentum",
+        "unit": "N*m*s",
+        "subsystem": "attitude_control",
+        "type": "float",
+        "normal_range": [
+            0,
+            4000
+        ]
+    },
+    "NODE3000002": {
+        "name": "CMG_2_Momentum",
+        "description": "Control Moment Gyroscope 2 Momentum",
+        "unit": "N*m*s",
+        "subsystem": "attitude_control",
+        "type": "float",
+        "normal_range": [
+            0,
+            4000
+        ]
+    },
+    "NODE3000003": {
+        "name": "CMG_3_Momentum",
+        "description": "Control Moment Gyroscope 3 Momentum",
+        "unit": "N*m*s",
+        "subsystem": "attitude_control",
+        "type": "float",
+        "normal_range": [
+            0,
+            4000
+        ]
+    },
+    "NODE3000004": {
+        "name": "CMG_4_Momentum",
+        "description": "Control Moment Gyroscope 4 Momentum",
+        "unit": "N*m*s",
+        "subsystem": "attitude_control",
+        "type": "float",
+        "normal_range": [
+            0,
+            4000
+        ]
+    },
+    "USLAB000032": {
+        "name": "Attitude_Q1",
+        "description": "Attitude Quaternion Component 1",
+        "unit": "dimensionless",
+        "subsystem": "attitude_control",
+        "type": "float",
+        "normal_range": [
+            -1,
+            1
+        ]
+    },
+    "USLAB000033": {
+        "name": "Attitude_Q2",
+        "description": "Attitude Quaternion Component 2",
+        "unit": "dimensionless",
+        "subsystem": "attitude_control",
+        "type": "float",
+        "normal_range": [
+            -1,
+            1
+        ]
+    },
+    "USLAB000034": {
+        "name": "Attitude_Q3",
+        "description": "Attitude Quaternion Component 3",
+        "unit": "dimensionless",
+        "subsystem": "attitude_control",
+        "type": "float",
+        "normal_range": [
+            -1,
+            1
+        ]
+    },
+    "USLAB000035": {
+        "name": "Attitude_Q4",
+        "description": "Attitude Quaternion Component 4",
+        "unit": "dimensionless",
+        "subsystem": "attitude_control",
+        "type": "float",
+        "normal_range": [
+            -1,
+            1
+        ]
+    },
+    "USLAB000098": {
+        "name": "SBand_Signal_Strength",
+        "description": "S-band Communication Signal Strength",
+        "unit": "dBm",
+        "subsystem": "communications",
+        "type": "float",
+        "normal_range": [
+            -120,
+            -60
+        ]
+    },
+    "USLAB000099": {
+        "name": "KuBand_Signal_Strength",
+        "description": "Ku-band Communication Signal Strength",
+        "unit": "dBm",
+        "subsystem": "communications",
+        "type": "float",
+        "normal_range": [
+            -120,
+            -60
+        ]
+    },
+    "USLAB000100": {
+        "name": "SBand_Power",
+        "description": "S-band Transmitter Power",
+        "unit": "Watts",
+        "subsystem": "communications",
+        "type": "float",
+        "normal_range": [
+            0,
+            100
+        ]
+    },
+    "USLAB000101": {
+        "name": "KuBand_Power",
+        "description": "Ku-band Transmitter Power",
+        "unit": "Watts",
+        "subsystem": "communications",
+        "type": "float",
+        "normal_range": [
+            0,
+            100
+        ]
+    },
+    "NODE2000015": {
+        "name": "Antenna_Azimuth",
+        "description": "Antenna Pointing Azimuth Angle",
+        "unit": "degrees",
+        "subsystem": "communications",
+        "type": "float",
+        "normal_range": [
+            0,
+            360
+        ]
+    },
+    "NODE2000016": {
+        "name": "Antenna_Elevation",
+        "description": "Antenna Pointing Elevation Angle",
+        "unit": "degrees",
+        "subsystem": "communications",
+        "type": "float",
+        "normal_range": [
+            -90,
+            90
+        ]
+    }
+}
