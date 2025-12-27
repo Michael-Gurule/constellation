@@ -72,3 +72,5 @@ junit-*.xml
 .env
 .DS_Store
 *.log
+/data/raw
+/data/processed
