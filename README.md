@@ -1,14 +1,17 @@
-<p align="center">
-  <img src="../assets/logo-full.svg" alt="CONSTELLATION Logo" width="300">
-</p>
 
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/a675358c-19d6-4bf6-b332-2cc65d36e2dc" alt="Alt text description">
 <p align="center">
   <strong>Satellite Fleet Health Management System</strong><br>
   Real-time ISS telemetry monitoring with ML-powered diagnostics
-</p>
+</p>  
+<br>
+<br> 
 
 **Continuous Operations Network for Satellite Telemetry Evaluation, Life-cycle Analysis, Tracking, Intelligence, Operations, and Notification**
-
+<br>
+<br>
 A production-grade satellite fleet health management platform using real ISS telemetry to demonstrate predictive maintenance, anomaly detection, and operational decision support capabilities for aerospace and defense applications.
 
 
