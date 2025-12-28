@@ -1,4 +1,4 @@
-# CONSTELLATION Dashboard Showcase
+
 
 <p align="center">
   <img src="../assets/logo-full.svg" alt="CONSTELLATION Logo" width="300">
