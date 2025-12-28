@@ -74,3 +74,6 @@ junit-*.xml
 *.log
 /data/raw
 /data/processed
+/docs/dev_notes
+/data
+/notebooks
