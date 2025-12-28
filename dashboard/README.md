@@ -1,8 +1,12 @@
-# CONSTELLATION Dashboard
 
 <p align="center">
-  <img src="../assets/logo.svg" alt="CONSTELLATION Logo" width="80">
-</p>
+  <img src="https://github.com/user-attachments/assets/a675358c-19d6-4bf6-b332-2cc65d36e2dc" alt="Alt text description">
+<p align="center">
+  <strong>Satellite Fleet Health Management System</strong><br>
+  Real-time ISS telemetry monitoring with ML-powered diagnostics
+</p>  
+<br>
+<br> 
 
 Interactive web interface for satellite fleet health monitoring with a dark space-themed design.
 
@@ -112,3 +116,11 @@ COLORS = {
 ## License
 
 MIT License - See project root for details.
+
+---
+
+<p align="center">
+  <img src="../assets/logo-icon.svg" alt="CONSTELLATION" width="40">
+  <br>
+  <sub>Built by Michael Gurule | Data: NASA ISS Telemetry (Public)</sub>
+</p>
