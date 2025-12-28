@@ -49,6 +49,7 @@ junit-*.xml
 
 # Jupyter
 .ipynb_checkpoints/
+.ipynb 
 
 # Python environment variables / secrets
 .env
@@ -58,7 +59,10 @@ junit-*.xml
 # Documentation
 *.manifest
 *.spec
-/dev_notes/ 
+scripts/
+data/
+docs/
+
 
 
 # VS Code
@@ -72,8 +76,11 @@ junit-*.xml
 .env
 .DS_Store
 *.log
-/data/raw
-/data/processed
-/docs/dev_notes
-/data
-/notebooks
+
+*.ipynb
+tests/test_api.py
+tests/test_features.py
+tests/test_models.py
+tests/test_optimazation.py
+tests/test_setup.py
+tests/TESTING.md
