@@ -26,106 +26,119 @@ The CONSTELLATION dashboard provides a comprehensive interface for monitoring th
 ---
 
 ## Dashboard Pages
-
+  
 ### Mission Control
-
-The main overview page displaying fleet-wide health status, active alerts, and live telemetry feeds.
-
+<br>
 <p align="center">
-  <img src="images/dashboard-mission-control.png" alt="Mission Control" width="800">
+  <img src="https://github.com/user-attachments/assets/ef464686-12bb-4fbb-a9fd-cd5cc5017f60" alt="Mission Control" width="800">
+</p>
+<p align="center">
+The main overview page displaying fleet-wide health status, active alerts, and live telemetry feeds.
 </p>
 
+<br>
 **Features:**
 - Fleet health gauge with real-time scoring
 - Subsystem status cards (Attitude Control, Communications)
 - Live telemetry chart with multi-parameter visualization
 - Active alerts panel with severity indicators
 - ML model status monitoring
+<br>
 
 ---
 
 ### Telemetry Monitoring
-
-Detailed telemetry visualization with multi-parameter selection and statistical analysis.
-
+<br>
 <p align="center">
-  <img src="images/dashboard-telemetry.png" alt="Telemetry Monitoring" width="800">
+  <img src="https://github.com/user-attachments/assets/89133d07-693a-4714-96d8-cfb1141c059a" alt="Telemetry Monitoring" width="800">
 </p>
-
+<p align="center">
+Detailed telemetry visualization with multi-parameter selection and statistical analysis.
+</p>
+<br>
 **Features:**
 - Multi-parameter selection (up to 6 simultaneous)
 - Line, area, and candlestick chart modes
 - Normal bounds visualization
 - Subsystem comparison with sparklines
 - Statistical summary table with export options
+<br>
 
 ---
 
 ### System Diagnostics
-
-Consolidated anomaly detection, health monitoring, and fault analysis.
-
+<br>
 <p align="center">
-  <img src="images/dashboard-diagnostics.png" alt="System Diagnostics" width="800">
+  <img src="https://github.com/user-attachments/assets/f652bbe1-d2fd-490c-8480-4e85887cad5e" alt="System Diagnostics" width="800">
 </p>
-
+<p align="center">
+Consolidated anomaly detection, health monitoring, and fault analysis.
+</p>
+<br>
 **Features:**
 - Component health treemap visualization
 - Radar chart for subsystem health comparison
 - Anomaly score distribution analysis
 - Fault classification breakdown
 - Health trend visualization (24h)
+<br>
 
 ---
 
 ### 3D Visualization
-
-Interactive 3D visualization of ISS attitude and component status.
-
+<br>
 <p align="center">
-  <img src="images/dashboard-visualization.png" alt="3D Visualization" width="800">
+  <img src="https://github.com/user-attachments/assets/4f9a0f7b-25d4-49c3-9fc6-72191c319bd7" alt="3D Visualization" width="800">
 </p>
-
+<p align="center">
+Interactive 3D visualization of ISS attitude and component status.
+</p>
+<br>
 **Features:**
 - 3D ISS model with solar arrays and modules
 - Quaternion-based attitude control
 - Manual rotation controls (pitch, yaw, roll)
 - Component health 3D map view
 - Earth reference sphere
+<br>
 
 ---
 
 ### Maintenance Scheduling
-
-Optimized maintenance task scheduling and resource management.
-
+<br>
 <p align="center">
-  <img src="images/dashboard-maintenance.png" alt="Maintenance Scheduling" width="800">
+  <img src="https://github.com/user-attachments/assets/c68958ba-a651-43ed-830f-9318c9ba1840" alt="Maintenance Scheduling" width="800">
 </p>
-
+<p align="center">
+Optimized maintenance task scheduling and resource management.
+</p>
+<br>
 **Features:**
 - Gantt chart timeline view
 - Calendar heatmap with risk scoring
 - Task list with priority indicators
 - Urgency vs Impact scatter analysis
 - Risk distribution visualization
+<br>
 
 ---
 
 ### Settings
-
-System configuration, model management, and about information.
-
+<br>
 <p align="center">
-  <img src="images/dashboard-settings.png" alt="Settings" width="800">
+  <img src="https://github.com/user-attachments/assets/ee2e256a-1a50-44fd-8179-a2be99446a53" alt="Settings" width="800">
 </p>
-
+<p align="center">
+System configuration, model management, and about information.
+</p>
+<br>
 **Features:**
 - ML model status and performance metrics
 - Alert threshold configuration
 - Data storage management
 - System information display
 - Technology stack overview
+<br>
 
 ---
 
@@ -173,24 +186,6 @@ streamlit run dashboard/app.py
 ```
 
 Dashboard will be available at: **http://localhost:8501**
-
----
-
-## Screenshots Setup
-
-To add screenshots to this showcase:
-
-1. Run the dashboard: `streamlit run dashboard/app.py`
-2. Navigate to each page and take screenshots
-3. Save images to `docs/images/` with these names:
-   - `dashboard-mission-control.png`
-   - `dashboard-telemetry.png`
-   - `dashboard-diagnostics.png`
-   - `dashboard-visualization.png`
-   - `dashboard-maintenance.png`
-   - `dashboard-settings.png`
-
-Recommended screenshot dimensions: **1600x900** or **1920x1080**
 
 ---
 
