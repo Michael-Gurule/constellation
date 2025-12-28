@@ -1,4 +1,11 @@
-# CONSTELLATION
+<p align="center">
+  <img src="../assets/logo-full.svg" alt="CONSTELLATION Logo" width="300">
+</p>
+
+<p align="center">
+  <strong>Satellite Fleet Health Management System</strong><br>
+  Real-time ISS telemetry monitoring with ML-powered diagnostics
+</p>
 
 **Continuous Operations Network for Satellite Telemetry Evaluation, Life-cycle Analysis, Tracking, Intelligence, Operations, and Notification**
 
