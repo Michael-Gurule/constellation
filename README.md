@@ -291,7 +291,12 @@ This is a portfolio project. For questions or collaboration:
 ---
 
 <p align="center">
-  <img src="../assets/logo-icon.svg" alt="CONSTELLATION" width="40">
-  <br>
-  <sub>Built by Michael Gurule | Data: NASA ISS Telemetry (Public)</sub>
+<sub>BUILT BY</sub> 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/ecb66c61-85c5-4d24-aaa3-99ddf2cd33cf" alt="MICHAEL GURULE">
+<p align="center">
+<b>Data Scientist | Machine Learning Engineer</b>
+</p>
+<p align="center">
+  <sub> Data: NASA ISS Telemetry (Public)</sub>
 </p>
