@@ -1,6 +1,6 @@
 # .gitignore for constellation
 
-# Byte-compiled / cache
+# Python / cache
 __pycache__/
 *.py[cod]
 *$py.class
@@ -62,6 +62,7 @@ junit-*.xml
 scripts/
 data/
 docs/
+assets/
 
 
 
