@@ -13,6 +13,5 @@ if [[ -z "$VIRTUAL_ENV" ]]; then
     echo "Run: source venv/bin/activate"
     exit 1
 fi
-
 # Run monitor
 python -m src.ingestion.collection_monitorch

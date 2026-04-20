@@ -1,3 +1,3 @@
 """
-Configuration package for CONSTELLATION project.
+Configuration package for CONSTELLATION.
 """
