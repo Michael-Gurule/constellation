@@ -72,3 +72,37 @@ markers = [
 # An expected failure that starts passing must fail the run (forces the
 # marker to be removed together with the change that delivers it).
 xfail_strict = true
+
+[tool.ruff]
+target-version = "py312"
+line-length = 88
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = [
+    "E", "W",   # pycodestyle
+    "F",        # pyflakes
+    "I",        # isort
+    "B",        # flake8-bugbear
+    "UP",       # pyupgrade
+    "SIM",      # flake8-simplify
+    "C4",       # flake8-comprehensions
+    "NPY",      # numpy-specific (incl. legacy global RNG use)
+    "PT",       # flake8-pytest-style
+    "RUF",      # ruff-specific
+]
+# The formatter owns line length; long f-strings/URLs are tolerated.
+ignore = ["E501"]
+
+# Known-debt register for the legacy modules and the v1 entry points. Each
+# entry is removed when its file is deleted or rewritten.
+[tool.ruff.lint.per-file-ignores]
+"api/main.py" = ["B904"]
+"dashboard/pages/2_Diagnostics.py" = ["NPY002"]
+"dashboard/pages/3_Visualization.py" = ["NPY002"]
+"dashboard/pages/5_Settings.py" = ["B905"]
+"scripts/load_colab_lstm.py" = ["NPY002"]
+"src/constellation/legacy/ingestion/data_simulator.py" = ["NPY002"]
+"src/constellation/legacy/ingestion/lightstreamer_client.py" = ["E722"]
+"tests/legacy/test_features.py" = ["NPY002"]
+"tests/legacy/test_models.py" = ["NPY002"]

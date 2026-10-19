@@ -12,31 +12,26 @@ COLORS = {
     "background_medium": "#0f1629",
     "background_light": "#1a2035",
     "background_card": "#141b2d",
-
     # Accent colors
-    "primary": "#00d4ff",      # Cyan - primary actions
-    "secondary": "#7b68ee",    # Purple - secondary elements
-    "accent": "#00ff88",       # Green - success/positive
-
+    "primary": "#00d4ff",  # Cyan - primary actions
+    "secondary": "#7b68ee",  # Purple - secondary elements
+    "accent": "#00ff88",  # Green - success/positive
     # Status colors
     "success": "#00ff88",
     "warning": "#ffaa00",
     "error": "#ff4757",
     "critical": "#ff0055",
     "info": "#00d4ff",
-
     # Health score colors
     "health_excellent": "#00ff88",
     "health_good": "#7bed9f",
     "health_fair": "#ffaa00",
     "health_poor": "#ff6b6b",
     "health_critical": "#ff0055",
-
     # Text colors
     "text_primary": "#ffffff",
     "text_secondary": "#8892b0",
     "text_muted": "#5a6a8a",
-
     # Chart colors
     "chart_1": "#00d4ff",
     "chart_2": "#7b68ee",
@@ -44,7 +39,6 @@ COLORS = {
     "chart_4": "#ffaa00",
     "chart_5": "#ff6b6b",
     "chart_6": "#ff00ff",
-
     # Grid/border
     "border": "#2a3f5f",
     "grid": "#1e3a5f",
@@ -60,6 +54,7 @@ CHART_COLORS = [
     COLORS["chart_6"],
 ]
 
+
 def get_health_color(score: float) -> str:
     """Get color based on health score (0-100)."""
     if score >= 85:
@@ -72,6 +67,7 @@ def get_health_color(score: float) -> str:
         return COLORS["health_poor"]
     else:
         return COLORS["health_critical"]
+
 
 def get_status_color(status: str) -> str:
     """Get color based on status string."""
@@ -88,6 +84,7 @@ def get_status_color(status: str) -> str:
         return COLORS["critical"]
     return COLORS["text_secondary"]
 
+
 def get_anomaly_color(score: float) -> str:
     """Get color based on anomaly score (0-1)."""
     if score < 0.5:
@@ -98,6 +95,7 @@ def get_anomaly_color(score: float) -> str:
         return COLORS["error"]
     else:
         return COLORS["critical"]
+
 
 # Plotly theme template
 PLOTLY_TEMPLATE = {
@@ -140,9 +138,11 @@ PLOTLY_TEMPLATE = {
     }
 }
 
+
 def apply_theme():
     """Apply the dark space theme to Streamlit."""
-    st.markdown(f"""
+    st.markdown(
+        f"""
     <style>
         /* Import fonts */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
@@ -578,12 +578,15 @@ def apply_theme():
             background: var(--primary);
         }}
     </style>
-    """, unsafe_allow_html=True)
+    """,
+        unsafe_allow_html=True,
+    )
 
 
 def render_logo():
     """Render the CONSTELLATION logo."""
-    st.markdown("""
+    st.markdown(
+        """
     <div class="logo-container">
         <div style="margin-bottom: 8px;">
             <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -604,13 +607,20 @@ def render_logo():
             Fleet Health Management
         </div>
     </div>
-    """, unsafe_allow_html=True)
+    """,
+        unsafe_allow_html=True,
+    )
 
 
 def render_status_indicator(status: str, label: str = ""):
     """Render a status indicator dot with optional label."""
-    status_class = "online" if status.lower() in ["online", "active", "nominal"] else \
-                   "warning" if status.lower() in ["warning", "degraded"] else "offline"
+    status_class = (
+        "online"
+        if status.lower() in ["online", "active", "nominal"]
+        else "warning"
+        if status.lower() in ["warning", "degraded"]
+        else "offline"
+    )
 
     html = f'<span class="status-dot {status_class}"></span>'
     if label:
@@ -619,10 +629,13 @@ def render_status_indicator(status: str, label: str = ""):
     st.markdown(html, unsafe_allow_html=True)
 
 
-def render_metric_card(title: str, value: str, subtitle: str = "", color: str = None):
+def render_metric_card(
+    title: str, value: str, subtitle: str = "", color: str | None = None
+):
     """Render a custom metric card."""
     color_style = f"color: {color};" if color else ""
-    st.markdown(f"""
+    st.markdown(
+        f"""
     <div class="metric-card">
         <div style="color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px;">
             {title}
@@ -634,17 +647,22 @@ def render_metric_card(title: str, value: str, subtitle: str = "", color: str = 
             {subtitle}
         </div>
     </div>
-    """, unsafe_allow_html=True)
+    """,
+        unsafe_allow_html=True,
+    )
 
 
 def render_section_header(title: str, icon: str = ""):
     """Render a styled section header."""
-    st.markdown(f"""
+    st.markdown(
+        f"""
     <div style="display: flex; align-items: center; margin: 30px 0 20px 0; padding-bottom: 10px; border-bottom: 1px solid var(--border);">
         <span style="font-size: 1.5rem; margin-right: 12px;">{icon}</span>
         <span style="font-size: 1.25rem; font-weight: 600; color: var(--text-primary);">{title}</span>
     </div>
-    """, unsafe_allow_html=True)
+    """,
+        unsafe_allow_html=True,
+    )
 
 
 def apply_plotly_theme(fig):
@@ -652,37 +670,37 @@ def apply_plotly_theme(fig):
     fig.update_layout(
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(0,0,0,0)",
-        font=dict(
-            family="Inter, sans-serif",
-            color=COLORS["text_secondary"],
-            size=12,
-        ),
-        title=dict(
-            font=dict(
-                color=COLORS["text_primary"],
-                size=16,
-            )
-        ),
-        xaxis=dict(
-            gridcolor=COLORS["grid"],
-            linecolor=COLORS["border"],
-            tickcolor=COLORS["text_muted"],
-            zerolinecolor=COLORS["border"],
-        ),
-        yaxis=dict(
-            gridcolor=COLORS["grid"],
-            linecolor=COLORS["border"],
-            tickcolor=COLORS["text_muted"],
-            zerolinecolor=COLORS["border"],
-        ),
-        hoverlabel=dict(
-            bgcolor=COLORS["background_card"],
-            bordercolor=COLORS["border"],
-            font=dict(color=COLORS["text_primary"]),
-        ),
-        legend=dict(
-            bgcolor="rgba(0,0,0,0)",
-            font=dict(color=COLORS["text_secondary"]),
-        ),
+        font={
+            "family": "Inter, sans-serif",
+            "color": COLORS["text_secondary"],
+            "size": 12,
+        },
+        title={
+            "font": {
+                "color": COLORS["text_primary"],
+                "size": 16,
+            }
+        },
+        xaxis={
+            "gridcolor": COLORS["grid"],
+            "linecolor": COLORS["border"],
+            "tickcolor": COLORS["text_muted"],
+            "zerolinecolor": COLORS["border"],
+        },
+        yaxis={
+            "gridcolor": COLORS["grid"],
+            "linecolor": COLORS["border"],
+            "tickcolor": COLORS["text_muted"],
+            "zerolinecolor": COLORS["border"],
+        },
+        hoverlabel={
+            "bgcolor": COLORS["background_card"],
+            "bordercolor": COLORS["border"],
+            "font": {"color": COLORS["text_primary"]},
+        },
+        legend={
+            "bgcolor": "rgba(0,0,0,0)",
+            "font": {"color": COLORS["text_secondary"]},
+        },
     )
     return fig

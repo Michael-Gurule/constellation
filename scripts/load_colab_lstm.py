@@ -16,7 +16,7 @@ class LSTMForecaster(nn.Module):
     """LSTM model architecture (must match Colab definition)."""
 
     def __init__(self, input_dim, hidden_dim=64, num_layers=2, dropout=0.2):
-        super(LSTMForecaster, self).__init__()
+        super().__init__()
         self.lstm = nn.LSTM(
             input_dim,
             hidden_dim,
@@ -77,7 +77,7 @@ def main():
         print("Please download it from Colab and place it in data/models/")
         return
 
-    model, scaler, metadata = load_colab_model(colab_model_path)
+    model, _scaler, metadata = load_colab_model(colab_model_path)
 
     # Test with synthetic data
     print("\nTesting model with dummy data...")

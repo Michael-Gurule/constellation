@@ -1,5 +1,3 @@
-from typing import Dict
-
 import numpy as np
 from sklearn.metrics import (
     f1_score,
@@ -14,7 +12,7 @@ from sklearn.metrics import (
 
 def calculate_regression_metrics(
     y_true: np.ndarray, y_pred: np.ndarray
-) -> Dict[str, float]:
+) -> dict[str, float]:
 
     mae = mean_absolute_error(y_true, y_pred)
     mse = mean_squared_error(y_true, y_pred)
@@ -30,7 +28,7 @@ def calculate_regression_metrics(
 
 def calculate_classification_metrics(
     y_true: np.ndarray, y_pred: np.ndarray, y_proba: np.ndarray = None
-) -> Dict[str, float]:
+) -> dict[str, float]:
 
     precision = precision_score(y_true, y_pred, average="weighted", zero_division=0)
     recall = recall_score(y_true, y_pred, average="weighted", zero_division=0)
@@ -53,7 +51,7 @@ def calculate_classification_metrics(
 
 def calculate_anomaly_metrics(
     y_true: np.ndarray, y_pred: np.ndarray, positive_label: int = 1
-) -> Dict[str, float]:
+) -> dict[str, float]:
 
     precision = precision_score(
         y_true, y_pred, pos_label=positive_label, zero_division=0

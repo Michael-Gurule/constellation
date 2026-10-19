@@ -4,7 +4,7 @@ import sys
 from constellation.legacy.settings import LOG_LEVEL
 
 
-def setup_logger(name: str, log_file: str = None) -> logging.Logger:
+def setup_logger(name: str, log_file: str | None = None) -> logging.Logger:
     """Return a console logger. `log_file` is accepted for compatibility and ignored."""
 
     logger = logging.getLogger(name)

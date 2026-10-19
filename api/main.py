@@ -4,14 +4,13 @@ Provides REST API endpoints for ML models and system operations.
 """
 
 from datetime import datetime
-from typing import Dict, List, Optional
 
 from fastapi import BackgroundTasks, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
-from constellation.legacy.settings import MODELS_DIR
 from constellation.legacy.optimization.system_integrator import ConstellationSystem
+from constellation.legacy.settings import MODELS_DIR
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -39,7 +38,7 @@ class HealthStatus(BaseModel):
 
     status: str
     timestamp: datetime
-    models_loaded: Dict[str, bool]
+    models_loaded: dict[str, bool]
     message: str
 
 
@@ -49,7 +48,7 @@ class AnomalyDetectionRequest(BaseModel):
     subsystem: str = Field(
         default="attitude_control", description="Subsystem to analyze"
     )
-    sample_size: Optional[int] = Field(
+    sample_size: int | None = Field(
         default=50000, description="Number of records to analyze"
     )
 
@@ -204,12 +203,10 @@ async def detect_anomalies(request: AnomalyDetectionRequest):
         )
 
     except Exception as e:
-        raise HTTPException(
-            status_code=500, detail=f"Anomaly detection failed: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=f"Anomaly detection failed: {e!s}")
 
 
-@app.get("/api/v1/health-scores", response_model=List[ComponentHealth])
+@app.get("/api/v1/health-scores", response_model=list[ComponentHealth])
 async def get_health_scores(subsystem: str = "attitude_control"):
     """
     Get health scores for all components.
@@ -255,11 +252,11 @@ async def get_health_scores(subsystem: str = "attitude_control"):
         raise HTTPException(status_code=404, detail="Health scores not found")
     except Exception as e:
         raise HTTPException(
-            status_code=500, detail=f"Failed to retrieve health scores: {str(e)}"
+            status_code=500, detail=f"Failed to retrieve health scores: {e!s}"
         )
 
 
-@app.get("/api/v1/maintenance-schedule", response_model=List[MaintenanceTask])
+@app.get("/api/v1/maintenance-schedule", response_model=list[MaintenanceTask])
 async def get_maintenance_schedule():
     """
     Get current maintenance schedule.
@@ -306,7 +303,7 @@ async def get_maintenance_schedule():
 
     except Exception as e:
         raise HTTPException(
-            status_code=500, detail=f"Failed to retrieve schedule: {str(e)}"
+            status_code=500, detail=f"Failed to retrieve schedule: {e!s}"
         )
 
 
@@ -363,7 +360,7 @@ async def run_complete_analysis(
         )
 
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Analysis failed: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Analysis failed: {e!s}")
 
 
 # Model management endpoints
@@ -381,7 +378,7 @@ async def load_models():
         }
 
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Failed to load models: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to load models: {e!s}")
 
 
 @app.get("/api/v1/models/status")

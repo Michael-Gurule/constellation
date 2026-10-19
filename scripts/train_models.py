@@ -40,7 +40,7 @@ def main():
     print("Training Complete!")
     print("=" * 60)
     print(f"\nTrained models: {len(models)}")
-    for name in models.keys():
+    for name in models:
         print(f"  ✓ {name}")
 
 

@@ -1,5 +1,3 @@
-from typing import List, Optional
-
 import matplotlib.pyplot as plt
 import pandas as pd
 import plotly.express as px
@@ -13,7 +11,7 @@ logger = setup_logger(__name__)
 def plot_time_series(
     df: pd.DataFrame,
     time_col: str,
-    value_cols: List[str],
+    value_cols: list[str],
     title: str = "Time Series",
     ylabel: str = "Value",
     figsize: tuple = (14, 6),
@@ -45,7 +43,7 @@ def plot_feature_importance(
             x=top_features["importance"],
             y=top_features["feature"],
             orientation="h",
-            marker=dict(color=top_features["importance"], colorscale="Viridis"),
+            marker={"color": top_features["importance"], "colorscale": "Viridis"},
         )
     )
 
@@ -62,7 +60,7 @@ def plot_feature_importance(
 
 def plot_correlation_matrix(
     df: pd.DataFrame,
-    features: Optional[List[str]] = None,
+    features: list[str] | None = None,
     title: str = "Feature Correlation Matrix",
 ) -> go.Figure:
 
@@ -90,7 +88,7 @@ def plot_correlation_matrix(
 
 
 def plot_distribution(
-    df: pd.DataFrame, column: str, title: Optional[str] = None, bins: int = 50
+    df: pd.DataFrame, column: str, title: str | None = None, bins: int = 50
 ) -> go.Figure:
 
     if title is None:
@@ -120,7 +118,7 @@ def plot_anomaly_scores(
             y=df[score_col],
             mode="lines",
             name="Anomaly Score",
-            line=dict(color="blue", width=1),
+            line={"color": "blue", "width": 1},
         )
     )
 
@@ -131,7 +129,7 @@ def plot_anomaly_scores(
             y=[threshold, threshold],
             mode="lines",
             name="Threshold",
-            line=dict(color="red", width=2, dash="dash"),
+            line={"color": "red", "width": 2, "dash": "dash"},
         )
     )
 
@@ -144,7 +142,7 @@ def plot_anomaly_scores(
                 y=anomalies[score_col],
                 mode="markers",
                 name="Anomalies",
-                marker=dict(color="red", size=8, symbol="x"),
+                marker={"color": "red", "size": 8, "symbol": "x"},
             )
         )
 
