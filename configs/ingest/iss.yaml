@@ -1,0 +1,97 @@
+# ISS channels collected by `constellation collect iss`.
+# IDs come from NASA's ISSLive dictionary; units were checked against live values
+# (the dictionary's units column disagrees with the descriptions in several places).
+# expect_static marks channels that sent no update beyond their initial value during a
+# 120 s probe. The six sa_*_current channels report TimeStamp 0 (no data) and are skipped.
+channels:
+  - {id: USLAB000001, name: cmg1_online, subsystem: cmg, kind: state, units: "", expect_static: true}
+  - {id: USLAB000002, name: cmg2_online, subsystem: cmg, kind: state, units: "", expect_static: true}
+  - {id: USLAB000003, name: cmg3_online, subsystem: cmg, kind: state, units: "", expect_static: true}
+  - {id: USLAB000004, name: cmg4_online, subsystem: cmg, kind: state, units: "", expect_static: true}
+  - {id: USLAB000005, name: cmgs_online, subsystem: cmg, kind: state, units: "", expect_static: true}
+  - {id: USLAB000006, name: cmg_torque_roll, subsystem: cmg, kind: numeric, units: "N*m"}
+  - {id: USLAB000007, name: cmg_torque_pitch, subsystem: cmg, kind: numeric, units: "N*m"}
+  - {id: USLAB000008, name: cmg_torque_yaw, subsystem: cmg, kind: numeric, units: "N*m"}
+  - {id: USLAB000009, name: cmg_momentum, subsystem: cmg, kind: numeric, units: "N*m*s"}
+  - {id: USLAB000010, name: cmg_momentum_pct, subsystem: cmg, kind: numeric, units: "%"}
+  - {id: USLAB000011, name: desat_request, subsystem: cmg, kind: state, units: "", expect_static: true}
+  - {id: USLAB000012, name: gnc_mode, subsystem: cmg, kind: state, units: "", expect_static: true}
+  - {id: USLAB000038, name: cmg_momentum_capacity, subsystem: cmg, kind: numeric, units: "N*m*s"}
+  - {id: USLAB000041, name: loac_alarm, subsystem: cmg, kind: state, units: "", expect_static: true}
+  - {id: USLAB000045, name: cmg1_spin_bearing_temp, subsystem: cmg, kind: numeric, units: "deg C"}
+  - {id: USLAB000046, name: cmg2_spin_bearing_temp, subsystem: cmg, kind: numeric, units: "deg C"}
+  - {id: USLAB000047, name: cmg3_spin_bearing_temp, subsystem: cmg, kind: numeric, units: "deg C"}
+  - {id: USLAB000048, name: cmg4_spin_bearing_temp, subsystem: cmg, kind: numeric, units: "deg C"}
+  - {id: USLAB000049, name: cmg1_hall_bearing_temp, subsystem: cmg, kind: numeric, units: "deg C"}
+  - {id: USLAB000050, name: cmg2_hall_bearing_temp, subsystem: cmg, kind: numeric, units: "deg C"}
+  - {id: USLAB000051, name: cmg3_hall_bearing_temp, subsystem: cmg, kind: numeric, units: "deg C"}
+  - {id: USLAB000052, name: cmg4_hall_bearing_temp, subsystem: cmg, kind: numeric, units: "deg C"}
+  - {id: Z1000001, name: cmg1_vibration, subsystem: cmg, kind: numeric, units: "g"}
+  - {id: Z1000002, name: cmg2_vibration, subsystem: cmg, kind: numeric, units: "g"}
+  - {id: Z1000003, name: cmg3_vibration, subsystem: cmg, kind: numeric, units: "g"}
+  - {id: Z1000004, name: cmg4_vibration, subsystem: cmg, kind: numeric, units: "g"}
+  - {id: Z1000005, name: cmg1_spin_current, subsystem: cmg, kind: numeric, units: "A"}
+  - {id: Z1000006, name: cmg2_spin_current, subsystem: cmg, kind: numeric, units: "A"}
+  - {id: Z1000007, name: cmg3_spin_current, subsystem: cmg, kind: numeric, units: "A"}
+  - {id: Z1000008, name: cmg4_spin_current, subsystem: cmg, kind: numeric, units: "A"}
+  - {id: Z1000009, name: cmg1_wheel_speed, subsystem: cmg, kind: numeric, units: "rpm"}
+  - {id: Z1000010, name: cmg2_wheel_speed, subsystem: cmg, kind: numeric, units: "rpm"}
+  - {id: Z1000011, name: cmg3_wheel_speed, subsystem: cmg, kind: numeric, units: "rpm"}
+  - {id: Z1000012, name: cmg4_wheel_speed, subsystem: cmg, kind: numeric, units: "rpm"}
+  - {id: USLAB000013, name: att_source, subsystem: attitude, kind: state, units: "", expect_static: true}
+  - {id: USLAB000014, name: rate_source, subsystem: attitude, kind: state, units: "", expect_static: true}
+  - {id: USLAB000016, name: controller_type, subsystem: attitude, kind: state, units: "", expect_static: true}
+  - {id: USLAB000017, name: ref_frame, subsystem: attitude, kind: state, units: "", expect_static: true}
+  - {id: USLAB000018, name: q_lvlh_0, subsystem: attitude, kind: numeric, units: ""}
+  - {id: USLAB000019, name: q_lvlh_1, subsystem: attitude, kind: numeric, units: ""}
+  - {id: USLAB000020, name: q_lvlh_2, subsystem: attitude, kind: numeric, units: ""}
+  - {id: USLAB000021, name: q_lvlh_3, subsystem: attitude, kind: numeric, units: ""}
+  - {id: USLAB000022, name: att_err_roll, subsystem: attitude, kind: numeric, units: "deg"}
+  - {id: USLAB000023, name: att_err_pitch, subsystem: attitude, kind: numeric, units: "deg"}
+  - {id: USLAB000024, name: att_err_yaw, subsystem: attitude, kind: numeric, units: "deg"}
+  - {id: USLAB000025, name: att_rate_x, subsystem: attitude, kind: numeric, units: "deg/s"}
+  - {id: USLAB000026, name: att_rate_y, subsystem: attitude, kind: numeric, units: "deg/s"}
+  - {id: USLAB000027, name: att_rate_z, subsystem: attitude, kind: numeric, units: "deg/s"}
+  - {id: USLAB000028, name: q_cmd_0, subsystem: attitude, kind: numeric, units: "", expect_static: true}
+  - {id: USLAB000029, name: q_cmd_1, subsystem: attitude, kind: numeric, units: "", expect_static: true}
+  - {id: USLAB000030, name: q_cmd_2, subsystem: attitude, kind: numeric, units: "", expect_static: true}
+  - {id: USLAB000031, name: q_cmd_3, subsystem: attitude, kind: numeric, units: "", expect_static: true}
+  - {id: USLAB000081, name: maneuver_in_progress, subsystem: attitude, kind: state, units: "", expect_static: true}
+  - {id: P4000001, name: sa_2a_voltage, subsystem: power, kind: numeric, units: "V"}
+  - {id: P4000002, name: sa_2a_current, subsystem: power, kind: numeric, units: "A", expect_static: true}
+  - {id: P4000004, name: sa_4a_voltage, subsystem: power, kind: numeric, units: "V"}
+  - {id: P4000005, name: sa_4a_current, subsystem: power, kind: numeric, units: "A", expect_static: true}
+  - {id: P6000001, name: sa_4b_voltage, subsystem: power, kind: numeric, units: "V"}
+  - {id: P6000002, name: sa_4b_current, subsystem: power, kind: numeric, units: "A", expect_static: true}
+  - {id: P6000004, name: sa_2b_voltage, subsystem: power, kind: numeric, units: "V"}
+  - {id: P6000005, name: sa_2b_current, subsystem: power, kind: numeric, units: "A", expect_static: true}
+  - {id: S6000001, name: sa_3b_voltage, subsystem: power, kind: numeric, units: "V"}
+  - {id: S6000002, name: sa_3b_current, subsystem: power, kind: numeric, units: "A", expect_static: true}
+  - {id: S6000004, name: sa_1b_voltage, subsystem: power, kind: numeric, units: "V"}
+  - {id: S6000005, name: sa_1b_current, subsystem: power, kind: numeric, units: "A", expect_static: true}
+  - {id: P4000007, name: bga_2a, subsystem: power, kind: numeric, units: "deg"}
+  - {id: P4000008, name: bga_4a, subsystem: power, kind: numeric, units: "deg"}
+  - {id: P6000007, name: bga_4b, subsystem: power, kind: numeric, units: "deg"}
+  - {id: P6000008, name: bga_2b, subsystem: power, kind: numeric, units: "deg"}
+  - {id: S6000007, name: bga_3b, subsystem: power, kind: numeric, units: "deg"}
+  - {id: S6000008, name: bga_1b, subsystem: power, kind: numeric, units: "deg"}
+  - {id: S0000003, name: sarj_stbd, subsystem: power, kind: numeric, units: "deg"}
+  - {id: S0000004, name: sarj_port, subsystem: power, kind: numeric, units: "deg"}
+  - {id: S1000001, name: loop_a_flow, subsystem: thermal, kind: numeric, units: "kg/h"}
+  - {id: S1000002, name: loop_a_press, subsystem: thermal, kind: numeric, units: "kPa"}
+  - {id: S1000003, name: loop_a_temp, subsystem: thermal, kind: numeric, units: "deg C"}
+  - {id: P1000001, name: loop_b_flow, subsystem: thermal, kind: numeric, units: "kg/h"}
+  - {id: P1000002, name: loop_b_press, subsystem: thermal, kind: numeric, units: "kPa"}
+  - {id: P1000003, name: loop_b_temp, subsystem: thermal, kind: numeric, units: "deg C"}
+  - {id: S0000001, name: trrj_stbd, subsystem: thermal, kind: numeric, units: "deg", expect_static: true}
+  - {id: S0000002, name: trrj_port, subsystem: thermal, kind: numeric, units: "deg"}
+  - {id: S1000004, name: sband_rfg1_az, subsystem: comms, kind: numeric, units: "deg"}
+  - {id: S1000005, name: sband_rfg1_el, subsystem: comms, kind: numeric, units: "deg"}
+  - {id: P1000004, name: sband_rfg2_az, subsystem: comms, kind: numeric, units: "deg"}
+  - {id: P1000005, name: sband_rfg2_el, subsystem: comms, kind: numeric, units: "deg"}
+  - {id: S1000009, name: sband_rfg1_on, subsystem: comms, kind: state, units: "", expect_static: true}
+  - {id: P1000007, name: sband_rfg2_on, subsystem: comms, kind: state, units: "", expect_static: true}
+  - {id: USLAB000092, name: sband_active_string, subsystem: comms, kind: state, units: "", expect_static: true}
+  - {id: Z1000013, name: ku_transmit, subsystem: comms, kind: state, units: "", expect_static: true}
+  - {id: Z1000014, name: ku_sgant_el, subsystem: comms, kind: numeric, units: "deg"}
+  - {id: Z1000015, name: ku_sgant_xel, subsystem: comms, kind: numeric, units: "deg"}

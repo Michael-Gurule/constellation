@@ -258,10 +258,10 @@ conda env create -f environment.yml && conda activate constellation
 
 ```bash
 # Start telemetry collection
-python -m constellation.legacy.ingestion.collect_telemetry
+constellation collect iss
 ```
 
-Data will be saved to `data/raw/` in date-partitioned Parquet files.
+Readings are saved under `data/readings/` as Parquet files partitioned by source, asset and event-time date. Check progress with `constellation collect status`.
 
 <br>
 

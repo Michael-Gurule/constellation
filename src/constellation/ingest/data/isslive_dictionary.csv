@@ -1,0 +1,302 @@
+# NASA ISSLive parameter dictionary (PUIList.xml, created 2011).
+# Source: https://raw.githubusercontent.com/Lightstreamer/Lightstreamer-example-ISSLive-client-javascript/master/src/assets/PUIList.xml
+# Retrieved: 2026-10-19
+public_pui,discipline,description,units,ops_nom,eng_nom,min,max
+AIRLOCK000001,EVA,"Supplies power through the Umbilical Interface Assembly (UIA) to the spacesuits (EMU 1), Voltage",CNT,PSA_EMU1_VOLTS,EVAS AL AA Rack PS #1 Voltage,,
+AIRLOCK000002,EVA,"Supplies power through the Umbilical Interface Assembly (UIA) to the spacesuits (EMU 1), Current",CNT,PSA_EMU1_AMPS,EVAS AL AA Rack PS #1 Current,,
+AIRLOCK000003,EVA,"Supplies power through the Umbilical Interface Assembly (UIA) to the spacesuits (EMU 2), Voltage",CNT,PSA_EMU2_VOLTS,EVAS AL AA Rack PS #2 Voltage,,
+AIRLOCK000004,EVA,"Supplies power through the Umbilical Interface Assembly (UIA) to the spacesuits (EMU 2), Current",CNT,PSA_EMU2_AMPS,EVAS AL AA Rack PS #2 Current,,
+AIRLOCK000005,EVA,"In-flight Refill Unit (IRU), Voltage",CNT,PSA_IRU_Utility_VOLTS,EVAS AL AA Rack PS #5 Voltage,,
+AIRLOCK000006,EVA,"In-flight Refill Unit (IRU), Current",CNT,PSA_IRU_Utility_AMPS,EVAS AL AA Rack PS #5 Current,,
+AIRLOCK000007,EVA,"Supplies power to the spacesuits (EVA Mobility Unit, EMU 1), Voltage",CNT,UIA_EV_1_VOLTS,EVAS AL EMU1 Voltage Monitor,,
+AIRLOCK000008,EVA,"Supplies power to the spacesuits (EVA Mobility Unit, EMU 1), Current",CNT,UIA_EV_1_AMPS,EVAS AL EMU1 Current Monitor,,
+AIRLOCK000009,EVA,"Supplies power to the spacesuits (EVA Mobility Unit, EMU 2), Voltage",CNT,UIA_EV_2_VOLTS,EVAS AL EMU2 Voltage Monitor,,
+AIRLOCK000010,EVA,"Supplies power to the spacesuits (EVA Mobility Unit, EMU 2), Current",CNT,UIA_EV_2_AMPS,EVAS AL EMU2 Current Monitor,,
+AIRLOCK000011,EVA,Battery Charger Assembly (BCA) 1 Voltage,CNT,BCA1_Analog_VOLTS,EVAS AL AA Rack BC #1 Voltage Monitor,,
+AIRLOCK000012,EVA,Battery Charger Assembly (BCA) 1 Current,CNT,BCA1_Analog_AMPS,EVAS AL AA Rack BC #1 Current Monitor,,
+AIRLOCK000013,EVA,Battery Charger Assembly (BCA) 2 Voltage,CNT,BCA2_Analog_VOLTS,EVAS AL AA Rack BC #2 Voltage Monitor,,
+AIRLOCK000014,EVA,Battery Charger Assembly (BCA) 2 Current,CNT,BCA2_Analog_AMPS,EVAS AL AA Rack BC #2 Current Monitor,,
+AIRLOCK000015,EVA,Battery Charger Assembly (BCA) 3 Voltage,CNT,BCA3_Analog_VOLTS,EVAS AL AA Rack BC #3 Voltage Monitor,,
+AIRLOCK000016,EVA,Battery Charger Assembly (BCA) 3 Current,CNT,BCA3_Analog_AMPS,EVAS AL AA Rack BC #3 Current Monitor,,
+AIRLOCK000017,EVA,Battery Charger Assembly (BCA) 4 Voltage,CNT,BCA4_Analog_VOLTS,EVAS AL AA Rack BC #4 Voltage Monitor,,
+AIRLOCK000018,EVA,Battery Charger Assembly (BCA) 4 Current,CNT,BCA4_Analog_AMPS,EVAS AL AA Rack BC #4 Current Monitor,,
+AIRLOCK000019,EVA,Battery Charger Assembly (BCA) 1 Status,N/A,BCA1_Serial_Data_Status,BCA 1 Serial Data Status,N/A,N/A
+AIRLOCK000020,EVA,Battery Charger Assembly (BCA) 2 Status,N/A,BCA2_Serial_Data_Status,BCA 2 Serial Data Status,N/A,N/A
+AIRLOCK000021,EVA,Battery Charger Assembly (BCA) 3 Status,N/A,BCA3_Serial_Data_Status,BCA 3 Serial Data Status,N/A,N/A
+AIRLOCK000022,EVA,Battery Charger Assembly (BCA) 4 Status,N/A,BCA4_Serial_Data_Status,BCA 4 Serial Data Status,N/A,N/A
+AIRLOCK000023,EVA,Battery Charger Assembly (BCA) 1 Channel 1 Status,N/A,BCA1_Ch1_Status,BCA 1 Channel 1 Status,N/A,N/A
+AIRLOCK000024,EVA,Battery Charger Assembly (BCA) 1 Channel 2 Status,N/A,BCA1_Ch2_Status,BCA 1 Channel 2 Status,N/A,N/A
+AIRLOCK000025,EVA,Battery Charger Assembly (BCA) 1 Channel 3 Status,N/A,BCA1_Ch3_Status,BCA 1 Channel 3 Status,N/A,N/A
+AIRLOCK000026,EVA,Battery Charger Assembly (BCA) 1 Channel 4 Status,N/A,BCA1_Ch4_Status,BCA 1 Channel 4 Status,N/A,N/A
+AIRLOCK000027,EVA,Battery Charger Assembly (BCA) 1 Channel 5 Status,N/A,BCA1_Ch5_Status,BCA 1 Channel 5 Status,N/A,N/A
+AIRLOCK000028,EVA,Battery Charger Assembly (BCA) 1 Channel 6 Status,N/A,BCA1_Ch6_Status,BCA 1 Channel 6 Status,N/A,N/A
+AIRLOCK000029,EVA,Battery Charger Assembly (BCA) 2 Channel 1 Status,N/A,BCA2_Ch1_Status,BCA 2 Channel 1 Status,N/A,N/A
+AIRLOCK000030,EVA,Battery Charger Assembly (BCA) 2 Channel 2 Status,N/A,BCA2_Ch2_Status,BCA 2 Channel 2 Status,N/A,N/A
+AIRLOCK000031,EVA,Battery Charger Assembly (BCA) 2 Channel 3 Status,N/A,BCA2_Ch3_Status,BCA 2 Channel 3 Status,N/A,N/A
+AIRLOCK000032,EVA,Battery Charger Assembly (BCA) 2 Channel 4 Status,N/A,BCA2_Ch4_Status,BCA 2 Channel 4 Status,N/A,N/A
+AIRLOCK000033,EVA,Battery Charger Assembly (BCA) 2 Channel 5 Status,N/A,BCA2_Ch5_Status,BCA 2 Channel 5 Status,N/A,N/A
+AIRLOCK000034,EVA,Battery Charger Assembly (BCA) 2 Channel 6 Status,N/A,BCA2_Ch6_Status,BCA 2 Channel 6 Status,N/A,N/A
+AIRLOCK000035,EVA,Battery Charger Assembly (BCA) 3 Channel 1 Status,N/A,BCA3_Ch1_Status,BCA 3 Channel 1 Status,N/A,N/A
+AIRLOCK000036,EVA,Battery Charger Assembly (BCA) 3 Channel 2 Status,N/A,BCA3_Ch2_Status,BCA 3 Channel 2 Status,N/A,N/A
+AIRLOCK000037,EVA,Battery Charger Assembly (BCA) 3 Channel 3 Status,N/A,BCA3_Ch3_Status,BCA 3 Channel 3 Status,N/A,N/A
+AIRLOCK000038,EVA,Battery Charger Assembly (BCA) 3 Channel 4 Status,N/A,BCA3_Ch4_Status,BCA 3 Channel 4 Status,N/A,N/A
+AIRLOCK000039,EVA,Battery Charger Assembly (BCA) 3 Channel 5 Status,N/A,BCA3_Ch5_Status,BCA 3 Channel 5 Status,N/A,N/A
+AIRLOCK000040,EVA,Battery Charger Assembly (BCA) 3 Channel 6 Status,N/A,BCA3_Ch6_Status,BCA 3 Channel 6 Status,N/A,N/A
+AIRLOCK000041,EVA,Battery Charger Assembly (BCA) 4 Channel 1 Status,N/A,BCA4_Ch1_Status,BCA 4 Channel 1 Status,N/A,N/A
+AIRLOCK000042,EVA,Battery Charger Assembly (BCA) 4 Channel 2 Status,N/A,BCA4_Ch2_Status,BCA 4 Channel 2 Status,N/A,N/A
+AIRLOCK000043,EVA,Battery Charger Assembly (BCA) 4 Channel 3 Status,N/A,BCA4_CH3_STATUS,BCA 4 Channel 3 Status,N/A,N/A
+AIRLOCK000044,EVA,Battery Charger Assembly (BCA) 4 Channel 4 Status,N/A,BCA4_CH4_STATUS,BCA 4 Channel 4 Status,N/A,N/A
+AIRLOCK000045,EVA,Battery Charger Assembly (BCA) 4 Channel 5 Status,N/A,BCA4_CH5_STATUS,BCA 4 Channel 5 Status,N/A,N/A
+AIRLOCK000046,EVA,Battery Charger Assembly (BCA) 4 Channel 6 Status,N/A,BCA4_CH6_STATUS,BCA 4 Channel 6 Status,N/A,N/A
+AIRLOCK000047,EVA,"Pumps atmosphere from Airlock into Node one during depress, voltage status.",N/A,RPCM_AL1A4A_A_RPC_01_Depress_Pump_On_Off_Stat,RPCM ALFR A57 SW01 Voltage Status,N/A,N/A
+AIRLOCK000048,EVA,"Pumps atmosphere from Airlock into Node one during depress, switch status.",N/A,Airlock_Depress_Pump_Power_Switch,EVAS AL DP Switch Status,N/A,N/A
+AIRLOCK000049,ETHOS,Crewlock Pressure,CNT,Airlock_Crewlock_Cabin_Pressure,EVAS AL CL Sensor Pressure,,
+AIRLOCK000050,ETHOS,Hi P O2 Supply valve position,N/A,Airlock_O2_Hi_P_Supply_Vlv_Actual_Posn,ACS AL High Pressure O2 Supply Valve Actual Position,N/A,N/A
+AIRLOCK000051,ETHOS,Lo P O2 Supply Valve position,N/A,Airlock_O2_Lo_P_Supply_Vlv_Actual_Posn,ACS AL Low Pressure O2 Supply Valve Actual Position,N/A,N/A
+AIRLOCK000052,ETHOS,N2 Supply Valve position,N/A,Airlock_N2_Supply_Vlv_Actual_Posn,ACS AL Low Pressure N2 Supply Valve Actual Position,N/A,N/A
+AIRLOCK000053,ETHOS,Airlock Air Conditioner State,N/A,Airlock_CCAA_State,CCAA State AL,N/A,N/A
+AIRLOCK000054,ETHOS,Airlock Pressure,PSI,Airlock_PCA_Cabin_Pressure,PCA Cabin Pressure,,
+AIRLOCK000055,ETHOS,Airlock Hi P O2 Tank Pressure,CNT,Airlock_O2_Hi_P_Supply_Pressure,ACS AL O2 #2 Line Pressure Sensor Data,,
+AIRLOCK000056,ETHOS,Airlock Lo P O2 Tank Pressure,CNT,Airlock_O2_Lo_P_Supply_Pressure,ACS AL O2 #3 Line Pressure Sensor Data,,
+AIRLOCK000057,ETHOS,Airlock N2 Tank Pressure,CNT,Airlock_N2_Supply_Pressure,ACS AL N2 #1 Line Pressure Sensor Data,,
+NODE2000001,ETHOS,"Coolant water quantity (Node 2), MT",CNT,Node2_MTL_PPA_Avg_Accum_Qty,PUMP N2 MT Average Accumulator Quantity,,
+NODE2000002,ETHOS,"Coolant water quantity (Node 2), LT",CNT,Node2_LTL_PPA_Avg_Accum_Qty,PUMP N2 LT Average Accumulator Quantity,,
+NODE2000003,ETHOS,Node 2 Air Conditioner State,N/A,Node_2_CCAA_State,CCAA State N2S2,N/A,N/A
+NODE2000006,ETHOS,Air Cooling Fluid Temp (Node 2),CNT,Node2_LTL_TWMV_Out_Temp,HXB N2 LT CTB Temperature,,
+NODE2000007,ETHOS,Avionics Cooling Fluid Temp (Node 2),CNT,Node2_MTL_TWMV_Out_Temp,HXB N2S1 MT CTB Temperature,,
+NODE3000001,ETHOS,Node 3 ppO2,PSIA,Node_3_MCA_ppO2,MCA O2 Partial Pres,,
+NODE3000002,ETHOS,Node 3 ppN2,PSIA,Node_3_MCA_ppN2,MCA N2 Partial Pres,,
+NODE3000003,ETHOS,Node 3 ppCO2,PSIA,Node_3_MCA_ppCO2,MCA CO2 Partial Pres,,
+NODE3000004,ETHOS,Urine Processor State,N/A,Node_3_UPA_Current_State,UPA TO MODE,N/A,N/A
+NODE3000005,ETHOS,Urine Tank Qty,PCT,Node_3_UPA_WSTA_Qty_Ctrl_Pct,"WSTA_QUANTITY (VOTED Q11,Q12,Q13)",,
+NODE3000006,ETHOS,Water Processor State,N/A,Node_3_WPA_Process_Cmd_Status,PROCESS_COMMAND,N/A,N/A
+NODE3000007,ETHOS,Water Processor Step,N/A,Node_3_WPA_Process_Step,PROCESS_STEP,N/A,N/A
+NODE3000008,ETHOS,Waste Water Tank Qty,PCT,Node_3_WPA_Waste_Water_Qty_Ctrl,Q_7183_1_MUXED,,
+NODE3000009,ETHOS,Clean Water Tank Qty,PCT,Node_3_WPA_Water_Storage_Qty_Ctrl,Q_7183_3_MUXED,,
+NODE3000010,ETHOS,Oxygen Generator State,N/A,Node_3_OGA_Process_Cmd_Status,PROCESS_COMMAND,N/A,N/A
+NODE3000011,ETHOS,O2 Production rate,LBM/D,Node_3_OGA_O2_Production_Rate,PROD_O2_PPD,,
+NODE3000012,ETHOS,Avionics Cooling Fluid Temp (Node 3),CNT,Node3_MTL_TWMV_Out_Temp,HXB N3S1 MT 3WMV CTB Temperature Sensor,,
+NODE3000013,ETHOS,Air Cooling Fluid Temp (Node 3),CNT,Node3_LTL_TWMV_Out_Temp,HXB N3S2 LT 3WMV CTB Temperature Sensor,,
+NODE3000017,ETHOS,Coolant water quantity (Node 3),CNT,Node3_MTL_PPA_Avg_Accum_Qty,PUMP N3S1 MT Average Accumulator Quantity,,
+NODE3000018,ETHOS,Node 3 Air Conditioner State,N/A,Node_3_CCAA_State,CCAA State N3S1,N/A,N/A
+NODE3000019,ETHOS,Coolant water quantity (Node 3),CNT,Node3_LTL_PPA_Avg_Accum_Qty,PUMP N3S2 LT Average Accumulator Quantity,,
+USLAB000053,ETHOS,Lab ppO2,PSIA,LAB_MCA_ppO2,MCA O2 Partial Pres,,
+USLAB000054,ETHOS,Lab ppN2,PSIA,LAB_MCA_ppN2,MCA N2 Partial Pres,,
+USLAB000055,ETHOS,Lab ppCO2,PSIA,LAB_MCA_ppCO2,MCA CO2 Partial Pres,,
+USLAB000056,ETHOS,"Coolant water quantity, LT (Lab)",CNT,LAB_LTL_PPA_Avg_Accum_Qty,PUMP LAB LT Average Accumulator Quantity,,
+USLAB000057,ETHOS,"Coolant water quantity, MT (Lab)",CNT,LAB_MTL_PPA_Avg_Accum_Qty,PUMP LAB MT Average Accumulator Quantity,,
+USLAB000058,ETHOS,Cabin pressure,PSI,LAB_PCA_Cabin_Pressure,PCA Cabin Pressure,,
+USLAB000059,ETHOS,Cabin temperature,CNT,LAB1P6_CCAA_In_T1,CCAA Raw Inlet Temp 1 L1,,
+USLAB000060,ETHOS,Avionics Cooling Fluid Temp (Lab),CNT,LAB_MTL_Regen_TWMV_Out_Temp,HXB LAB MT REG Temperature Sensor,,
+USLAB000061,ETHOS,Air Cooling Fluid Temp (Lab),CNT,LAB_LTL_TWMV_Out_Temp,HXB LAB LT CTB Temperature Sensor,,
+USLAB000062,ETHOS,Vacuum Resource System Valve Position,CNT,LAB_VRS_Vent_Vlv_Posn_Raw,VRS Vent Valve Position Raw,,
+USLAB000063,ETHOS,Vacuum Exhaust System Valve Position,CNT,LAB_VES_Vent_Vlv_Posn_Raw,VES Vent Valve Position Raw,,
+USLAB000064,ETHOS,Lab Port Air Conditioner State,N/A,LAB1P6_CCAA_State,CCAA State L1,N/A,N/A
+USLAB000065,ETHOS,Lab Starboard Air Conditioner State,N/A,LAB1S6_CCAA_State,CCAA State L2,N/A,N/A
+AIRLOCK000058,CDH,Airlock Multiplexer/Demultiplexer (MDM) on-off status,N/A,RPCM_AL2A3B_A_RPC_02_AL_MDM_On_Off_Stat,RPCM ALFR A56 SW02 Voltage Status,N/A,N/A
+NODE1000001,CDH,Node 1 Multiplexer/Demultiplexer (MDM) 1 on-off status,N/A,RPCM_N1RS1_A_RPC_11_N1_1_MDM_On_Off_Stat,RPCM N1-RS1-A SW11 Voltage Status,N/A,N/A
+NODE1000002,CDH,Node 1 Multiplexer/Demultiplexer (MDM) 2 on-off status,N/A,RPCM_N1RS2_C_RPC_13_N1_2_MDM_On_Off_Stat,RPCM N1-RS2-C SW13 Voltage Status,N/A,N/A
+NODE2000004,CDH,Node 2 Multiplexer/Demultiplexer (MDM) 2 on-off status,N/A,RPCM_N22A3A_B_RPC_01_N2_2_MDM_On_Off_Stat,RPCM N2PRT 2A3A_B SW01 Voltage Status,N/A,N/A
+NODE2000005,CDH,Node 2 Multiplexer/Demultiplexer (MDM) 1 on-off status,N/A,RPCM_N21B4A_A_RPC_01_N2_1_MDM_On_Off_Stat,RPCM N2STD 1B4A_A SW01 Voltage Status,N/A,N/A
+NODE3000014,CDH,Hub Control Zone (HCZ) Multiplexer/Demultiplexer 2 (MDM) on-off status,N/A,RPCM_N32A2B_F1_RPC_01_HCZ_2_MDM_On_Off_Stat,RPCM N3O5-2A2B-1F SW01 Voltage Status,N/A,N/A
+NODE3000015,CDH,Node 3 Multiplexer/Demultiplexer (MDM) 2 on-off status,N/A,RPCM_N32A2B_E2_RPC_03_N3_2_MDM_On_Off_Stat,N3-O5_2A2B-2_RPCM_E SW03 Voltage Status,N/A,N/A
+NODE3000016,CDH,Hub Control Zone (HCZ) Multiplexer/Demultiplexer 1 (MDM) on-off status,N/A,RPCM_N31B4A_F1_RPC_01_HCZ_1_MDM_On_Off_Stat,RPCM N3O4-1B4A-1F SW01 Voltage Status,N/A,N/A
+NODE3000020,CDH,Node 3 Multiplexer/Demultiplexer (MDM) 1 on-off status,N/A,RPCM_N31B4A_E2_RPC_03_N3_1_MDM_On_Off_Stat,N3-O4_1B4A-2_RPCM_E SW03 Voltage Status,N/A,N/A
+P1000006,CDH,P1 Truss Multiplexer/Demultiplexer (MDM) 1 on-off status,N/A,RPCM_P11A_B_RPC_05_P1_1_MDM_On_Off_Stat,RPCM P1_1A_B HYBRID SW05 VOLTAGE STATUS,N/A,N/A
+P1000008,CDH,Port Thermal Radiator (STR) Multiplexer/Demultiplexer (MDM) on-off status,N/A,RPCM_P12B_C_RPC_03_PTR_MDM_On_Off_Stat,RPCM P1_2B_C HYBRID SW03 VOLTAGE STATUS,N/A,N/A
+P1000009,CDH,P1 Truss Multiplexer/Demultiplexer (MDM) 2 on-off status,N/A,RPCM_P12B_C_RPC_16_P1_2_MDM_On_Off_Stat,RPCM P1_2B_C HYBRID SW16 VOLTAGE STATUS,N/A,N/A
+P3000001,CDH,P3 Truss Multiplexer/Demultiplexer (MDM) 1 on-off status,N/A,RPCM_P31A_A_RPC_01_P3_1_MDM_On_Off_Sta,RPCM P3_1A_A HYBRID SW01 VOLTAGE STATUS,N/A,N/A
+P3000002,CDH,P3 Truss Multiplexer/Demultiplexer (MDM) 2 on-off status,N/A,RPCM_P32B_A_RPC_01_P3_2_MDM_On_Off_Stat,RPCM P3_2B_A HYBRID SW01 VOLTAGE STATUS,N/A,N/A
+P4000003,CDH,Photovolatic Control Unit (PVCU) - Solar Array - 2A Multiplexer/Demultiplexer (MDM) 120 Volt On-Off Status,N/A,DCSU_2A_PVCU_On_Off_V_Stat,DCSU P4LWR-2A SCA MDM 120V On/Off Status,N/A,N/A
+P4000006,CDH,Photovolatic Control Unit (PVCU) - Solar Array - 4A Multiplexer/Demultiplexer (MDM) 120 Volt On-Off Status,N/A,DCSU_4A_PVCU_On_Off_V_Stat,DCSU P4UPR-4A SCA MDM 120V On/Off Status,N/A,N/A
+P6000003,CDH,Photovolatic Control Unit (PVCU) - Solar Array - 4B Multiplexer/Demultiplexer (MDM) 120 Volt On-Off Status,N/A,DCSU_4B_PVCU_On_Off_V_Stat,DCSU P6LWR-4B SCA MDM 120V On/Off Status,N/A,N/A
+P6000006,CDH,Photovolatic Control Unit (PVCU) - Solar Array - 2B Multiplexer/Demultiplexer (MDM) 120 Volt On-Off Status,N/A,DCSU_2B_PVCU_On_Off_V_Stat,DCSU P6UPR-2B SCA MDM 120V On/Off Status,N/A,N/A
+S0000010,CDH,External Control Zone Multiplexer/Demultiplexer (MDM) 1 on-off status,N/A,RPCM_S01A_C_RPC_01_Ext_1_MDM_On_Off_Stat,RPCM S0 1A-C SW01 Voltage Status,N/A,N/A
+S0000011,CDH,S0 Truss Multiplexer/Demultiplexer (MDM) 1 on-off status,N/A,RPCM_S01A_C_RPC_16_S0_1_MDM_On_Off_Stat,RPCM S0 1A-C SW16 Voltage Status,N/A,N/A
+S0000012,CDH,External Control Zone Multiplexer/Demultiplexer (MDM) 2 on-off status,N/A,RPCM_S02B_C_RPC_01_Ext_2_MDM_On_Off_Stat,RPCM S0 2B-C SW01 Voltage Status,N/A,N/A
+S0000013,CDH,S0 Truss Multiplexer/Demultiplexer (MDM) 2 on-off status,N/A,RPCM_S02B_C_RPC_16_S0_2_MDM_On_Off_Stat,RPCM S0 2B-C SW16 Voltage Status,N/A,N/A
+S1000006,CDH,Starboard Thermal Radiator (STR) Multiplexer/Demultiplexer (MDM) on-off status,N/A,RPCM_S11A_C_RPC_03_STR_MDM_On_Off_Stat,RPCM S1_1A_C HYBRID SW03 VOLTAGE STATUS,N/A,N/A
+S1000007,CDH,S1 Truss Multiplexer/Demultiplexer (MDM) 1 on-off status,N/A,RPCM_S11A_C_RPC_16_S1_1_MDM_On_Off_Stat,RPCM S1_1A_C HYBRID SW16 VOLTAGE STATUS,N/A,N/A
+S1000008,CDH,S1 Truss Multiplexer/Demultiplexer (MDM) 2 on-off status,N/A,RPCM_S12B_B_RPC_05_S1_2_MDM_On_Off_Stat,RPCM S1_2B_B HYBRID SW05 VOLTAGE STATUS,N/A,N/A
+S3000001,CDH,S3 Truss Multiplexer/Demultiplexer (MDM) 1 on-off status,N/A,RPCM_S31A_A_RPC_01_S3_1_MDM_On_Off_Stat,RPCM S3_1A_A HYBRID SW01 VOLTAGE STATUS,N/A,N/A
+S3000002,CDH,S3 Truss Multiplexer/Demultiplexer (MDM) 2 on-off status,N/A,RPCM_S32B_A_RPC_01_S3_2_MDM_On_Off_Stat,RPCM S3_2B_A HYBRID SW01 VOLTAGE STATUS,N/A,N/A
+S4000003,CDH,Photovolatic Control Unit (PVCU) - Solar Array - 1A Multiplexer/Demultiplexer (MDM) 120 Volt On-Off Status,N/A,DCSU_1A_PVCU_On_Off_V_Stat,DCSU S4LWR-1A SCA MDM 120V On/Off Status,N/A,N/A
+S4000006,CDH,Photovolatic Control Unit (PVCU) - Solar Array - 3A Multiplexer/Demultiplexer (MDM) 120 Volt On-Off Status,N/A,DCSU_3A_PVCU_On_Off_V_Stat,DCSU S4UPR-3A SCA MDM 120V On/Off Status,N/A,N/A
+S6000003,CDH,Photovolatic Control Unit (PVCU) - Solar Array - 3B Multiplexer/Demultiplexer (MDM) 120 Volt On-Off Status,N/A,DCSU_3B_PVCU_On_Off_V_Stat,DCSU S6LWR-3B SCA MDM 120V On/Off Status,N/A,N/A
+S6000006,CDH,Photovolatic Control Unit (PVCU) - Solar Array - 1B Multiplexer/Demultiplexer (MDM) 120 Volt On-Off Status,N/A,DCSU_1B_PVCU_On_Off_V_Stat,DCSU S6UPR-1B SCA MDM 120V On/Off Status,N/A,N/A
+USLAB000066,CDH,Command and Control (C&C) Multiplexer/Demultiplexer (MDM) 1 on-off status,N/A,RPCM_LAD11B_A_RPC_07_CC_1_MDM_On_Off_Stat,RPCM LAF1 A53 SW07 Voltage Status,N/A,N/A
+USLAB000067,CDH,Command and Control (C&C) Multiplexer/Demultiplexer (MDM) 2 on-off status,N/A,RPCM_LAD52B_A_RPC_03_CC_2_MDM_On_Off_Stat,RPCM LAF5 A57 SW03 Voltage Status,N/A,N/A
+USLAB000068,CDH,Command and Control (C&C) Multiplexer/Demultiplexer (MDM) 3 on-off status,N/A,RPCM_LA1A4A_E_RPC_01_CC_3_MDM_On_Off_Stat,RPCM LAP3 A36 SW01 Voltage Status,N/A,N/A
+USLAB000069,CDH,Internal Control Zone Multiplexer/Demultiplexer (MDM) 1 on-off status,N/A,RPCM_LAD11B_A_RPC_09_Int_1_MDM_On_Off_Stat,RPCM LAF1 A53 SW09 Voltage Status,N/A,N/A
+USLAB000070,CDH,Internal Control Zone Multiplexer/Demultiplexer (MDM) 2 on-off status,N/A,RPCM_LAD52B_A_RPC_04_Int_2_MDM_On_Off_Stat,RPCM LAF5 A57 SW04 Voltage Status,N/A,N/A
+USLAB000071,CDH,Payload (PL) Multiplexer/Demultiplexer (MDM) 1 on-off status,N/A,RPCM_LAD11B_A_RPC_11_PL_1_MDM_On_Off_Stat,RPCM LAF1 A53 SW11 Voltage Status,N/A,N/A
+USLAB000072,CDH,Payload (PL) Multiplexer/Demultiplexer (MDM) 2 on-off status,N/A,RPCM_LAD22B_A_RPC_01_PL_2_MDM_On_Off_Stat,RPCM LAF2-2B-A58 SW01 Voltage Status,N/A,N/A
+USLAB000073,CDH,"Guidance, Navigation and Control (GNC) Multiplexer/Demultiplexer 1 on-off status",N/A,RPCM_LA1B_B_RPC_14_GNC_1_MDM_On_Off_Stat,RPCM LAFE A2 SW14 Voltage Status,N/A,N/A
+USLAB000074,CDH,"Guidance, Navigation and Control (GNC) Multiplexer/Demultiplexer 2 on-off status",N/A,RPCM_LA2B_E_RPC_03_GNC_2_MDM_On_Off_Stat,RPCM LAAE A19 SW03 Voltage Status,N/A,N/A
+USLAB000075,CDH,Power Mangement Controller Unit (PMCU) 1 Multiplexer/Demultiplexer 1 on-off status,N/A,RPCM_LAD11B_A_RPC_08_PMCU_1_MDM_On_Off_Stat,RPCM LAF1 A53 SW08 Voltage Status,N/A,N/A
+USLAB000076,CDH,Power Mangement Controller Unit (PMCU) 2 Multiplexer/Demultiplexer 1 on-off status,N/A,RPCM_LAD52B_A_RPC_01_PMCU_2_MDM_On_Off_Stat,RPCM LAF5 A57 SW01 Voltage Status,N/A,N/A
+USLAB000077,CDH,US Lab Multiplexer/Demultiplexer (MDM) 1 on-off status,N/A,RPCM_LA1B_B_RPC_09_LAB_1_MDM_On_Off_Stat,RPCM LAFE A2 SW09 Voltage Status,N/A,N/A
+USLAB000078,CDH,US Lab Multiplexer/Demultiplexer (MDM) 2 on-off status,N/A,RPCM_LA2B_E_RPC_04_LAB_2_MDM_On_Off_Stat,RPCM LAAE A19 SW04 Voltage Status,N/A,N/A
+USLAB000079,CDH,US Lab Multiplexer/Demultiplexer (MDM) 3 on-off status,N/A,RPCM_LA2B_E_RPC_13_LAB_3_MDM_On_Off_Stat,RPCM LAAE A19 SW13 Voltage Status,N/A,N/A
+USLAB000080,CDH,Permanent Multipurpose Module - System Power voltage status,N/A,RPCM_LA1B_D_RPC_01_LAB_FSEGF_Sys_Pwr_1_On_Off_Stat,RPCM LAFE A5 SW01 Voltage Status,N/A,N/A
+P1000001,SPARTAN,Loop B Pump Flowrate (kg/hr),CNT,ETCS_LoopB_PM_Out_Flowrate,EATCS_PTC_ANALOG_DATA_PM-B_OUT_FL_MTR_MEAS,,
+P1000002,SPARTAN,Loop B PM Out Press (kPa),CNT,ETCS_LoopB_PM_Out_Press,EATCS_PTC_ANALOG_DATA_PM-B_OUT_PRESS_XDCR_MEAS,,
+P1000003,SPARTAN,Loop B PM Out Temp (deg C),CNT,ETCS_LoopB_PM_Out_Temp,EATCS_PTC_ANALOG_DATA_PM-B_OUT_RTD_MEAS,,
+P4000001,SPARTAN,Photovolatic Control Unit (PVCU) - Solar Array - 2A - Drive Voltage,CNT,DCSU_2A_RBI_6_V,DCSU P4LWR-2A SCA SW06 Raw Voltage,,
+P4000002,SPARTAN,Photovolatic Control Unit (PVCU) - Solar Array - 2A - Drive Current,CNT,DCSU_2A_RBI_6_Integ_I,DCSU P4LWR-2A SCA SW06 Intg Current,,
+P4000004,SPARTAN,Photovolatic Control Unit (PVCU) - Solar Array - 4A - Drive Voltage,CNT,DCSU_4A_RBI_6_V,DCSU P4UPR-4A SCA SW06 Raw Voltage,,
+P4000005,SPARTAN,Photovolatic Control Unit (PVCU) - Solar Array - 4A - Drive Current,CNT,DCSU_4A_RBI_6_Integ_I,DCSU P4UPR-4A SCA SW06 Intg Current,,
+P4000007,SPARTAN,Photovolatic Control Unit (PVCU) - Solar Array - 2A - Beta Gimble Assembly (BGA) Position (degrees),DEG,PVCU_P4_Prim_BGA_2A_Resolver_Position_Conv,P4 PV_PSN_1_ECU_BGA_Resolver_Conv_Position,,
+P4000008,SPARTAN,Photovolatic Control Unit (PVCU) - Solar Array - 4A - Beta Gimble Assembly (BGA) Position (degrees),DEG,PVCU_P4_Prim_BGA_4A_Resolver_Position_Conv,P4 PV_PSN_2_ECU_BGA_Resolver_Conv_Position,,
+P6000001,SPARTAN,Photovolatic Control Unit (PVCU) - Solar Array - 4B - Drive Voltage,CNT,DCSU_4B_RBI_6_V,DCSU P6LWR-4B SCA SW06 Raw Voltage,,
+P6000002,SPARTAN,Photovolatic Control Unit (PVCU) - Solar Array - 4B - Drive Current,CNT,DCSU_4B_RBI_6_Integ_I,DCSU P6LWR-4B SCA SW06 Intg Current,,
+P6000004,SPARTAN,Photovolatic Control Unit (PVCU) - Solar Array - 2B - Drive Voltage,CNT,DCSU_2B_RBI_6_V,DCSU P6UPR-2B SCA SW06 Raw Voltage,,
+P6000005,SPARTAN,Photovolatic Control Unit (PVCU) - Solar Array - 2B - Drive Current,CNT,DCSU_2B_RBI_6_Integ_I,DCSU P6UPR-2B SCA SW06 Intg Current,,
+P6000007,SPARTAN,Photovolatic Control Unit (PVCU) - Solar Array - 4B - Beta Gimble Assembly (BGA) Position (degrees),DEG,PVCU_P6_Prim_BGA_4B_Resolver_Position_Conv,P6 PV_PSN_1_ECU_BGA_Resolver_Conv_Position,,
+P6000008,SPARTAN,Photovolatic Control Unit (PVCU) - Solar Array - 2B - Beta Gimble Assembly (BGA) Position (degrees),DEG,PVCU_P6_Prim_BGA_2B_Resolver_Position_Conv,P6 PV_PSN_2_ECU_BGA_Resolver_Conv_Position,,
+S1000001,SPARTAN,Loop A Pump Flowrate (kg/hr),CNT,ETCS_LoopA_PM_Out_Flowrate,EATCS_PTC_ANALOG_DATA_PM-A_OUT_FL_MTR_MEAS,,
+S1000002,SPARTAN,Loop A PM Out Press (kPa),CNT,ETCS_LoopA_PM_Out_Press,EATCS_PTC_ANALOG_DATA_PM-A_OUT_PRESS_XDCR_MEAS,,
+S1000003,SPARTAN,Loop A PM Out Temp (deg C),CNT,ETCS_LoopA_PM_Out_Temp,EATCS_PTC_ANALOG_DATA_PM-A_OUT_RTD_MEAS,,
+S4000001,SPARTAN,Photovolatic Control Unit (PVCU) - Solar Array - 1A - Drive Voltage,CNT,DCSU_1A_RBI_6_V,DCSU S4LWR-1A SCA SW06 Raw Voltage,,
+S4000002,SPARTAN,Photovolatic Control Unit (PVCU) - Solar Array - 1A - Drive Current,CNT,DCSU_1A_RBI_6_Integ_I,DCSU S4LWR-1A SCA SW06 Intg Current,,
+S4000004,SPARTAN,Photovolatic Control Unit (PVCU) - Solar Array - 3B - Drive Voltage,CNT,DCSU_3A_RBI_6_V,DCSU S4UPR-3A SCA SW06 Raw Voltage,,
+S4000005,SPARTAN,Photovolatic Control Unit (PVCU) - Solar Array - 3B - Drive Current,CNT,DCSU_3A_RBI_6_Integ_I,DCSU S4UPR-3A SCA SW06 Intg Current,,
+S4000007,SPARTAN,Photovolatic Control Unit (PVCU) - Solar Array - 1A - Beta Gimble Assembly (BGA) Position (degrees),DEG,PVCU_S4_Prim_BGA_1A_Resolver_Position_Conv,S4 PV_PSN_1_ECU_BGA_Resolver_Conv_Position,,
+S4000008,SPARTAN,Photovolatic Control Unit (PVCU) - Solar Array - 3A - Beta Gimble Assembly (BGA) Position (degrees),DEG,PVCU_S4_Prim_BGA_3A_Resolver_Position_Conv,S4 PV_PSN_2_ECU_BGA_Resolver_Conv_Position,,
+S6000001,SPARTAN,Photovolatic Control Unit (PVCU) - Solar Array - 3B - Drive Voltage,CNT,DCSU_3B_RBI_6_V,DCSU S6LWR-3B SCA SW06 Raw Voltage,,
+S6000002,SPARTAN,Photovolatic Control Unit (PVCU) - Solar Array - 3B - Drive Current,CNT,DCSU_3B_RBI_6_Integ_I,DCSU S6LWR-3B SCA SW06 Intg Current,,
+S6000004,SPARTAN,Photovolatic Control Unit (PVCU) - Solar Array - 1B - Drive Voltage,CNT,DCSU_1B_RBI_6_V,DCSU S6UPR-1B SCA SW06 Raw Voltage,,
+S6000005,SPARTAN,Photovolatic Control Unit (PVCU) - Solar Array - 1B - Drive Current,CNT,DCSU_1B_RBI_6_Integ_I,DCSU S6UPR-1B SCA SW06 Intg Current,,
+S6000007,SPARTAN,Photovolatic Control Unit (PVCU) - Solar Array - 3B - Beta Gimble Assembly (BGA) Position (degrees),DEG,PVCU_S6_Prim_BGA_3B_Resolver_Position_Conv,S6 PV_PSN_1_ECU_BGA_Resolver_Conv_Position,,
+S6000008,SPARTAN,Photovolatic Control Unit (PVCU) - Solar Array - 1B - Beta Gimble Assembly (BGA) Position (degrees),DEG,PVCU_S6_Prim_BGA_1B_Resolver_Position_Conv,S6 PV_PSN_2_ECU_BGA_Resolver_Conv_Position,,
+P1000004,CATO,S-Band Radio Frequency Group (RFG 2) Azimuth Gimbal Position,DEG,S_Band_RFG2_Est_Az_Position,ACRFG2 5M Estimated Azimuth Position,,
+P1000005,CATO,S-Band Radio Frequency Group (RFG 2) Elevation Gimbal Position,DEG,S_Band_RFG2_Est_El_Position,ACRFG2 5M Estimated Elevation Position,,
+P1000007,CATO,"S-Band Radio Frequency Group (RFG 2), on-off status",N/A,RPCM_P12B_B_RPC_16_RFG2_P1_On_Off_Stat,RPCM P1_2B_B HYBRID SW16 VOLTAGE STATUS,N/A,N/A
+S1000004,CATO,S-Band Radio Frequency Group (RFG 1) Azimuth Gimbal Position,DEG,S_Band_RFG1_Est_Az_Position,ACRFG1 5M Estimated Azimuth Position,,
+S1000009,CATO,"S-Band Radio Frequency Group (RFG 1), on-off status",N/A,RPCM_S11A_B_RPC_16_RFG1_On_Off_Stat,RPCM S1_1A_B HYBRID SW16 VOLTAGE STATUS,N/A,N/A
+USLAB000088,CATO,Ku-Band Video Downlink Channel 1 Activity,N/A,Ku_HRFM_VBSP_1_Activity_Indicator,HRFM VBSP 1 Activity Indicator,N/A,N/A
+USLAB000089,CATO,Ku-Band Video Downlink Channel 2 Activity,N/A,Ku_HRFM_VBSP_2_Activity_Indicator,HRFM VBSP 2 Activity Indicator,N/A,N/A
+USLAB000090,CATO,Ku-Band Video Downlink Channel 3 Activity,N/A,Ku_HRFM_VBSP_3_Activity_Indicator,HRFM VBSP 3 Activity Indicator,N/A,N/A
+USLAB000091,CATO,Ku-Band Video Downlink Channel 4 Activity,N/A,Ku_HRFM_VBSP_4_Activity_Indicator,HRFM VBSP 4 Activity Indicator,N/A,N/A
+USLAB000092,CATO,Active String of S-Band,INTEGR,S_BAND_ACTIVE_STRING,String 1 Sband software status system status active string,,
+USLAB000093,CATO,Internal Audio Controller (IAC) - IAC-1 Active/Backup Indication,N/A,Audio_IAC1_Mode_Indication,IAC-1 Active/Backup Indication,N/A,N/A
+USLAB000094,CATO,Internal Audio Controller (IAC) - IAC-2 Active/Backup Indication,N/A,Audio_IAC2_Mode_Indication,IAC-2 Active/Backup Indication,N/A,N/A
+USLAB000095,CATO,Video Source Routed to Downlink 1,INTEGR,VDS_Destination_9_Source_ID,Cvt out destination usage table 9 source id,,
+USLAB000096,CATO,Video Source Routed to Downlink 2,INTEGR,VDS_Destination_13_Source_ID,Cvt out destination usage table 13 source id,,
+USLAB000097,CATO,Video Source Routed to Downlink 3,INTEGR,VDS_Destination_14_Source_ID,Cvt out destination usage table 14 source id,,
+USLAB000098,CATO,Video Source Routed to Downlink 4,INTEGR,VDS_Destination_29_Source_ID,Cvt out destination usage table 29 source id,,
+USLAB000099,CATO,Space-To-Space Radio (UHF) 1 Power,N/A,RPCM_LAD52B_A_RPC_08_UHF_SSSR_1_On_Off_Stat,RPCM LAF5 A57 SW08 Voltage Status,N/A,N/A
+USLAB000100,CATO,Space-To-Space Radio (UHF) 2 Power,N/A,RPCM_LA1B_H_RPC_04_UHF_SSSR_2_On_Off_Stat,RPCM LAFE A12 SW04 Voltage Status,N/A,N/A
+USLAB000101,CATO,Space-To-Space Radio Frame Sync Lock,N/A,UHF_Frame_Sync,SSSR_FrameSync,N/A,N/A
+Z1000013,CATO,Ku-Band Transmit,N/A,Ku_TRC_PLC_Selection,TRC PLC Selection,N/A,N/A
+Z1000014,CATO,Ku-Band SGANT Elevation Position,DEG,Ku_TRC_Current_SGANT_EL_Position,TRC Current SGANT EL Position,,
+Z1000015,CATO,Ku-Band SGANT Cross-Elevation Position,N/A,N/A,N/A,N/A,N/A
+S0000001,SPARTAN/VVO,Starboard Thermal Radiator Rotating Joint (TRRJ) Position (degrees),DEG,ETCS_LoopA_TRRJ_M_BAD_Joint_Angle,TRRJ_M_BAD_DATA_FLOAT_STBD_JOINT_ANGLE_READOUT,,
+S0000002,SPARTAN/VVO,Port Thermal Radiator Rotating Joint (TRRJ) Position (degrees),DEG,ETCS_LoopB_TRRJ_M_BAD_Joint_Angle,TRRJ_M_BAD_DATA_FLOAT_PORT_JOINT_ANGLE_READOUT,,
+S0000003,SPARTAN/VVO,Solar Alpha Rotary Joint (SARJ) Starboard Joint Angle Position (degrees),DEG,SARJ_Starboard_Joint_Angle_Position,SARJ_M_BAD_DATA_FLOAT_STBD_JOINT_ANGLE_READOUT,,
+S0000004,SPARTAN/VVO,Solar Alpha Rotary Joint (SARJ) Port Joint Angle Position (degrees),DEG,SARJ_Port_Joint_Angle_Position,SARJ_M_BAD_DATA_FLOAT_PORT_JOINT_ANGLE_READOUT,,
+S0000005,VVO,Solar Alpha Rotary Joint (SARJ) Port Joint Angle Commanded Position (degrees),DEG,SARJ_Port_Commanded_Position,SARJ_P3_C_DATA_FLOAT_COMMANDED_POSITION,,
+S0000006,VVO,External Thermal Control System (ETCS) - Thermal Radiator Rotating Joint (TRRJ) - Loop B - Software mode,N/A,ETCS_LoopB_TRRJ_M_SW_Mode,TRRJ_M_DATA_USB_PORT_TRRJ_M_MODE,N/A,N/A
+S0000007,VVO,External Thermal Control System (ETCS) - Thermal Radiator Rotating Joint (TRRJ) - Loop A - Software mode,N/A,ETCS_LoopA_TRRJ_M_SW_Mode,TRRJ_M_DATA_USB_STBD_TRRJ_M_MODE,N/A,N/A
+S0000008,VVO,External Primary Solar Alpha Rotary Joint (SARJ) Port Mode,N/A,EXT_Prim_SARJ_Port_Mode,SARJ_M_PORT_DATA_USB_SARJ_M_MODE,N/A,N/A
+S0000009,VVO,External Primary Solar Alpha Rotary Joint (SARJ) Starboard Mode,N/A,EXT_Prim_SARJ_Starboard_Mode,SARJ_M_STBD_DATA_USB_SARJ_M_MODE,N/A,N/A
+USLAB000081,VVO,Attitude Maneuver In Progress status,N/A,USGNC_CA_AttMnvr_In_Progress,STS_CA_ManeuverInProgress,N/A,N/A
+RUSSEG000001,VVO,Russian Segment Station Mode - Service Module (SM),N/A,RS_SM_Current_Segment_Mode,RS Current Mode-RS,N/A,N/A
+RUSSEG000002,VVO,First Kurs Equipment Kit Operating,N/A,RSMCS_SM_KURS1_On,SM KURS Equipment Set1 Operating-RS,N/A,N/A
+RUSSEG000003,VVO,Second Kurs Equipment Kit Operating,N/A,RSMCS_SM_KURS2_On,SM KURS Equipment Set2 Operating-RS,N/A,N/A
+RUSSEG000004,VVO,"Service Module Kurs P1, P2 Failure - Russian Segment",N/A,SM_ECW_KURS_Fail,"SM KURS P1, P2 Failure-RS",N/A,N/A
+RUSSEG000005,VVO,Distance from Service Module (SM) Kurs (Range),M,RSMCS_SM_KURS_Rng,SM Distance from KURS-RS,,
+RUSSEG000006,VVO,Rate from Service Module (SM) Kurs (Range Rate),M/S,RSMCS_SM_KURS_Vel,SM Rate from SM KURS-RS,,
+RUSSEG000007,VVO,Service Module (SM) Kurs-P Test Mode - Russian Segment,N/A,SM_KURS_P_Test_Mode_RS,SM KURS-P Test Mode-RS,N/A,N/A
+RUSSEG000008,VVO,"Service Module (SM) Kurs-P ""Capture"" Signal Availability",N/A,SM_KURS_P_Capture_Signal_RS,SM KURS-P Capture Signal -RS,N/A,N/A
+RUSSEG000009,VVO,Service Module (SM) Kurs-P Target Acquisition Signal - Russian Segment,N/A,SM_KURS_P_Target_Acquisition_Signal_RS,SM KURS-P Target Acquisition Signal-RS,N/A,N/A
+RUSSEG000010,VVO,Service Module (SM) Kurs-P Functional Mode Signal - Russian Segment,N/A,SM_KURS_P_Functional_Mode_Signal_RS,SM KURS-P Functional Mode Signal-RS,N/A,N/A
+RUSSEG000011,VVO,Service Module (SM) Kurs-P Standby Mode - Russian Segment,N/A,SM_KURS_P_In_Stand_by_Mode_RS,SM KURS-P In Standby Mode-RS,N/A,N/A
+RUSSEG000012,VVO,Service Module Docking Flag,N/A,RSMCS_SM_Dock_Contact,SM Docking Flag-RS,N/A,N/A
+RUSSEG000013,VVO,Service Module (SM) Forward Docking Port Engaged,N/A,RSMCS_SM_Forward_Port_Engaged,SM Docking Port Engaged from Xfer Side-RS,N/A,N/A
+RUSSEG000014,VVO,Service Module (SM) Aft Docking Port Engaged,N/A,RSMCS_SM_Aft_Port_Engaged,SM Docking Port Engaged from Instr Compartment Side-RS,N/A,N/A
+RUSSEG000015,VVO,Service Module (SM) Nadir (Down-looking) Docking Port Engaged - Along Y-Axis,N/A,RSMCS_SM_Nadir_Port_Engaged,SM Docking Port Engaged Below (along SM -Y Axis)-RS,N/A,N/A
+RUSSEG000016,VVO,Functional Cargo Block (FGB) Nadir (Down-looking) Docking Port Engaged - Along Y-Axis,N/A,RSMCS_SM_FGB_Nadir_Port_Engaged,FGB Bottom Docking Port Engaged (along SM -Y Axis)-RS,N/A,N/A
+RUSSEG000017,VVO,Service Module (SM) Nadir (Down-looking) Universal Docking Module (UDM) Docking Port Engaged - Along Y-Axis,N/A,RSMCS_SM_UDM_Nadir_Port_Engaged,SM Bottom UDM Docking Port Engaged (along SM -Y Axis)-RS,N/A,N/A
+RUSSEG000018,VVO,Mini Research Module (MRM) 1 Docking Port Engaged - Russian Segment,N/A,RSMCS_MRM1_Port_Engaged,MRM1 Docking Port Engaged-RS,N/A,N/A
+RUSSEG000019,VVO,Mini Research Module (MRM) 2 Docking Port Engaged - Russian Segment,N/A,RSMCS_MRM2_Port_Engaged,MRM2 Docking Port Engaged-RS,N/A,N/A
+RUSSEG000020,VVO,Service Module - Docked Vehicle Hooks Closed - Russian Segment,N/A,RSMCS_SM_ETOV_Hooks_Closed,Docked Vehicle Hooks Closed-RS,N/A,N/A
+RUSSEG000021,VVO,"Service Module - Russian Guidance, Navigation, and Control - Active Attitude Mode - Russian Segment",N/A,RSMCS_SM_Act_Att_Ref_Frame,SM SUDN Active Attitude Mode-RS,N/A,N/A
+RUSSEG000022,VVO,"Service Module - Russian Guidance, Navigation, and Control - Motion Control - Russian Segment",N/A,RSMCS_SM_RS_Is_Master,SM SUDN Controls the Motion (RS master)-RS,N/A,N/A
+RUSSEG000023,VVO,"Service Module - Russian Guidance, Navigation, and Control - Prepared to Free Drift Mode Transition - Russian Segment",N/A,RSMCS_SM_Ready_For_Indicator,SM SUDN Prepared to Free Drift Mode Transition-RS,N/A,N/A
+RUSSEG000024,VVO,"Service Module - Russian Guidance, Navigation, and Control - Thruster Operation Mode Terminated - Russian Segment",N/A,RSProp_SM_Thrstr_Mode_Terminated,SM Attitude Thruster Operation Mode Terminated-RS,N/A,N/A
+S1000005,CATO/VVO,S-Band Radio Frequency Group (RFG 1) Elevation Gimbal Position,DEG,S_Band_RFG1_Est_El_Position,ACRFG1 5M Estimated Elevation Position,,
+USLAB000001,ADCO,Control Moment Gyroscope (CMG)-1 On-Line,N/A,USGNC_SEQ_CMG1_Online,STS_SEQ_CMG1InUse,N/A,N/A
+USLAB000002,ADCO,Control Moment Gyroscope (CMG)-2 On-Line,N/A,USGNC_SEQ_CMG2_Online,STS_SEQ_CMG2InUse,N/A,N/A
+USLAB000003,ADCO,Control Moment Gyroscope (CMG)-3 On-Line,N/A,USGNC_SEQ_CMG3_Online,STS_SEQ_CMG3InUse,N/A,N/A
+USLAB000004,ADCO,Control Moment Gyroscope (CMG)-4 On-Line,N/A,USGNC_SEQ_CMG4_Online,STS_SEQ_CMG4InUse,N/A,N/A
+USLAB000005,ADCO,Number of Control Moment Gyroscope (CMG)s Online,ND,USGNC_CA_Num_CMGs_Online,CDT_CA_CMGSysNumrActCMGs,,
+USLAB000006,ADCO,Control Moment Gyroscope (CMG) Control Torque - Roll (N-m),FT-LB,USGNC_CA_Unlim_Cntl_Trq_InBody_X,CDT_CA_UnlimTorqueCmdInBody_1,,
+USLAB000007,ADCO,Control Moment Gyroscope (CMG) Control Torque - Pitch (N-m),FT-LB,USGNC_CA_Unlim_Cntl_Trq_InBody_Y,CDT_CA_UnlimTorqueCmdInBody_2,,
+USLAB000008,ADCO,Control Moment Gyroscope (CMG) Control Torque - Yaw (N-m),FT-LB,USGNC_CA_Unlim_Cntl_Trq_InBody_Z,CDT_CA_UnlimTorqueCmdInBody_3,,
+USLAB000009,ADCO,Active Control Moment Gyroscope (CMG) Momentum (Nms),FT-LB-S,USGNC_CA_CMG_Mom_Act_Mag,CDT_CA_CMGSysActMomMag,,
+USLAB000011,ADCO,Desaturation Request (Enabled/Inhibited),N/A,USGNC_CA_Desat_Request_Inh,STS_CA_InhibitThrusterFiring,N/A,N/A
+USLAB000013,ADCO,US Attitude Source,N/A,USGNC_AD_Selected_Att_Source,STS_AD_Selected_Attitude,N/A,N/A
+USLAB000014,ADCO,US Rate Source,N/A,USGNC_AD_Selected_Rate_Source,STS_AD_Selected_Rate,N/A,N/A
+USLAB000015,ADCO,US State Vector Source,N/A,USGNC_SD_Selected_State_Source,STS_SD_SelectedStateSource,N/A,N/A
+USLAB000016,ADCO,Attitude Controller Type,N/A,USGNC_CA_Act_CCDB_Att_Cntl_Type,STS_CA_AttControllerType,N/A,N/A
+USLAB000017,ADCO,Attitude Control Reference Frame,N/A,USGNC_CA_Act_CCDB_Att_Cntl_Ref_Frame,STS_CA_AttCntrlRefFrame,N/A,N/A
+USLAB000018,ADCO,US Current Local Vertical Local Horizontal (LVLH) Attitude Quaternion Component 0,ND,USGNC_PS_Pointing_LVLH_Att_Quatrn_0,CDT_PS_PDLVLHAttQ0,,
+USLAB000019,ADCO,US Current Local Vertical Local Horizontal (LVLH) Attitude Quaternion Component 1,ND,USGNC_PS_Pointing_LVLH_Att_Quatrn_1,CDT_PS_PDLVLHAttQ1,,
+USLAB000020,ADCO,US Current Local Vertical Local Horizontal (LVLH) Attitude Quaternion Component 2,ND,USGNC_PS_Pointing_LVLH_Att_Quatrn_2,CDT_PS_PDLVLHAttQ2,,
+USLAB000021,ADCO,US Current Local Vertical Local Horizontal (LVLH) Attitude Quaternion Component 3,ND,USGNC_PS_Pointing_LVLH_Att_Quatrn_3,CDT_PS_PDLVLHAttQ3,,
+USLAB000022,ADCO,US Attitude Roll Error (deg),RAD,USGNC_CA_Att_Error_X,CDT_CA_ThetaErrorInRef_1,,
+USLAB000023,ADCO,US Attitude Pitch Error (deg),RAD,USGNC_CA_Att_Error_Y,CDT_CA_ThetaErrorInRef_2,,
+USLAB000024,ADCO,US Attitude Yaw Error (deg),RAD,USGNC_CA_Att_Error_Z,CDT_CA_ThetaErrorInRef_3,,
+USLAB000025,ADCO,US Inertial Attitude Rate X (deg/s),RAD/S,USGNC_PS_Pointing_Current_Inert_Rate_Vector_X,CDT_PS_PDRateX,,
+USLAB000026,ADCO,US Inertial Attitude Rate Y (deg/s),RAD/S,USGNC_PS_Pointing_Current_Inert_Rate_Vector_Y,CDT_PS_PDRateY,,
+USLAB000027,ADCO,US Inertial Attitude Rate Z (deg/s),RAD/S,USGNC_PS_Pointing_Current_Inert_Rate_Vector_Z,CDT_PS_PDRateZ,,
+USLAB000028,ADCO,US Commanded Attitude Quaternion Component 0,ND,USGNC_CA_Act_CCDB_AttQuatrn_0_Cmd,STS_CA_AttCmdQuat_0,,
+USLAB000029,ADCO,US Commanded Attitude Quaternion Component 1,ND,USGNC_CA_Act_CCDB_AttQuatrn_1_Cmd,STS_CA_AttCmdQuat_1,,
+USLAB000030,ADCO,US Commanded Attitude Quaternion Component 2,ND,USGNC_CA_Act_CCDB_AttQuatrn_2_Cmd,STS_CA_AttCmdQuat_2,,
+USLAB000031,ADCO,US Commanded Attitude Quaternion Component 3,ND,USGNC_CA_Act_CCDB_AttQuatrn_3_Cmd,STS_CA_AttCmdQuat_3,,
+USLAB000038,ADCO,Active Control Moment Gyroscope (CMG) Momentum Capacity (Nms),FT-LB-S,USGNC_CA_CMG_Mom_Act_Cap,CDT_CA_CMGSysActMomCapc,,
+USLAB000039,ADCO,ISS Total Mass (kg),KG,USGNC_PS_Tot_Mass,CDT_PS_ISSAMass,,
+USLAB000040,ADCO,Solar Beta Angle (degrees),DEG,USGNC_PS_Solar_Beta_Angle,CDT_PS_PDSolarBeta,,
+USLAB000041,ADCO,Loss of CMG Attitude Control (LOAC) Caution Message In Alarm,N/A,USGNC_CA_Loss_Of_CMG_Att_Cntl_Latched_Caution,CW_CA_LossOfAttCntrlLatched,N/A,N/A
+USLAB000042,ADCO,Loss of ISS Attitude Control (LOAC) Caution Message In Alarm,N/A,USGNC_CCS_Loss_of_ISS_Attitude_Control_Warning,Table ewc list Station-Wide Loss of Attitude Control,N/A,N/A
+USLAB000043,ADCO,Global Positioning System (GPS-1) Ops Status,N/A,USGNC_GPS1_Operational_Status,STS_GPS1_OpStatus,N/A,N/A
+USLAB000044,ADCO,Global Positioning System (GPS-2) Ops Status,N/A,USGNC_GPS2_Operational_Status,STS_GPS2_OpStatus,N/A,N/A
+USLAB000045,ADCO,Spin Motor Spin Bearing Temperature - Control Moment Gyroscope (CMG) 1 (deg C),DEGF,USGNC_CMG1_SpinBrg_Temp1,CDT_CMG1_M01SpinBearingTemp1,,
+USLAB000046,ADCO,Spin Motor Spin Bearing Temperature - Control Moment Gyroscope (CMG) 2 (deg C),DEGF,USGNC_CMG2_SpinBrg_Temp1,CDT_CMG2_M01SpinBearingTemp1,,
+USLAB000047,ADCO,Spin Motor Spin Bearing Temperature - Control Moment Gyroscope (CMG) 3 (deg C),DEGF,USGNC_CMG3_SpinBrg_Temp1,CDT_CMG3_M01SpinBearingTemp1,,
+USLAB000048,ADCO,Spin Motor Spin Bearing Temperature - Control Moment Gyroscope (CMG) 4 (deg C),DEGF,USGNC_CMG4_SpinBrg_Temp1,CDT_CMG4_M01SpinBearingTemp1,,
+USLAB000049,ADCO,Hall Resolver Spin Bearing Temperature - Control Moment Gyroscope (CMG) 1 (deg C),DEGF,USGNC_CMG1_SpinBrg_Temp2,CDT_CMG1_M01SpinBearingTemp2,,
+USLAB000050,ADCO,Hall Resolver Spin Bearing Temperature - Control Moment Gyroscope (CMG) 2 (deg C),DEGF,USGNC_CMG2_SpinBrg_Temp2,CDT_CMG2_M01SpinBearingTemp2,,
+USLAB000051,ADCO,Hall Resolver Spin Bearing Temperature - Control Moment Gyroscope (CMG) 3 (deg C),DEGF,USGNC_CMG3_SpinBrg_Temp2,CDT_CMG3_M01SpinBearingTemp2,,
+USLAB000052,ADCO,Hall Resolver Spin Bearing Temperature - Control Moment Gyroscope (CMG) 4 (deg C),DEGF,USGNC_CMG4_SpinBrg_Temp2,CDT_CMG4_M01SpinBearingTemp2,,
+Z1000001,ADCO,Control Moment Gyroscope (CMG)-1 Vibration (g),G,USGNC_CMG1_IG_Vibration,CDT_CMG1_M01WheelUnbalanceSensor,,
+Z1000002,ADCO,Control Moment Gyroscope (CMG)-2 Vibration (g),G,USGNC_CMG2_IG_Vibration,CDT_CMG2_M01WheelUnbalanceSensor,,
+Z1000003,ADCO,Control Moment Gyroscope (CMG)-3 Vibration (g),G,USGNC_CMG3_IG_Vibration,CDT_CMG3_M01WheelUnbalanceSensor,,
+Z1000004,ADCO,Control Moment Gyroscope (CMG)-4 Vibration (g),G,USGNC_CMG4_IG_Vibration,CDT_CMG4_M01WheelUnbalanceSensor,,
+Z1000005,ADCO,Control Moment Gyroscope (CMG)-1 Spin Motor Current (amps),AMP,USGNC_CMG1_SpinMtr_Current,CDT_CMG1_M03SMCurrentCmd,,
+Z1000006,ADCO,Control Moment Gyroscope (CMG)-2 Spin Motor Current (amps),AMP,USGNC_CMG2_SpinMtr_Current,CDT_CMG2_M03SMCurrentCmd,,
+Z1000007,ADCO,Control Moment Gyroscope (CMG)-3 Spin Motor Current (amps),AMP,USGNC_CMG3_SpinMtr_Current,CDT_CMG3_M03SMCurrentCmd,,
+Z1000008,ADCO,Control Moment Gyroscope (CMG)-4 Spin Motor Current (amps),AMP,USGNC_CMG4_SpinMtr_Current,CDT_CMG4_M03SMCurrentCmd,,
+Z1000009,ADCO,Control Moment Gyroscope (CMG) 1 Wheel Speed (rpm),RPM,USGNC_CMG1_Current_Wheel_Speed,CDT_CMG1_M01WheelSpeed,,
+Z1000010,ADCO,Control Moment Gyroscope (CMG) 2 Wheel Speed (rpm),RPM,USGNC_CMG2_Current_Wheel_Speed,CDT_CMG2_M01WheelSpeed,,
+Z1000011,ADCO,Control Moment Gyroscope (CMG) 3 Wheel Speed (rpm),RPM,USGNC_CMG3_Current_Wheel_Speed,CDT_CMG3_M01WheelSpeed,,
+Z1000012,ADCO,Control Moment Gyroscope (CMG) 4 Wheel Speed (rpm),RPM,USGNC_CMG4_Current_Wheel_Speed,CDT_CMG4_M01WheelSpeed,,
+USLAB000010,ADCO/VVO,Control Moment Gyroscope (CMG) Momentum Percentage (%),PCT,USGNC_CA_CMG_Mom_Act_Cap_Pct,STS_CA_CMGMomentumPercentCapc,,
+USLAB000012,ADCO/VVO,"US Guidance, Navigation and Control (GNC) Mode",N/A,USGNC_SEQ_MDM_Current_Mode,STS_SEQ_CurrentModeStatusCC,N/A,N/A
+RUSSEG000025,ADCO/VVO,"Service Module - Russian Guidance, Navigation, and Control - Current Dynamic Mode - Russian Segment",N/A,RSMCS_SM_SUDN_Mode,SM SUDN Current Dynamic Mode-RS,N/A,N/A
+USLAB000032,ADCO/TOPO,"US Guidance, Navigation and Control (GNC) J2000 Propagated State Vector - X (km)",FT,USGNC_SD_Selected_State_Posn_X,STS_SD_Selected_J2000_PosX,,
+USLAB000033,ADCO/TOPO,"US Guidance, Navigation and Control (GNC) J2000 Propagated State Vector - Y (km)",FT,USGNC_SD_Selected_State_Posn_Y,STS_SD_Selected_J2000_PosY,,
+USLAB000034,ADCO/TOPO,"US Guidance, Navigation and Control (GNC) J2000 Propagated State Vector - Z (km)",FT,USGNC_SD_Selected_State_Posn_Z,STS_SD_Selected_J2000_PosZ,,
+USLAB000035,ADCO/TOPO,"US Guidance, Navigation and Control (GNC) J2000 Propagated State Vector - X (m/s)",FT/S,USGNC_SD_Selected_State_Vel_X,STS_SD_Selected_J2000_VelX,,
+USLAB000036,ADCO/TOPO,"US Guidance, Navigation and Control (GNC) J2000 Propagated State Vector - Y (m/s)",FT/S,USGNC_SD_Selected_State_Vel_Y,STS_SD_Selected_J2000_VelY,,
+USLAB000037,ADCO/TOPO,"US Guidance, Navigation and Control (GNC) J2000 Propagated State Vector - Z (m/s)",FT/S,USGNC_SD_Selected_State_Vel_Z,STS_SD_Selected_J2000_VelZ,,
+USLAB000082,ODIN,Standard Command Counter - Count of standard commands received by the ISS Command and Control Computer,INTEGR,Prim_CCS_MDM_Std_Cmd_Accept_Cnt,CCCCPV packet command counter standard received cmd count,,
+USLAB000083,ODIN,Data Load Command Counter - Count of data load commands received by the ISS Command and Control Computer,INTEGR,Prim_CCS_MDM_Data_Load_Cmd_Accept_Cnt,CCCCPV packet cmd counter data load received command count,,
+USLAB000084,ODIN,ISS Command and Control Multiplexer/Demultiplexer Onboard Time (course),S,Coarse_Time,Coarse,,
+USLAB000085,ODIN,ISS Command and Control Multiplexer/Demultiplexer Onboard Time (fine),S,Fine_Time,Fine Time,,
+USLAB000087,ODIN,PCS Connection Count - Number of crew Portable Computer System laptops active and connected to the Primary Command and Control (C&C) Multiplexer/Demultiplexer (MDM),INTEGR,Prim_CCS_MDM_PCS_Cnct_Cnt,*Total Number of Active Core Laptops,,
+USLAB000086,ODIN/VVO,ISS Station Mode,N/A,Prim_CCS_MDM_SMCC_Cmd_Station_Mode,Smc cvt commanded station mode,N/A,N/A
+USLAB000102,TOPO,State vector time tag,S,USGNC_SD_Selected_State_Time_Tag,STS_SD_Selected_State_TimeTag,,
+TIME_000001,N/A,Greenwich Mean Time (GMT),MS,Time of Occurrence,Time of Occurrence,N/A,N/A
+TIME_000002,N/A,Year,YR,Year of Occurrence,Year of Occurrence,N/A,N/A

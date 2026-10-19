@@ -73,7 +73,7 @@ For full functionality, run system analysis first:
 python scripts/run_system_analysis.py --subsystem attitude_control --export
 
 # Or collect live telemetry
-python scripts/collect_telemetry.py --duration 3600
+constellation collect iss --duration 1h
 ```
 
 The dashboard will display demo data if no analysis results are available.

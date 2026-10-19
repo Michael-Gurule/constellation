@@ -8,9 +8,8 @@ without a marker have been delivered and now run against the new modules.
 """
 
 import ast
-import csv
+import re
 from pathlib import Path
-from types import SimpleNamespace
 
 import numpy as np
 import pandas as pd
@@ -19,13 +18,13 @@ import pytest
 import torch
 
 from constellation.core.store import ParquetStore
+from constellation.ingest.channels import load_channels, load_dictionary
+from constellation.ingest.isslive import IssLiveCollector
 from constellation.legacy.features.domain_features import AerospaceFeatureExtractor
 from constellation.legacy.features.time_series_features import (
     TimeSeriesFeatureExtractor,
 )
-from constellation.legacy.ingestion import lightstreamer_client
 from constellation.legacy.ingestion.data_simulator import TelemetrySimulator
-from constellation.legacy.ingestion.lightstreamer_client import LightstreamerClient
 from constellation.legacy.models import base_model, degradation_forecast
 from constellation.legacy.models.anomaly_detection import (
     IsolationForestDetector,
@@ -40,10 +39,8 @@ from constellation.legacy.optimization.maintenance_scheduler import (
     MaintenanceTask,
 )
 from constellation.legacy.optimization.system_integrator import ConstellationSystem
-from constellation.legacy.settings import MONITORED_PARAMS
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-FIXTURES = Path(__file__).resolve().parents[1] / "fixtures"
 
 
 class FeatureMismatchError(Exception):
@@ -66,68 +63,110 @@ def _cbc_runs() -> bool:
 # --- ingestion and storage -------------------------------------------------
 
 
-@pytest.mark.xfail(
-    strict=True,
-    raises=AssertionError,
-    reason="A live update is mapped to the channel it was subscribed under",
-)
-def test_lightstreamer_update_maps_to_subscribed_channel(monkeypatch):
-    monkeypatch.setattr(
-        lightstreamer_client.requests,
-        "post",
-        lambda *args, **kwargs: SimpleNamespace(status_code=200),
+class _Update:
+    """The slice of the Lightstreamer SDK's ItemUpdate that the collector reads."""
+
+    def __init__(self, item, **fields):
+        self._item = item
+        self._fields = fields
+
+    def getItemName(self):
+        return self._item
+
+    def getValue(self, field):
+        return self._fields.get(field)
+
+    def isSnapshot(self):
+        return False
+
+
+def test_lightstreamer_update_maps_to_subscribed_channel(tmp_path):
+    channels = load_channels(REPO_ROOT / "configs/ingest/iss.yaml").channels
+    store = ParquetStore(tmp_path)
+    collector = IssLiveCollector(channels, store)
+    # Z1000011 is the third wheel-speed item in the subscription.
+    update = _Update(
+        "Z1000011", Value="6601", TimeStamp="7031.5", **{"Status.Class": "24"}
     )
-    client = LightstreamerClient()
-    client.session_id = "S1"
-    assert client.subscribe(["CHANNEL_A", "CHANNEL_B", "CHANNEL_C"])
 
-    client._process_update("U,1,3,2026-03-01 12:00:00|42.5|24")
+    collector.handle_update(update)
+    collector.flush()
 
-    record = client.data_queue.get_nowait()
-    assert record["parameter_id"] == "CHANNEL_C"
-    assert record["value"] == "42.5"
+    (reading,) = store.read_readings().itertuples()
+    assert reading.channel == "cmg3_wheel_speed"
+    assert reading.value == 6601.0
 
 
-# Expected meaning of each configured channel, from the labels in the settings.
-CONFIGURED_MEANING = {
-    "USLAB000084": "wheel speed",
-    "USLAB000085": "wheel speed",
-    "USLAB000086": "wheel speed",
-    "USLAB000087": "wheel speed",
-    "NODE3000001": "momentum",
-    "NODE3000002": "momentum",
-    "NODE3000003": "momentum",
-    "NODE3000004": "momentum",
-    "USLAB000032": "quaternion",
-    "USLAB000033": "quaternion",
-    "USLAB000034": "quaternion",
-    "USLAB000035": "quaternion",
-    "USLAB000098": "s-band",
-    "USLAB000099": "ku-band",
-    "USLAB000100": "s-band",
-    "USLAB000101": "ku-band",
-    "NODE2000015": "azimuth",
-    "NODE2000016": "elevation",
-}
+# Words the dictionary description must contain for each kind of channel name.
+KEYWORDS = [
+    (r"cmg\d_online", "on-line"),
+    (r"cmgs_online", "number of control moment gyroscope"),
+    (r"cmg_torque_(roll|pitch|yaw)", "control torque - {0}"),
+    (r"cmg_momentum_pct", "momentum percentage"),
+    (r"cmg_momentum_capacity", "momentum capacity"),
+    (r"cmg_momentum", "momentum (nms)"),
+    (r"desat_request", "desaturation request"),
+    (r"gnc_mode", "guidance, navigation and control (gnc) mode"),
+    (r"loac_alarm", "loss of cmg attitude control"),
+    (r"cmg\d_spin_bearing_temp", "spin motor spin bearing temperature"),
+    (r"cmg\d_hall_bearing_temp", "hall resolver spin bearing temperature"),
+    (r"cmg\d_vibration", "vibration"),
+    (r"cmg\d_spin_current", "spin motor current"),
+    (r"cmg\d_wheel_speed", "wheel speed"),
+    (r"att_source", "attitude source"),
+    (r"rate_source", "rate source"),
+    (r"controller_type", "attitude controller type"),
+    (r"ref_frame", "reference frame"),
+    (r"q_lvlh_\d", "lvlh) attitude quaternion"),
+    (r"att_err_(roll|pitch|yaw)", "attitude {0} error"),
+    (r"att_rate_([xyz])", "attitude rate {0}"),
+    (r"q_cmd_\d", "commanded attitude quaternion"),
+    (r"maneuver_in_progress", "maneuver in progress"),
+    (r"sa_(\d[ab])_voltage", "solar array - {0} - drive voltage"),
+    (r"sa_(\d[ab])_current", "solar array - {0} - drive current"),
+    (r"bga_(\d[ab])", "solar array - {0} - beta gimble"),
+    (r"sarj_(stbd)", "starboard joint angle"),
+    (r"sarj_(port)", "port joint angle"),
+    (r"loop_([ab])_flow", "loop {0} pump flowrate"),
+    (r"loop_([ab])_press", "loop {0} pm out press"),
+    (r"loop_([ab])_temp", "loop {0} pm out temp"),
+    (r"trrj_stbd", "starboard thermal radiator rotating joint"),
+    (r"trrj_port", "port thermal radiator rotating joint"),
+    (r"sband_rfg(\d)_az", "rfg {0}) azimuth"),
+    (r"sband_rfg(\d)_el", "rfg {0}) elevation"),
+    (r"sband_rfg(\d)_on", "rfg {0}), on-off"),
+    (r"sband_active_string", "active string of s-band"),
+    (r"ku_transmit", "ku-band transmit"),
+    (r"ku_sgant_el", "sgant elevation"),
+    (r"ku_sgant_xel", "sgant cross-elevation"),
+]
 
 
-@pytest.mark.xfail(
-    strict=True,
-    raises=AssertionError,
-    reason="Every configured channel ID describes what it is configured to measure",
-)
+def _expected_phrase(name):
+    for pattern, template in KEYWORDS:
+        match = re.fullmatch(pattern, name)
+        if match:
+            return template.format(*match.groups()).lower()
+    return None
+
+
 def test_configured_iss_channels_match_dictionary():
-    with (FIXTURES / "isslive_dictionary_subset.csv").open(newline="") as handle:
-        dictionary = {row["id"]: row["description"] for row in csv.DictReader(handle)}
+    dictionary = load_dictionary()
+    channels = load_channels(REPO_ROOT / "configs/ingest/iss.yaml").channels
 
     mismatches = []
-    for channel_id in MONITORED_PARAMS:
-        expected = CONFIGURED_MEANING[channel_id]
-        description = dictionary.get(channel_id)
-        if description is None:
-            mismatches.append(f"{channel_id}: not in dictionary (wanted {expected!r})")
-        elif expected not in description.lower():
-            mismatches.append(f"{channel_id}: {description!r} (wanted {expected!r})")
+    for channel in channels:
+        expected = _expected_phrase(channel.name)
+        entry = dictionary.get(channel.id)
+        if expected is None:
+            mismatches.append(f"{channel.name}: no keyword rule")
+        elif entry is None:
+            mismatches.append(f"{channel.id} ({channel.name}): not in dictionary")
+        elif expected not in entry.description.lower():
+            mismatches.append(
+                f"{channel.id} ({channel.name}): {entry.description!r} "
+                f"does not contain {expected!r}"
+            )
 
     assert not mismatches, "\n".join(mismatches)
 
@@ -388,7 +427,7 @@ def test_health_score_bounds_are_exact():
 )
 def test_scheduler_respects_deadlines():
     now = pd.Timestamp.now().to_pydatetime()
-    hour = pd.Timedelta(hours=1).to_pytimedelta()
+    hour = pd.Timedelta(1, unit="h").to_pytimedelta()
     scheduler = MaintenanceScheduler()
     # One crew slot. The high-risk task has slack; the low-risk task must start
     # within the hour, so it has to go first.

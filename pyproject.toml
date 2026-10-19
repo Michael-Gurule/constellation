@@ -55,6 +55,7 @@ where = ["src"]
 
 [tool.setuptools.package-data]
 "constellation.legacy" = ["telemetry_params.json"]
+"constellation.ingest" = ["data/*.csv"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -153,6 +154,5 @@ exclude_also = [
 "dashboard/pages/5_Settings.py" = ["B905"]
 "scripts/load_colab_lstm.py" = ["NPY002"]
 "src/constellation/legacy/ingestion/data_simulator.py" = ["NPY002"]
-"src/constellation/legacy/ingestion/lightstreamer_client.py" = ["E722"]
 "tests/legacy/test_features.py" = ["NPY002"]
 "tests/legacy/test_models.py" = ["NPY002"]

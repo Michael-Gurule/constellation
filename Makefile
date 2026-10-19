@@ -4,7 +4,7 @@ PYTHON ?= python
 ENV_NAME ?= constellation
 
 .DEFAULT_GOAL := help
-.PHONY: help env env-update hooks lint format typecheck test cov check clean
+.PHONY: help env env-update hooks lint format typecheck test cov check collect-iss clean
 
 help:  ## List available targets
 	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | \
@@ -50,6 +50,9 @@ cov:  ## Run tests with coverage
 	MPLBACKEND=Agg $(PYTHON) -m pytest --cov --cov-report=term-missing --cov-report=xml
 
 check: lint typecheck cov  ## Everything CI runs
+
+collect-iss:  ## Collect ISS telemetry until stopped (see scripts/collect_iss.sh)
+	scripts/collect_iss.sh
 
 clean:  ## Remove caches and build artifacts
 	rm -rf .pytest_cache .mypy_cache .ruff_cache .hypothesis htmlcov .coverage coverage.xml build dist
