@@ -8,17 +8,11 @@ import pandas as pd
 import plotly.graph_objects as go
 import plotly.express as px
 from datetime import datetime, timedelta
-import sys
-from pathlib import Path
 import json
 import numpy as np
 
-# Add project root to path
-project_root = Path(__file__).parent.parent
-sys.path.insert(0, str(project_root))
-
-from config.settings import PROCESSED_DATA_DIR, MODELS_DIR, RAW_DATA_DIR
-from dashboard.theme import (
+from constellation.legacy.settings import PROCESSED_DATA_DIR, MODELS_DIR, RAW_DATA_DIR
+from theme import (
     apply_theme, render_logo, COLORS, CHART_COLORS,
     apply_plotly_theme, get_health_color, render_section_header
 )

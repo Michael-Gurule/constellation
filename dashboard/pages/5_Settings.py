@@ -4,16 +4,12 @@ System settings, model configuration, and about information.
 """
 
 import streamlit as st
-import sys
 from pathlib import Path
 from datetime import datetime
 import json
 
-project_root = Path(__file__).parent.parent.parent
-sys.path.insert(0, str(project_root))
-
-from config.settings import MODELS_DIR, PROCESSED_DATA_DIR, RAW_DATA_DIR
-from dashboard.theme import (
+from constellation.legacy.settings import MODELS_DIR, PROCESSED_DATA_DIR, RAW_DATA_DIR
+from theme import (
     apply_theme, render_logo, COLORS,
     render_section_header
 )
@@ -603,9 +599,9 @@ elif settings_section == "About":
 
     tech_categories = [
         ("Data Processing", ["Pandas", "NumPy", "PyArrow", "SciPy"]),
-        ("Machine Learning", ["scikit-learn", "XGBoost", "PyTorch", "TensorFlow"]),
+        ("Machine Learning", ["scikit-learn", "XGBoost", "PyTorch"]),
         ("Visualization", ["Plotly", "Streamlit", "Matplotlib"]),
-        ("Operations", ["FastAPI", "PuLP", "boto3", "pytest"])
+        ("Operations", ["FastAPI", "PuLP", "pytest"])
     ]
 
     for col, (category, techs) in zip(tech_cols, tech_categories):

@@ -3,20 +3,15 @@ FastAPI application for CONSTELLATION system.
 Provides REST API endpoints for ML models and system operations.
 """
 
-import sys
 from datetime import datetime
-from pathlib import Path
 from typing import Dict, List, Optional
 
 from fastapi import BackgroundTasks, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
-project_root = Path(__file__).parent.parent
-sys.path.insert(0, str(project_root))
-
-from config.settings import MODELS_DIR
-from src.optimization.system_integrator import ConstellationSystem
+from constellation.legacy.settings import MODELS_DIR
+from constellation.legacy.optimization.system_integrator import ConstellationSystem
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -230,7 +225,7 @@ async def get_health_scores(subsystem: str = "attitude_control"):
         # Load latest health scores
         import pandas as pd
 
-        from config.settings import PROCESSED_DATA_DIR
+        from constellation.legacy.settings import PROCESSED_DATA_DIR
 
         results_dir = PROCESSED_DATA_DIR / "analysis_results"
         health_files = list(results_dir.glob("health_scores_*.csv"))
@@ -276,7 +271,7 @@ async def get_maintenance_schedule():
     try:
         import pandas as pd
 
-        from config.settings import PROCESSED_DATA_DIR
+        from constellation.legacy.settings import PROCESSED_DATA_DIR
 
         results_dir = PROCESSED_DATA_DIR / "analysis_results"
         schedule_files = list(results_dir.glob("maintenance_schedule_*.csv"))

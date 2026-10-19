@@ -1,51 +1,36 @@
-# Core Data Science
-numpy==1.24.3
-pandas==2.0.3
-pyarrow==12.0.0
-fastparquet==2023.5.3
-scipy==1.11.1
-scikit-learn==1.3.0
+# Runtime dependencies, pinned for reproducible environments.
+# Resolved on Python 3.12 (macOS arm64). Compatible ranges live in pyproject.toml.
+# Install via environment.yml, or: pip install -r requirements.txt -e .
+# scikit-survival constrains scikit-learn; the two are pinned together.
+# ecos (a scikit-survival dependency) builds from source and needs a C compiler.
+numpy==2.5.4
+pandas==2.3.3
+pyarrow==26.0.0
+scipy==1.18.1
+scikit-learn==1.9.1
+lightgbm==4.7.0
+statsmodels==0.15.0
+lifelines==0.30.3
+scikit-survival==0.28.0
+stumpy==1.14.1
+torch==2.14.1
+ortools==9.15.6755
+skyfield==1.55
+lightstreamer-client-lib==2.2.3
+httpx==0.28.1
+pydantic==2.14.1
+pydantic-settings==2.16.0
+PyYAML==6.0.3
+typer==0.27.3
+fastapi==0.149.0
+uvicorn==0.54.0
+streamlit==1.66.0
+plotly==7.1.0
+matplotlib==3.11.2
+joblib==1.6.0
+shap==0.54.1
+tqdm==4.70.1
 
-# Deep Learning
-torch==2.0.1
-tensorflow==2.13.0
-# Time Series & Survival Analysis
-lifelines==0.27.7
-statsmodels==0.14.0
-xgboost==1.7.4
-
-# Optimization
-pulp==2.7.0
-
-# Visualization
-plotly==5.16.1
-streamlit==1.26.0
-fastapi 
-altair==5.0.1
-seaborn==0.12.2
-matplotlib==3.7.2
-uvicorn 
-
-
-# AWS
-boto3==1.28.25
-awscli==1.29.25
-
-# API & Web
-requests==2.31.0
-websocket-client==1.6.1
-python-dotenv==1.0.0
-
-# Utilities
-pytz==2023.3
-python-dateutil==2.8.2
-tqdm==4.66.1
-pydantic 
-
-# Testing
-pytest==7.4.0
-pytest-cov==4.1.0
-
-# Jupyter
-jupyter==1.0.0
-ipykernel==6.25.1
+# Legacy-only packages
+xgboost==3.4.1  # legacy, removed in 7.2
+PuLP==3.3.2  # legacy, removed in 7.2 (3.x keeps the LpStatus API the legacy scheduler uses)

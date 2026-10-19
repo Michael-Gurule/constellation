@@ -1,0 +1,8 @@
+# Development dependencies, pinned. Installed by environment.yml.
+-r requirements.txt
+
+# Testing
+pytest==9.1.1
+pytest-cov==7.1.0
+hypothesis==6.170.3
+pytest-benchmark==5.3.0

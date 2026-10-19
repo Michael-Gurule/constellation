@@ -1,0 +1,74 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "constellation"
+dynamic = ["version"]
+description = "Health monitoring for spacecraft telemetry: anomaly detection, forecasting, survival analysis, diagnosis and maintenance scheduling"
+readme = "README.md"
+requires-python = ">=3.12"
+authors = [{ name = "Michael Gurule" }]
+# Compatible ranges for the library; exact pins for reproducible
+# environments live in requirements.txt / requirements-dev.txt.
+dependencies = [
+    "numpy>=2.0",
+    "pandas>=2.2",
+    "pyarrow>=16.0",
+    "scipy>=1.13",
+    "scikit-learn>=1.5",
+    "lightgbm>=4.3",
+    "statsmodels>=0.14",
+    "lifelines>=0.29",
+    "scikit-survival>=0.23",
+    "stumpy>=1.13",
+    "torch>=2.4",
+    "ortools>=9.10",
+    "skyfield>=1.49",
+    "lightstreamer-client-lib>=2.1",
+    "httpx>=0.27",
+    "pydantic>=2.7",
+    "pydantic-settings>=2.3",
+    "pyyaml>=6.0",
+    "typer>=0.12",
+    "fastapi>=0.110",
+    "uvicorn>=0.29",
+    "streamlit>=1.35",
+    "plotly>=5.20",
+    "matplotlib>=3.8",
+    "joblib>=1.4",
+    "shap>=0.45",
+    "tqdm>=4.66",
+]
+
+[project.scripts]
+constellation = "constellation.cli:app"
+
+[project.optional-dependencies]
+satnogs = ["satnogs-decoders"]
+
+[tool.setuptools.dynamic]
+version = { attr = "constellation.__version__" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"constellation.legacy" = ["telemetry_params.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# importlib mode keeps the repo root off sys.path, so tests exercise the
+# installed `constellation` package rather than whatever happens to be on disk.
+addopts = ["-ra", "--strict-markers", "--import-mode=importlib"]
+# The repo root is importable for `api`, `dashboard` and `experiments`
+# (not part of the package); `constellation` still resolves to the
+# installed src/ package.
+pythonpath = ["."]
+markers = [
+    "live: needs network access; skipped unless --run-live is given",
+    "slow: long-running test",
+]
+# An expected failure that starts passing must fail the run (forces the
+# marker to be removed together with the change that delivers it).
+xfail_strict = true

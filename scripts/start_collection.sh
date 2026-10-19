@@ -8,14 +8,14 @@ echo "CONSTELLATION Telemetry Collection"
 echo "=========================================="
 echo ""
 
-# Check if virtual environment is activated
-if [[ -z "$VIRTUAL_ENV" ]]; then
-    echo "⚠️  Virtual environment not activated"
-    echo "Run: source venv/bin/activate"
+# Check that the conda environment is activated
+if [[ -z "${CONDA_PREFIX:-$VIRTUAL_ENV}" ]]; then
+    echo "⚠️  Python environment not activated"
+    echo "Run: conda activate constellation"
     exit 1
 fi
 
-echo "✓ Virtual environment active"
+echo "✓ Python environment active"
 echo ""
 
 # Create logs directory
@@ -26,4 +26,4 @@ echo "Starting telemetry collection..."
 echo "Press Ctrl+C to stop"
 echo ""
 
-python -m src.ingestion.collect_telemetry 2>&1 | tee logs/collection_$(date +%Y%m%d_%H%M%S).log
+python -m constellation.legacy.ingestion.collect_telemetry 2>&1 | tee logs/collection_$(date +%Y%m%d_%H%M%S).log

@@ -108,7 +108,7 @@ COLORS = {
 1. Create a new file in `pages/` with numeric prefix (e.g., `6_NewPage.py`)
 2. Import and apply the theme:
    ```python
-   from dashboard.theme import apply_theme, render_logo, COLORS
+   from theme import apply_theme, render_logo, COLORS
    apply_theme()
    ```
 3. Use shared components like `render_section_header()` and `apply_plotly_theme()`

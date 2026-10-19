@@ -7,11 +7,11 @@ echo "CONSTELLATION Collection Monitor"
 echo "=========================================="
 echo ""
 
-# Check if virtual environment is activated
-if [[ -z "$VIRTUAL_ENV" ]]; then
-    echo "⚠️  Virtual environment not activated"
-    echo "Run: source venv/bin/activate"
+# Check that the conda environment is activated
+if [[ -z "${CONDA_PREFIX:-$VIRTUAL_ENV}" ]]; then
+    echo "⚠️  Python environment not activated"
+    echo "Run: conda activate constellation"
     exit 1
 fi
 # Run monitor
-python -m src.ingestion.collection_monitorch
+python -m constellation.legacy.ingestion.collection_monitor
