@@ -1,6 +1,6 @@
 # .gitignore for constellation
 
-# Python / cache
+# Python / bytecode
 __pycache__/
 *.py[cod]
 *$py.class
@@ -21,67 +21,73 @@ venv.bak/
 # Distribution / packaging
 build/
 dist/
- eggs/
+eggs/
 *.egg
 *.egg-info/
 pip-wheel-metadata/
 *.whl
 
-# Installer / logs
+# Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
 
 # Tests / coverage
 .coverage
 .coverage.*
+coverage.xml
 htmlcov/
 .tox/
 .nox/
 .pytest_cache/
+.hypothesis/
+.benchmarks/
 nosetests.xml
-coverage.xml
 junit-*.xml
 
-# Type checking / caches
+# Type checking / lint caches
 .mypy_cache/
 .pyre/
 .ruff_cache/
 
-# Jupyter
+# Jupyter (the walkthrough notebook is un-ignored when it is added)
+*.ipynb
 .ipynb_checkpoints/
-.ipynb 
 
-# Python environment variables / secrets
+# Environment variables / secrets
 .env
 .env.*
-*.env
+!.env.example
 
-# Documentation
-*.manifest
-*.spec
-scripts/
-data/
-docs/
-assets/
+# Generated data (manifests and directory placeholders stay tracked)
+data/*
+!data/manifests/
+!data/*/
+data/*/*
+!data/*/.gitkeep
+!data/manifests/**
 
+# Model artifacts, run outputs and logs (top-level only; src/**/models is code)
+/models/
+/runs/
+/logs/
+*.log
+*.pkl
+*.joblib
+*.pt
 
+# Local working notes
+notes/
+REFACTOR_PLAN.md
 
-# VS Code
+# Design assets (published logos stay tracked)
+/assets/*
+!/assets/logo*.svg
+
+# Editors
 .vscode/
 *.code-workspace
 
 # Misc
-*.log
 *.sqlite3
 *.db
-.env
 .DS_Store
-*.log
-
-*.ipynb
-tests/test_api.py
-tests/test_features.py
-tests/test_models.py
-tests/test_optimazation.py
-tests/test_setup.py
-tests/TESTING.md
