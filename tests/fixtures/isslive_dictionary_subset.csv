@@ -1,0 +1,17 @@
+id,description,units
+USLAB000084,ISS Command and Control Multiplexer/Demultiplexer Onboard Time (course),S
+USLAB000085,ISS Command and Control Multiplexer/Demultiplexer Onboard Time (fine),S
+USLAB000086,ISS Station Mode,N/A
+USLAB000087,PCS Connection Count - Number of crew Portable Computer System laptops active and connected to the Primary Command and Control (C&C) Multiplexer/Demultiplexer (MDM),INTEGR
+NODE3000001,Node 3 ppO2,PSIA
+NODE3000002,Node 3 ppN2,PSIA
+NODE3000003,Node 3 ppCO2,PSIA
+NODE3000004,Urine Processor State,N/A
+USLAB000032,"US Guidance, Navigation and Control (GNC) J2000 Propagated State Vector - X (km)",FT
+USLAB000033,"US Guidance, Navigation and Control (GNC) J2000 Propagated State Vector - Y (km)",FT
+USLAB000034,"US Guidance, Navigation and Control (GNC) J2000 Propagated State Vector - Z (km)",FT
+USLAB000035,"US Guidance, Navigation and Control (GNC) J2000 Propagated State Vector - X (m/s)",FT/S
+USLAB000098,Video Source Routed to Downlink 4,INTEGR
+USLAB000099,Space-To-Space Radio (UHF) 1 Power,N/A
+USLAB000100,Space-To-Space Radio (UHF) 2 Power,N/A
+USLAB000101,Space-To-Space Radio Frame Sync Lock,N/A
