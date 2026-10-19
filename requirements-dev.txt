@@ -6,3 +6,13 @@ pytest==9.1.1
 pytest-cov==7.1.0
 hypothesis==6.170.3
 pytest-benchmark==5.3.0
+
+# Lint, format, type check
+ruff==0.16.10
+mypy==2.4.0
+pandas-stubs==2.3.3.260113
+scipy-stubs==1.18.1.1
+types-PyYAML==6.0.12.20260906
+
+# Git hooks
+pre-commit==4.7.0

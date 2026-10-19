@@ -281,13 +281,13 @@ Constellation is a portfolio project on spacecraft telemetry health monitoring. 
 <div align="center">
   <a href="mailto:michaelgurule1164@gmail.com">
     <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white"></a>
-  
+
   <a href="https://michaelgurule.com">
     <img src="https://custom-icon-badges.demolab.com/badge/MICHAELGURULE.COM-150458?style=for-the-badge&logo=browser&logoColor=white"></a>
-  
+
   <a href="https://www.linkedin.com/in/michael-gurule-447aa2134">
     <img src="https://custom-icon-badges.demolab.com/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin-white&logoColor=fff"></a>
-  
+
   <a href="https://medium.com/@michaelgurule1164">
     <img src="https://img.shields.io/badge/Medium-12100E?style=for-the-badge&logo=medium&logoColor=white"></a>
 </div>

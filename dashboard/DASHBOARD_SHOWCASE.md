@@ -26,7 +26,7 @@ The CONSTELLATION dashboard provides a comprehensive interface for monitoring th
 ---
 
 ## Dashboard Pages
-  
+
 ### Mission Control
 <br>
 <p align="center">

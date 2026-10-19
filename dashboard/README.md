@@ -6,7 +6,7 @@
   Real-time ISS telemetry monitoring with ML-powered diagnostics
 </p>  
 <br>
-<br> 
+<br>
 
 Interactive web interface for satellite fleet health monitoring with a dark space-themed design.
 
