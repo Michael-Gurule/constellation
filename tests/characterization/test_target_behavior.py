@@ -3,7 +3,8 @@
 Every test asserts the behavior the finished system must have. Until the
 module that delivers it lands, each one is a strict expected failure. The
 change that delivers the behavior rewrites the test against the new module and
-removes the marker, so a test that starts passing early fails the run.
+removes the marker, so a test that starts passing early fails the run. Tests
+without a marker have been delivered and now run against the new modules.
 """
 
 import ast
@@ -17,6 +18,7 @@ import pulp
 import pytest
 import torch
 
+from constellation.core.store import ParquetStore
 from constellation.legacy.features.domain_features import AerospaceFeatureExtractor
 from constellation.legacy.features.time_series_features import (
     TimeSeriesFeatureExtractor,
@@ -24,7 +26,6 @@ from constellation.legacy.features.time_series_features import (
 from constellation.legacy.ingestion import lightstreamer_client
 from constellation.legacy.ingestion.data_simulator import TelemetrySimulator
 from constellation.legacy.ingestion.lightstreamer_client import LightstreamerClient
-from constellation.legacy.ingestion.storage_handler import LocalStorageHandler
 from constellation.legacy.models import base_model, degradation_forecast
 from constellation.legacy.models.anomaly_detection import (
     IsolationForestDetector,
@@ -131,29 +132,33 @@ def test_configured_iss_channels_match_dictionary():
     assert not mismatches, "\n".join(mismatches)
 
 
-@pytest.mark.xfail(
-    strict=True,
-    raises=AssertionError,
-    reason="Records are partitioned by event time, not write time",
-)
 def test_store_partitions_by_event_time(tmp_path):
-    records = [
+    times = pd.to_datetime(
+        ["2026-03-01T12:00:00", "2026-03-02T12:00:00"], utc=True
+    ).as_unit("ns")
+    readings = pd.DataFrame(
         {
-            "timestamp": f"2026-03-0{day}T12:00:00",
-            "parameter_id": "CHANNEL_A",
-            "value": "1.0",
-            "raw_message": "",
+            "source": "iss",
+            "asset_id": "ISS",
+            "channel": "cmg1_wheel_speed",
+            "t": times,
+            "value": [6600.0, 6601.0],
+            "value_text": pd.Series([None, None], dtype=object),
+            "status": pd.Series([None, None], dtype=object),
+            "ingested_at": pd.Timestamp.now(tz="UTC").as_unit("ns"),
         }
-        for day in (1, 2)
-    ]
+    )
 
-    LocalStorageHandler(base_dir=tmp_path).save_batch(records, subsystem="test")
+    ParquetStore(tmp_path).write_readings(readings)
 
     partitions = sorted(
         str(path.relative_to(tmp_path))
-        for path in tmp_path.glob("year=*/month=*/day=*")
+        for path in tmp_path.glob("source=*/asset=*/date=*")
     )
-    assert partitions == ["year=2026/month=03/day=01", "year=2026/month=03/day=02"]
+    assert partitions == [
+        "source=iss/asset=ISS/date=2026-03-01",
+        "source=iss/asset=ISS/date=2026-03-02",
+    ]
 
 
 # --- features and simulation -----------------------------------------------
