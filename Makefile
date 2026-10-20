@@ -4,7 +4,7 @@ PYTHON ?= python
 ENV_NAME ?= constellation
 
 .DEFAULT_GOAL := help
-.PHONY: help env env-update hooks lint format typecheck test cov bench check collect-iss clean
+.PHONY: help env env-update hooks lint format typecheck test cov bench check collect-iss data-benchmarks clean
 
 help:  ## List available targets
 	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | \
@@ -56,6 +56,9 @@ check: lint typecheck cov bench  ## Everything CI runs
 
 collect-iss:  ## Collect ISS telemetry until stopped (see scripts/collect_iss.sh)
 	scripts/collect_iss.sh
+
+data-benchmarks:  ## Fetch the labeled benchmarks (large: ESA-Mission1 is 3.8 GB)
+	constellation data fetch --all
 
 clean:  ## Remove caches and build artifacts
 	rm -rf .pytest_cache .mypy_cache .ruff_cache .hypothesis htmlcov .coverage coverage.xml build dist

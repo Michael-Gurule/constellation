@@ -1,0 +1,14 @@
+{
+  "opssat": {
+    "dataset.csv": {
+      "md5": "c12fb83863afa4463dec07303a20bb14",
+      "sha256": "da20bc4bd3f30a3302ce06fe6a073bea6f036b297a92e83311d3f83b9c5e619b",
+      "size": 507568
+    },
+    "segments.csv": {
+      "md5": "1f4b6ffd0359efac96a6698ff557e0f9",
+      "sha256": "dab2e01e873c93590692b50a7cc312d9cce4d5ba7e69ce8015603c47a8ffb97b",
+      "size": 17970946
+    }
+  }
+}

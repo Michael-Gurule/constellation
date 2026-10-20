@@ -18,9 +18,12 @@ collect_app = typer.Typer(help="Collect telemetry into the event-time store.")
 app.add_typer(collect_app, name="collect")
 tle_app = typer.Typer(help="Orbital element sets.")
 app.add_typer(tle_app, name="tle")
+data_app = typer.Typer(help="Datasets.")
+app.add_typer(data_app, name="data")
 
 DEFAULT_CHANNELS = Path("configs/ingest/iss.yaml")
 STALE_AFTER = pd.Timedelta(5, unit="min")
+PROGRESS_STEP = 100 << 20  # report every 100 MB
 
 
 def readings_store() -> ParquetStore:
@@ -133,3 +136,62 @@ def tle_fetch(
     directory = get_settings().data_dir / "external" / "tle"
     path, downloaded = fetch_tle(norad, directory, force=force)
     typer.echo(f"{'downloaded' if downloaded else 'kept recent copy:'} {path}")
+
+
+@data_app.command("fetch")
+def data_fetch(
+    name: Annotated[
+        str | None, typer.Argument(help="smap_msl, esa_adb or opssat; omit with --all.")
+    ] = None,
+    all_: Annotated[bool, typer.Option("--all", help="Fetch every benchmark.")] = False,
+    config: Annotated[Path, typer.Option(help="Benchmark sources.")] = Path(
+        "configs/data/benchmarks.yaml"
+    ),
+) -> None:
+    """Download, verify and extract a benchmark into data/external/<name>/."""
+    from constellation.data.benchmarks import fetch, load_benchmark_config
+    from constellation.data.benchmarks.base import ManualDownloadError, update_manifest
+
+    sources = load_benchmark_config(config).benchmarks
+    if all_ and name is not None:
+        raise typer.BadParameter("give a benchmark name or --all, not both")
+    if not all_ and name is None:
+        raise typer.BadParameter("give a benchmark name or --all")
+    names = sorted(sources) if all_ else [str(name)]
+    unknown = [n for n in names if n not in sources]
+    if unknown:
+        raise typer.BadParameter(
+            f"unknown benchmark {unknown[0]!r}; known: {sorted(sources)}"
+        )
+
+    settings = get_settings()
+    manifest = settings.data_dir / "manifests" / "benchmarks.json"
+    failed = False
+    for benchmark in names:
+        source = sources[benchmark]
+        typer.echo(f"{benchmark}: {source.title} (doi:{source.doi})")
+        counter = {"bytes": 0}
+
+        def progress(chunk: int, counter: dict[str, int] = counter) -> None:
+            before = counter["bytes"]
+            counter["bytes"] += chunk
+            if counter["bytes"] // PROGRESS_STEP != before // PROGRESS_STEP:
+                typer.echo(f"  {counter['bytes'] / 1e6:.0f} MB downloaded", err=True)
+
+        try:
+            files = fetch(
+                benchmark,
+                source,
+                settings.data_dir / "external" / benchmark,
+                progress=progress,
+            )
+        except ManualDownloadError as error:
+            typer.echo(f"  needs a manual step: {error}", err=True)
+            failed = True
+            continue
+        update_manifest(manifest, benchmark, files)
+        for item in files:
+            state = "downloaded" if item.downloaded else "verified"
+            typer.echo(f"  {item.name}: {state} ({int(item.digests['size']):,} bytes)")
+    if failed:
+        raise typer.Exit(code=2)

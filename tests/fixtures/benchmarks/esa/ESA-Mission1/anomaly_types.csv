@@ -1,0 +1,6 @@
+ID,Class,Subclass,Category,Dimensionality,Locality,Length
+id_a,Outlier,Point,Anomaly,Univariate,Local,Point
+id_b,Outlier,Extreme,Anomaly,Univariate,Local,Subsequence
+id_c,Outlier,Extreme,Rare Event,Univariate,Local,Subsequence
+id_d,Outlier,Extreme,Anomaly,Univariate,Local,Subsequence
+id_e,Outlier,Extreme,Communication Gap,Univariate,Local,Subsequence

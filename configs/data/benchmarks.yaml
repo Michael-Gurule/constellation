@@ -1,0 +1,65 @@
+# Labeled spacecraft anomaly benchmarks, fetched into data/external/<name>/.
+# Every download is verified against the checksums below. A missing sha256 is
+# recorded in data/manifests/benchmarks.json after the first verified download.
+
+benchmarks:
+  smap_msl:
+    title: NASA SMAP and MSL telemetry anomalies (Telemanom)
+    doi: 10.1145/3219819.3219845
+    citation: >-
+      K. Hundman, V. Constantinou, C. Laporte, I. Colwell, T. Soderstrom.
+      Detecting Spacecraft Anomalies Using LSTMs and Nonparametric Dynamic
+      Thresholding. KDD 2018.
+    licence: >-
+      Not stated by the authors' repository (https://github.com/khundman/telemanom).
+      Check the terms of the copy you download.
+    manual: >-
+      The S3 link published with Telemanom (s3-us-west-2.amazonaws.com/telemanom/data.zip)
+      returned 403 on 2026-10-19. The authors now point to the Kaggle dataset
+      patrickfleith/nasa-anomaly-detection-dataset-smap-msl, which needs a Kaggle
+      account. Download it yourself and save the zip as data.zip in
+      data/external/smap_msl/; it must contain the train/ and test/ folders of .npy arrays.
+    files:
+      - name: data.zip
+        extract: true
+        note: manual download, see above
+      - name: labeled_anomalies.csv
+        url: https://raw.githubusercontent.com/khundman/telemanom/master/labeled_anomalies.csv
+        size: 3956
+
+  esa_adb:
+    title: ESA Anomaly Dataset (ESA-AD) and benchmark (ESA-ADB), Mission1
+    doi: 10.5281/zenodo.12528696
+    citation: >-
+      ESA Anomaly Dataset, Zenodo, doi:10.5281/zenodo.12528696 (concept DOI
+      10.5281/zenodo.12528695). Benchmark code and preprocessing:
+      https://github.com/kplabs-pl/ESA-ADB (MIT licence).
+    licence: >-
+      The Zenodo record is open access but names no licence in its metadata.
+      See https://doi.org/10.5281/zenodo.12528696 before redistributing anything.
+    files:
+      - name: ESA-Mission1.zip
+        url: https://zenodo.org/api/records/12528696/files/ESA-Mission1.zip/content
+        md5: 80750189d171f5f398fb3d96c49df12b
+        size: 3776246054
+        extract: true
+        note: 3.78 GB. The default loader uses the lightweight channel subset (channels 41 to 46).
+
+  opssat:
+    title: OPSSAT-AD, anomaly detection dataset for satellite telemetry
+    doi: 10.5281/zenodo.12588359
+    citation: >-
+      B. Ruszczak et al. OPSSAT-AD, Zenodo, doi:10.5281/zenodo.12588359; paper
+      arXiv:2407.04730.
+    licence: CC-BY-4.0
+    files:
+      - name: segments.csv
+        url: https://zenodo.org/api/records/12588359/files/segments.csv/content
+        md5: 1f4b6ffd0359efac96a6698ff557e0f9
+        sha256: dab2e01e873c93590692b50a7cc312d9cce4d5ba7e69ce8015603c47a8ffb97b
+        size: 17970946
+      - name: dataset.csv
+        url: https://zenodo.org/api/records/12588359/files/dataset.csv/content
+        md5: c12fb83863afa4463dec07303a20bb14
+        sha256: da20bc4bd3f30a3302ce06fe6a073bea6f036b297a92e83311d3f83b9c5e619b
+        size: 507568
