@@ -121,6 +121,8 @@ module = [
     "sklearn.*",
     "pyarrow.*",
     "joblib.*",
+    "skyfield.*",
+    "sgp4.*",
     "lightgbm.*",
     "stumpy.*",
     "lifelines.*",

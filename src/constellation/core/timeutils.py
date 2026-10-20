@@ -9,8 +9,8 @@ import pandas as pd
 
 from constellation.core.errors import ConfigError
 
-_DURATION = re.compile(r"^(?P<number>\d+(?:\.\d+)?)(?P<unit>s|m|h|d|w)$")
-_UNIT_SECONDS = {"s": 1, "m": 60, "h": 3600, "d": 86400, "w": 604800}
+_DURATION = re.compile(r"^(?P<number>\d+(?:\.\d+)?)(?P<unit>s|min|m|h|d|w)$")
+_UNIT_SECONDS = {"s": 1, "min": 60, "m": 60, "h": 3600, "d": 86400, "w": 604800}
 
 
 @overload
@@ -40,11 +40,11 @@ def ensure_utc(
 
 
 def parse_duration(text: str) -> pd.Timedelta:
-    """Parse a duration such as `10s`, `5m`, `1h`, `7d` or `2w`."""
+    """Parse a duration such as `10s`, `5m` (or `5min`), `1h`, `7d` or `2w`."""
     match = _DURATION.match(text.strip())
     if match is None:
         raise ConfigError(
-            f"invalid duration {text!r}: expected a number and one of s, m, h, d, w"
+            f"invalid duration {text!r}: expected a number and one of s, min, m, h, d, w"
         )
     seconds = float(match["number"]) * _UNIT_SECONDS[match["unit"]]
     if seconds <= 0:

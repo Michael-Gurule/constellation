@@ -52,6 +52,8 @@ jobs:
         run: mypy
       - name: Test
         run: pytest --cov --cov-report=term-missing --cov-report=xml
+      - name: Latency budgets
+        run: pytest benchmarks --benchmark-only --benchmark-columns=median,max
       - name: Upload coverage report
         if: always()
         uses: actions/upload-artifact@v7

@@ -4,7 +4,7 @@ PYTHON ?= python
 ENV_NAME ?= constellation
 
 .DEFAULT_GOAL := help
-.PHONY: help env env-update hooks lint format typecheck test cov check collect-iss clean
+.PHONY: help env env-update hooks lint format typecheck test cov bench check collect-iss clean
 
 help:  ## List available targets
 	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | \
@@ -49,7 +49,10 @@ test:  ## Run the test suite
 cov:  ## Run tests with coverage
 	MPLBACKEND=Agg $(PYTHON) -m pytest --cov --cov-report=term-missing --cov-report=xml
 
-check: lint typecheck cov  ## Everything CI runs
+bench:  ## Latency benchmarks with budgets (benchmarks/)
+	MPLBACKEND=Agg $(PYTHON) -m pytest benchmarks --benchmark-only --benchmark-columns=min,median,max,rounds
+
+check: lint typecheck cov bench  ## Everything CI runs
 
 collect-iss:  ## Collect ISS telemetry until stopped (see scripts/collect_iss.sh)
 	scripts/collect_iss.sh

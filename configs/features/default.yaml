@@ -1,0 +1,92 @@
+# Default feature set. Every window is a duration and every function is causal.
+# A feature may only be applied to channels of the types listed in `applies_to`.
+
+channel_types:
+  - {match: 'cmg\d_wheel_speed', type: speed}
+  - {match: 'cmg\d_spin_current', type: current}
+  - {match: 'cmg\d_(spin|hall)_bearing_temp', type: temperature}
+  - {match: 'loop_[ab]_temp', type: temperature}
+  - {match: 'cmg\d_vibration', type: vibration}
+  - {match: 'att_err_(roll|pitch|yaw)', type: attitude_error}
+  - {match: 'sa_\d[ab]_voltage', type: voltage}
+  - match: 'cmg\d_online|cmgs_online|desat_request|gnc_mode|loac_alarm|att_source|rate_source|controller_type|ref_frame|maneuver_in_progress|sband_rfg\d_on|sband_active_string|ku_transmit'
+    type: state
+
+features:
+  # Temperatures: level, spread and trend over 10 minutes, 1 hour and 6 hours.
+  - {name: mean_10m, function: roll_mean, params: {window: 10min}, applies_to: [temperature]}
+  - {name: mean_1h, function: roll_mean, params: {window: 1h}, applies_to: [temperature]}
+  - {name: mean_6h, function: roll_mean, params: {window: 6h}, applies_to: [temperature]}
+  - {name: std_10m, function: roll_std, params: {window: 10min}, applies_to: [temperature]}
+  - {name: std_1h, function: roll_std, params: {window: 1h}, applies_to: [temperature]}
+  - {name: std_6h, function: roll_std, params: {window: 6h}, applies_to: [temperature]}
+  - {name: slope_1h, function: roll_slope, params: {window: 1h}, applies_to: [temperature]}
+  - {name: slope_6h, function: roll_slope, params: {window: 6h}, applies_to: [temperature]}
+  - {name: robust_z_1h, function: robust_z, params: {window: 1h}, applies_to: [temperature]}
+
+  # Wheel speed.
+  - {name: mean_10m, function: roll_mean, params: {window: 10min}, applies_to: [speed]}
+  - {name: mean_1h, function: roll_mean, params: {window: 1h}, applies_to: [speed]}
+  - {name: mean_6h, function: roll_mean, params: {window: 6h}, applies_to: [speed]}
+  - {name: std_10m, function: roll_std, params: {window: 10min}, applies_to: [speed]}
+  - {name: std_1h, function: roll_std, params: {window: 1h}, applies_to: [speed]}
+  - {name: std_6h, function: roll_std, params: {window: 6h}, applies_to: [speed]}
+  - {name: robust_z_1h, function: robust_z, params: {window: 1h}, applies_to: [speed]}
+
+  # Motor current.
+  - {name: mean_10m, function: roll_mean, params: {window: 10min}, applies_to: [current]}
+  - {name: mean_1h, function: roll_mean, params: {window: 1h}, applies_to: [current]}
+  - {name: mean_6h, function: roll_mean, params: {window: 6h}, applies_to: [current]}
+  - {name: std_10m, function: roll_std, params: {window: 10min}, applies_to: [current]}
+  - {name: std_1h, function: roll_std, params: {window: 1h}, applies_to: [current]}
+  - {name: std_6h, function: roll_std, params: {window: 6h}, applies_to: [current]}
+  - {name: slope_1h, function: roll_slope, params: {window: 1h}, applies_to: [current]}
+  - {name: robust_z_1h, function: robust_z, params: {window: 1h}, applies_to: [current]}
+
+  # Vibration.
+  - {name: mean_10m, function: roll_mean, params: {window: 10min}, applies_to: [vibration]}
+  - {name: mean_1h, function: roll_mean, params: {window: 1h}, applies_to: [vibration]}
+  - {name: mean_6h, function: roll_mean, params: {window: 6h}, applies_to: [vibration]}
+  - {name: max_10m, function: roll_max, params: {window: 10min}, applies_to: [vibration]}
+  - {name: max_1h, function: roll_max, params: {window: 1h}, applies_to: [vibration]}
+  - {name: max_6h, function: roll_max, params: {window: 6h}, applies_to: [vibration]}
+  - {name: robust_z_1h, function: robust_z, params: {window: 1h}, applies_to: [vibration]}
+
+  # Attitude error.
+  - {name: mean_10m, function: roll_mean, params: {window: 10min}, applies_to: [attitude_error]}
+  - {name: mean_1h, function: roll_mean, params: {window: 1h}, applies_to: [attitude_error]}
+  - {name: std_10m, function: roll_std, params: {window: 10min}, applies_to: [attitude_error]}
+  - {name: std_1h, function: roll_std, params: {window: 1h}, applies_to: [attitude_error]}
+  - {name: max_1h, function: roll_max, params: {window: 1h}, applies_to: [attitude_error]}
+  - {name: max_6h, function: roll_max, params: {window: 6h}, applies_to: [attitude_error]}
+
+  # Solar array voltage.
+  - {name: mean_10m, function: roll_mean, params: {window: 10min}, applies_to: [voltage]}
+  - {name: mean_1h, function: roll_mean, params: {window: 1h}, applies_to: [voltage]}
+  - {name: std_10m, function: roll_std, params: {window: 10min}, applies_to: [voltage]}
+  - {name: std_1h, function: roll_std, params: {window: 1h}, applies_to: [voltage]}
+
+  # State channels: the integer code and how often it changed.
+  - {name: code, function: level, applies_to: [state]}
+  - {name: changes_1h, function: roll_changes, params: {window: 1h}, applies_to: [state]}
+  - {name: changes_6h, function: roll_changes, params: {window: 6h}, applies_to: [state]}
+
+  # Orbit: sunlit flag and position relative to mid-eclipse (needs a TLE for the asset).
+  - {name: sunlit, function: orbit_sunlit, optional: true}
+  - {name: eclipse_phase, function: orbit_eclipse_phase, optional: true}
+
+  # Physics: current drawn per unit wheel speed, and bearing temperature above the
+  # coolant loop. Skipped when the channels are not present.
+  - name: "cmg{i}_k_current_per_speed"
+    function: safe_ratio
+    params: {eps: 1.0}
+    inputs: ["cmg{i}_spin_current", "cmg{i}_wheel_speed"]
+    applies_to: [current, speed]
+    optional: true
+    foreach: {i: [1, 2, 3, 4]}
+  - name: "cmg{i}_bearing_minus_coolant"
+    function: difference
+    inputs: ["cmg{i}_spin_bearing_temp", loop_a_temp]
+    applies_to: [temperature, temperature]
+    optional: true
+    foreach: {i: [1, 2, 3, 4]}

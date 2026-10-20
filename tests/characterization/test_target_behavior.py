@@ -17,13 +17,11 @@ import pulp
 import pytest
 import torch
 
+from constellation import orbit
 from constellation.core.store import ParquetStore
+from constellation.features.windows import roll_mean
 from constellation.ingest.channels import load_channels, load_dictionary
 from constellation.ingest.isslive import IssLiveCollector
-from constellation.legacy.features.domain_features import AerospaceFeatureExtractor
-from constellation.legacy.features.time_series_features import (
-    TimeSeriesFeatureExtractor,
-)
 from constellation.legacy.ingestion.data_simulator import TelemetrySimulator
 from constellation.legacy.models import base_model, degradation_forecast
 from constellation.legacy.models.anomaly_detection import (
@@ -203,50 +201,34 @@ def test_store_partitions_by_event_time(tmp_path):
 # --- features and simulation -----------------------------------------------
 
 
-@pytest.mark.xfail(
-    strict=True,
-    raises=AssertionError,
-    reason="The sunlit flag follows the orbit: both states, sunlit about 60 percent",
-)
 def test_daylight_flag_varies_over_an_orbit():
-    frame = pd.DataFrame(
-        {
-            "timestamp": pd.date_range("2026-03-01", periods=185, freq="1min"),
-            "value": 0.0,
-        }
-    )
+    tle = orbit.load_tle((REPO_ROOT / "tests/fixtures/iss_25544.tle").read_text())
+    two_orbits = pd.date_range("2026-10-19T12:00", periods=186, freq="1min", tz="UTC")
 
-    flag = AerospaceFeatureExtractor().extract_orbital_features(frame)["is_daylight"]
+    flag = orbit.orbit_features(tle, two_orbits)["sunlit"]
 
-    assert set(flag.unique()) == {0, 1}
+    assert set(flag.unique()) == {0.0, 1.0}
     assert 0.5 <= flag.mean() <= 0.8
 
 
-@pytest.mark.xfail(
-    strict=True,
-    raises=AssertionError,
-    reason="A time window covers its duration, not a fixed number of rows",
-)
 def test_time_window_covers_its_duration():
     rng = np.random.default_rng(7)
-    start = pd.Timestamp("2026-03-01")
+    start = pd.Timestamp("2026-03-01", tz="UTC")
     offsets = np.cumsum(rng.integers(30, 900, size=150))
-    frame = pd.DataFrame(
-        {
-            "timestamp": start + pd.to_timedelta(offsets, unit="s"),
-            "value": rng.normal(size=150),
-        }
+    series = pd.Series(
+        rng.normal(size=150),
+        index=pd.DatetimeIndex(start + pd.to_timedelta(offsets, unit="s")),
     )
 
-    result = TimeSeriesFeatureExtractor(windows=[3600]).extract_rolling_features(frame)
+    result = roll_mean(series, "1h")
 
-    times = frame["timestamp"].to_numpy()
-    values = frame["value"].to_numpy()
+    times = series.index.to_numpy()
+    values = series.to_numpy()
     one_hour = np.timedelta64(1, "h")
     expected = np.array(
         [values[(times > t - one_hour) & (times <= t)].mean() for t in times]
     )
-    np.testing.assert_allclose(result["rolling_mean_1h"].to_numpy(), expected)
+    np.testing.assert_allclose(result.to_numpy(), expected)
 
 
 @pytest.mark.xfail(

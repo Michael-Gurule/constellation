@@ -50,6 +50,7 @@ def test_series_and_index():
         ("7d", 604800),
         ("2w", 1209600),
         ("1.5h", 5400),
+        ("10min", 600),
     ],
 )
 def test_parse_duration(text, seconds):

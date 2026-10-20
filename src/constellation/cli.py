@@ -16,6 +16,8 @@ from constellation.core.timeutils import parse_duration
 app = typer.Typer(help="Constellation: spacecraft telemetry health monitoring.")
 collect_app = typer.Typer(help="Collect telemetry into the event-time store.")
 app.add_typer(collect_app, name="collect")
+tle_app = typer.Typer(help="Orbital element sets.")
+app.add_typer(tle_app, name="tle")
 
 DEFAULT_CHANNELS = Path("configs/ingest/iss.yaml")
 STALE_AFTER = pd.Timedelta(5, unit="min")
@@ -116,3 +118,18 @@ def collect_status(
                 typer.echo(
                     f"  {row.channel:28s} {row.rows:>9d}  last {row.last_t:%H:%M:%S}"
                 )
+
+
+@tle_app.command("fetch")
+def tle_fetch(
+    norad: Annotated[int, typer.Option(help="NORAD catalogue number.")] = 25544,
+    force: Annotated[
+        bool, typer.Option(help="Download even if the saved copy is recent.")
+    ] = False,
+) -> None:
+    """Download the current TLE from CelesTrak (at most once per 12 hours)."""
+    from constellation.ingest.tle import fetch_tle
+
+    directory = get_settings().data_dir / "external" / "tle"
+    path, downloaded = fetch_tle(norad, directory, force=force)
+    typer.echo(f"{'downloaded' if downloaded else 'kept recent copy:'} {path}")
