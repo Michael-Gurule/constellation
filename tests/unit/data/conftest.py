@@ -17,11 +17,18 @@ def smap_root(tmp_path):
     shutil.copy(
         FIXTURES / "smap_msl" / "labeled_anomalies.csv", root / "labeled_anomalies.csv"
     )
-    # The Kaggle archive nests the arrays one level down.
+    # The Kaggle release nests the arrays one level down, under data/data/.
     for split, rows in (("train", 300), ("test", 200)):
-        folder = root / "data" / split
+        folder = root / "data" / "data" / split
         folder.mkdir(parents=True)
-        for channel, columns in (("P-1", 25), ("E-1", 25), ("T-1", 55)):
+        # T-10 has arrays but no row in the label file, as in the published data.
+        for channel, columns in (
+            ("P-1", 25),
+            ("E-1", 25),
+            ("T-1", 55),
+            ("P-2", 25),
+            ("T-10", 55),
+        ):
             values = np.linspace(-1, 1, rows)
             array = np.zeros((rows, columns))
             array[:, 0] = values

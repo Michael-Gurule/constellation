@@ -1,3 +1,5 @@
+import logging
+
 import numpy as np
 import pandas as pd
 import pytest
@@ -10,7 +12,9 @@ from constellation.data.benchmarks import (
     OpsSatBenchmark,
     SmapMslBenchmark,
     get_benchmark,
+    smap_msl,
 )
+from constellation.data.benchmarks.smap_msl import parse_classes
 from constellation.data.labels import labels_frame, mask_from_intervals
 
 # -- SMAP / MSL -------------------------------------------------------------------------
@@ -19,7 +23,7 @@ from constellation.data.labels import labels_frame, mask_from_intervals
 def test_smap_msl_series_use_the_first_column_and_inclusive_label_ends(smap_root):
     series = {s.channel: s for s in SmapMslBenchmark(smap_root).load()}
 
-    assert set(series) == {"P-1", "E-1", "T-1"}
+    assert set(series) == {"P-1", "E-1", "T-1", "P-2"}  # T-10 has no label row
     p1 = series["P-1"]
     assert (p1.dataset, p1.asset_id) == ("smap_msl", "SMAP")
     assert len(p1.train) == 300
@@ -41,6 +45,63 @@ def test_smap_msl_clips_and_merges_labels(smap_root):
     assert series["T-1"].test_labels == [(10, 26)]  # [10, 20] and [15, 25] overlap
     assert series["T-1"].asset_id == "MSL"
     assert series["T-1"].meta["n_input_columns"] == 55
+
+
+def test_smap_msl_classes_are_parsed_from_unquoted_lists(smap_root):
+    series = {s.channel: s for s in SmapMslBenchmark(smap_root).load()}
+
+    assert series["E-1"].meta["anomaly_classes"] == ["contextual"]
+    assert series["T-1"].meta["anomaly_classes"] == ["point", "point"]
+
+
+@pytest.mark.parametrize(
+    ("text", "expected"),
+    [
+        ("[contextual, contextual]", ["contextual", "contextual"]),
+        ("[point]", ["point"]),
+        ("['point', 'contextual']", ["point", "contextual"]),
+        ('["point"]', ["point"]),
+        ("[]", []),
+        ("", []),
+    ],
+)
+def test_parse_classes_accepts_quoted_and_unquoted_lists(text, expected):
+    assert parse_classes(text) == expected
+
+
+def test_smap_msl_merges_the_rows_of_a_duplicated_channel(smap_root, caplog):
+    with caplog.at_level(logging.DEBUG, logger=smap_msl.__name__):
+        series = SmapMslBenchmark(smap_root).load()
+
+    p2 = [s for s in series if s.channel == "P-2"]
+    assert len(p2) == 1  # one series, not two
+    assert p2[0].test_labels == [
+        (50, 100)
+    ]  # [50, 80] and [70, 99], merged, ends inclusive
+    assert p2[0].meta["label_rows"] == 2
+    assert p2[0].meta["anomaly_classes"] == ["contextual", "point"]
+    assert "P-2 has 2 label rows" in caplog.text
+
+
+def test_smap_msl_skips_arrays_without_a_label_row_and_says_so(smap_root, caplog):
+    with caplog.at_level(logging.DEBUG, logger=smap_msl.__name__):
+        series = SmapMslBenchmark(smap_root).load()
+
+    assert "T-10" not in {s.channel for s in series}
+    assert "skipping T-10" in caplog.text
+    assert [s.meta["label_rows"] for s in series if s.channel == "P-1"] == [1]
+
+
+def test_smap_msl_warns_when_an_array_disagrees_with_the_label_file(smap_root, caplog):
+    labels = smap_root / "labeled_anomalies.csv"
+    labels.write_text(
+        labels.read_text().replace("[contextual],200", "[contextual],999")
+    )
+
+    with caplog.at_level(logging.WARNING, logger=smap_msl.__name__):
+        SmapMslBenchmark(smap_root).load(["E-1"])
+
+    assert "E-1: test array has 200 values but the label file says [999]" in caplog.text
 
 
 def test_smap_msl_channel_selection_and_errors(smap_root, tmp_path):

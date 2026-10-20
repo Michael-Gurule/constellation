@@ -1,4 +1,6 @@
 chan_id,spacecraft,anomaly_sequences,class,num_values
-P-1,SMAP,"[[30, 39], [120, 150]]","['point', 'contextual']",200
-E-1,SMAP,"[[190, 250]]",['contextual'],200
-T-1,MSL,"[[10, 20], [15, 25]]","['point', 'point']",200
+P-1,SMAP,"[[30, 39], [120, 150]]","[point, contextual]",200
+E-1,SMAP,"[[190, 250]]",[contextual],200
+T-1,MSL,"[[10, 20], [15, 25]]","[point, point]",200
+P-2,SMAP,"[[50, 80]]",[contextual],200
+P-2,SMAP,"[[70, 99]]",[point],200

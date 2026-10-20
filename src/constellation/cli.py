@@ -191,6 +191,12 @@ def data_fetch(
             continue
         update_manifest(manifest, benchmark, files)
         for item in files:
+            if item.tree:
+                typer.echo(
+                    f"  {item.name}: found extracted ({item.digests['files']} files, "
+                    f"{int(item.digests['size']):,} bytes)"
+                )
+                continue
             state = "downloaded" if item.downloaded else "verified"
             typer.echo(f"  {item.name}: {state} ({int(item.digests['size']):,} bytes)")
     if failed:

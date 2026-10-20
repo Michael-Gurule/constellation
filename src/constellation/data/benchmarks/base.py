@@ -64,6 +64,8 @@ class BenchmarkFile(BaseModel):
     size: int | None = None
     extract: bool = False
     note: str = ""
+    # Directories that stand in for this file when it was delivered already extracted.
+    provided_as: list[str] = []
 
 
 class BenchmarkSource(BaseModel):
@@ -132,12 +134,40 @@ def safe_extract(archive: Path, target: Path) -> list[str]:
     return names
 
 
+def tree_digests(
+    directory: Path, subdirectories: Sequence[str]
+) -> dict[str, str | int]:
+    """One sha256 over the files below `subdirectories`, with their count and size.
+
+    The hash covers every file's relative path and content hash in sorted order, so
+    it changes if a file is added, removed, renamed or altered. Hidden files such as
+    `.DS_Store` are ignored.
+    """
+    digest = hashlib.sha256()
+    count = 0
+    size = 0
+    for name in sorted(subdirectories):
+        for path in sorted(p for p in (directory / name).rglob("*") if p.is_file()):
+            relative = path.relative_to(directory)
+            if any(part.startswith(".") for part in relative.parts):
+                continue
+            digest.update(
+                f"{relative.as_posix()}:{file_digest(path, 'sha256')}\n".encode()
+            )
+            count += 1
+            size += path.stat().st_size
+    return {"sha256": digest.hexdigest(), "size": size, "files": count}
+
+
 @dataclass(frozen=True)
 class FetchedFile:
+    """A verified file, or (with `tree=True`) a set of extracted directories."""
+
     name: str
     path: Path
     downloaded: bool
     digests: dict[str, str | int]
+    tree: bool = False
 
 
 def _download(
@@ -184,10 +214,29 @@ def fetch(
             path = directory / spec.name
             downloaded = False
             if not path.exists():
+                if spec.provided_as and all(
+                    (directory / d).is_dir() for d in spec.provided_as
+                ):
+                    label = "+".join(spec.provided_as)
+                    results.append(
+                        FetchedFile(
+                            label,
+                            directory,
+                            False,
+                            tree_digests(directory, spec.provided_as),
+                            tree=True,
+                        )
+                    )
+                    continue
                 if spec.url is None:
                     raise ManualDownloadError(
-                        f"{name}: {spec.name} must be downloaded by hand and saved to {path}. "
-                        f"{source.manual or spec.note}"
+                        f"{name}: {spec.name} must be downloaded by hand and saved to {path}"
+                        + (
+                            f" (or extracted so that {', '.join(spec.provided_as)} sit beside it)"
+                            if spec.provided_as
+                            else ""
+                        )
+                        + f". {source.manual or spec.note}"
                     )
                 _download(http, spec.url, path, progress)
                 downloaded = True
@@ -215,9 +264,9 @@ def update_manifest(
     manifest: dict[str, Any] = json.loads(path.read_text()) if path.exists() else {}
     manifest[name] = {
         item.name: {
-            "sha256": item.digests["sha256"],
-            "md5": item.digests["md5"],
-            "size": item.digests["size"],
+            key: item.digests[key]
+            for key in ("md5", "sha256", "size", "files")
+            if key in item.digests
         }
         for item in files
     }

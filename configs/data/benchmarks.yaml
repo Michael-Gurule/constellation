@@ -17,14 +17,20 @@ benchmarks:
       The S3 link published with Telemanom (s3-us-west-2.amazonaws.com/telemanom/data.zip)
       returned 403 on 2026-10-19. The authors now point to the Kaggle dataset
       patrickfleith/nasa-anomaly-detection-dataset-smap-msl, which needs a Kaggle
-      account. Download it yourself and save the zip as data.zip in
-      data/external/smap_msl/; it must contain the train/ and test/ folders of .npy arrays.
+      account, so the download is manual. Either save the zip as data.zip in
+      data/external/smap_msl/, or put the extracted train/ and test/ folders (82 .npy
+      arrays each) directly in that folder, which is how Kaggle delivers them. Kaggle
+      also ships the authors' original run (models and predictions, 95 MB) next to the
+      data; it is not needed and can be deleted.
     files:
       - name: data.zip
         extract: true
+        provided_as: [train, test]
         note: manual download, see above
       - name: labeled_anomalies.csv
         url: https://raw.githubusercontent.com/khundman/telemanom/master/labeled_anomalies.csv
+        md5: c54f6c09f44410763e33aac7329d769a
+        sha256: 057ce2d6c8875982bf4e5404aefea14efdcbce413d80826d2b737c95b59b7539
         size: 3956
 
   esa_adb:

@@ -158,6 +158,72 @@ def test_files_without_a_url_must_be_supplied_by_hand(tmp_path):
     assert (tmp_path / "train" / "a.npy").read_bytes() == b"x"  # extracted
 
 
+def test_extracted_directories_stand_in_for_a_missing_archive(tmp_path):
+    for split in ("train", "test"):
+        (tmp_path / split).mkdir()
+        (tmp_path / split / "A-1.npy").write_bytes(split.encode())
+    (tmp_path / "train" / ".DS_Store").write_bytes(b"ignored")
+    spec = source(
+        BenchmarkFile(name="data.zip", extract=True, provided_as=["train", "test"])
+    )
+
+    (result,) = fetch("demo", spec, tmp_path)
+
+    assert result.tree
+    assert result.name == "train+test"
+    assert not result.downloaded
+    assert result.digests["files"] == 2
+    assert result.digests["size"] == len(b"train") + len(b"test")
+
+    first = result.digests["sha256"]
+    assert fetch("demo", spec, tmp_path)[0].digests["sha256"] == first  # stable
+    (tmp_path / "test" / "A-1.npy").write_bytes(b"changed")
+    assert (
+        fetch("demo", spec, tmp_path)[0].digests["sha256"] != first
+    )  # sensitive to content
+    (tmp_path / "test" / "B-1.npy").write_bytes(b"x")
+    assert fetch("demo", spec, tmp_path)[0].digests["files"] == 3  # and to new files
+
+
+def test_the_archive_wins_when_both_it_and_extracted_folders_exist(tmp_path):
+    (tmp_path / "train").mkdir()
+    (tmp_path / "test").mkdir()
+    (tmp_path / "data.zip").write_bytes(archive({"train/x.npy": b"x"}))
+    spec = source(
+        BenchmarkFile(name="data.zip", extract=True, provided_as=["train", "test"])
+    )
+
+    (result,) = fetch("demo", spec, tmp_path)
+
+    assert not result.tree
+    assert (tmp_path / "train" / "x.npy").exists()
+
+
+def test_a_partial_extracted_layout_still_asks_for_a_manual_step(tmp_path):
+    (tmp_path / "train").mkdir()  # no test/
+    spec = source(
+        BenchmarkFile(name="data.zip", provided_as=["train", "test"]),
+        manual="See the notes.",
+    )
+
+    with pytest.raises(
+        ManualDownloadError, match=r"extracted so that train, test sit beside it"
+    ):
+        fetch("demo", spec, tmp_path)
+
+
+def test_manifest_entries_for_extracted_trees_carry_a_file_count(tmp_path):
+    for split in ("train", "test"):
+        (tmp_path / split).mkdir()
+        (tmp_path / split / "A-1.npy").write_bytes(b"x")
+    spec = source(BenchmarkFile(name="data.zip", provided_as=["train", "test"]))
+    files = fetch("demo", spec, tmp_path)
+
+    manifest = update_manifest(tmp_path / "m.json", "demo", files)
+
+    assert set(manifest["demo"]["train+test"]) == {"sha256", "size", "files"}
+
+
 def test_archives_are_extracted_after_verification(tmp_path):
     payload = archive(
         {"ESA-Mission1/labels.csv": b"ID\n", "ESA-Mission1/channels/c.zip": b"z"}
@@ -234,7 +300,12 @@ def test_the_shipped_config_describes_the_three_benchmarks():
     assert config["esa_adb"].doi == "10.5281/zenodo.12528696"
     assert config["opssat"].doi == "10.5281/zenodo.12588359"
     assert config["smap_msl"].files[0].url is None  # manual download
-    assert config["smap_msl"].manual
+    assert config["smap_msl"].files[0].provided_as == ["train", "test"]
+    assert (
+        config["smap_msl"].files[1].sha256
+        == "057ce2d6c8875982bf4e5404aefea14efdcbce413d80826d2b737c95b59b7539"
+    )
+    assert "extracted" in config["smap_msl"].manual
 
 
 # -- command line ----------------------------------------------------------------------------
