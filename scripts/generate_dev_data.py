@@ -2,16 +2,11 @@
 Generate a comprehensive simulated dataset for development and testing.
 """
 
-import sys
 from datetime import datetime, timedelta
-from pathlib import Path
 
-project_root = Path(__file__).parent.parent
-sys.path.insert(0, str(project_root))
-
-from src.ingestion.data_simulator import TelemetrySimulator
-from src.ingestion.storage_handler import LocalStorageHandler
-from src.utils.logging_config import setup_logger
+from constellation.legacy.ingestion.data_simulator import TelemetrySimulator
+from constellation.legacy.ingestion.storage_handler import LocalStorageHandler
+from constellation.legacy.utils.logging_config import setup_logger
 
 logger = setup_logger(__name__)
 
@@ -89,7 +84,7 @@ def generate_development_dataset(days: int = 7):
     print()
 
     # Run collection monitor to verify
-    from src.ingestion.collection_monitor import CollectionMonitor
+    from constellation.legacy.ingestion.collection_monitor import CollectionMonitor
 
     monitor = CollectionMonitor()
     monitor.print_status(hours=days * 24)

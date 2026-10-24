@@ -12,6 +12,8 @@
 <br>
 <br>
 
+> **Status:** v2 is under active development on the `v2` branch; see [CHANGELOG.md](CHANGELOG.md).
+
 ## Project Overview
 
 **CONSTELLATION monitors the International Space Station's attitude control and communications subsystems using real-time telemetry from NASA's public Lightstreamer feed. The system provides:**
@@ -20,10 +22,9 @@
 
 **Real-Time Telemetry Processor**
 
-- AWS Lambda function subscribing to NASA Lightstreamer
+- Collector subscribing to NASA's public ISS Live Lightstreamer feed
 - Filters for attitude control and communications subsystems
-- Writes to DynamoDB for real-time access
-- Archives to S3 for historical analysis
+- Writes date-partitioned Parquet files under `data/raw/`
 
 **Parameters Monitored:**
 
@@ -80,24 +81,21 @@
 
 ### 3. ML Model Suite
 
-**Model 1: Anomaly Detection (Isolation Forest + LSTM Autoencoder)**
+**Model 1: Anomaly Detection (Isolation Forest)**
 
 *Purpose:* Real-time detection of unusual telemetry patterns
 
 *Approach:*
 
 - Isolation Forest for fast, lightweight anomaly flagging
-- LSTM Autoencoder for complex temporal anomaly detection
-- Ensemble voting for final anomaly score
 
 *Training Data:*
 
-- Nominal operational periods (confirmed healthy operation)
-- Labeled anomalies from NASA incident reports
+- Nominal operational periods (healthy operation)
 
 *Metrics:* Precision, Recall, F1-Score, False Positive Rate
 
-**Model 2: Degradation Forecasting (Temporal Fusion Transformer)**
+**Model 2: Degradation Forecasting**
 
 *Purpose:* Predict subsystem performance degradation over time
 
@@ -110,7 +108,7 @@
 
 *Features:* Time series telemetry + orbital mechanics (radiation exposure, thermal cycling)
 
-*Output:* Forecasted parameter values with confidence intervals (7, 30, 90 days ahead)
+*Output:* Forecasted parameter values with confidence intervals
 
 **Model 3: Survival Analysis (Cox Proportional Hazards)**
 
@@ -173,8 +171,8 @@
 ┌─────────────────────────────────────────────────────────────────┐
 │                     DATA INGESTION LAYER                        │
 ├─────────────────────────────────────────────────────────────────┤
-│  NASA Lightstreamer → Lambda (Real-time) → DynamoDB             │
-│  Historical Archive → S3 Data Lake                              │
+│  NASA Lightstreamer → Collector → Parquet (data/raw)            │
+│  Date-partitioned Parquet archive                               │
 └─────────────────────────────────────────────────────────────────┘
                               ↓
 ┌─────────────────────────────────────────────────────────────────┐
@@ -189,8 +187,8 @@
 ┌─────────────────────────────────────────────────────────────────┐
 │                      ML MODEL SUITE                             │
 ├─────────────────────────────────────────────────────────────────┤
-│  Anomaly Detection    → Isolation Forest / Autoencoder          │
-│  Degradation Forecast → LSTM / Temporal Fusion Transformer      │
+│  Anomaly Detection    → Isolation Forest                        │
+│  Degradation Forecast → LSTM                                    │
 │  Survival Analysis    → Cox Proportional Hazards / Weibull      │
 │  Fault Classification → Random Forest / XGBoost                 │
 └─────────────────────────────────────────────────────────────────┘
@@ -199,27 +197,20 @@
 │                   OPERATIONAL LAYER                             │
 ├─────────────────────────────────────────────────────────────────┤
 │  Health Scoring → Maintenance Scheduling → Alert Generation     │
-│  Dashboard (Streamlit) → CloudWatch Monitoring                  │
+│  Dashboard (Streamlit)                                          │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
 <br>
 ### Model Training Strategy
 
-### Training Infrastructure
+### Training Workflow
 
 **Local Development:**
 
 - Jupyter notebooks for experimentation
-- GPU-enabled local training for initial model development
+- Local training for model development
 - Small data samples for rapid iteration
-
-**Production Training:**
-
-- AWS SageMaker for full dataset training
-- Hyperparameter tuning with SageMaker Automatic Model Tuning
-- Distributed training for large models
-- Model versioning with MLflow
 
 ### Evaluation Metrics
 
@@ -235,7 +226,7 @@
 - RMSE, MAE, MAPE
 - Prediction interval coverage
 - Directional accuracy (did we predict the trend correctly?)
-- Forecast horizon performance (7d vs 30d vs 90d)
+- Performance by forecast horizon
 
 **Survival Analysis:**
 
@@ -259,29 +250,25 @@
 git clone <your-repo-url>
 cd constellation
 
-# Create virtual environment
-python3 -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies
-pip install -r requirements.txt
+# Create and activate the conda environment (Python 3.12)
+conda env create -f environment.yml && conda activate constellation
 ```
 
 ### Collect Telemetry Data
 
 ```bash
 # Start telemetry collection
-python -m src.ingestion.collect_telemetry
+constellation collect iss
 ```
 
-Data will be saved to `data/raw/` in date-partitioned Parquet files.
+Readings are saved under `data/readings/` as Parquet files partitioned by source, asset and event-time date. Check progress with `constellation collect status`.
 
 <br>
 
 <h1 align="center">LET'S CONNECT!</h1>
 
 <p align="center">
-This project demonstrates production-grade ML engineering capabilities including distributed training infrastructure, experiment management, and systematic research methodology. All code and documentation available for technical review.
+Constellation is a portfolio project on spacecraft telemetry health monitoring. All code and documentation are available for technical review.
 </p>
 
 <h3 align="center">Michael Gurule</h3>
@@ -294,13 +281,13 @@ This project demonstrates production-grade ML engineering capabilities including
 <div align="center">
   <a href="mailto:michaelgurule1164@gmail.com">
     <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white"></a>
-  
-  <a href="michaelgurule.com">
+
+  <a href="https://michaelgurule.com">
     <img src="https://custom-icon-badges.demolab.com/badge/MICHAELGURULE.COM-150458?style=for-the-badge&logo=browser&logoColor=white"></a>
-  
-  <a href="www.linkedin.com/in/michael-gurule-447aa2134">
+
+  <a href="https://www.linkedin.com/in/michael-gurule-447aa2134">
     <img src="https://custom-icon-badges.demolab.com/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin-white&logoColor=fff"></a>
-  
+
   <a href="https://medium.com/@michaelgurule1164">
     <img src="https://img.shields.io/badge/Medium-12100E?style=for-the-badge&logo=medium&logoColor=white"></a>
 </div>
@@ -312,5 +299,5 @@ This project demonstrates production-grade ML engineering capabilities including
 <img  width="450" alt="Designed By" src="https://github.com/user-attachments/assets/12ddff9c-b9b6-4e69-ace0-5cbc94f1a3ad">
 </p>
 <p align="center">
-  <sub> Demonstrating institutional-quality quantitative finance capabilities through production-grade portfolio optimization </sub>
+  <sub> Constellation: spacecraft telemetry health monitoring </sub>
 </p>

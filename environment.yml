@@ -1,0 +1,16 @@
+# Conda environment for Constellation development.
+#   conda env create -f environment.yml
+#   conda activate constellation
+# Python and the OpenMP runtime come from conda; Python packages come from the
+# pinned pip requirements.
+name: constellation
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python=3.12
+  - pip
+  - llvm-openmp  # OpenMP runtime used by the LightGBM and XGBoost wheels on macOS
+  - pip:
+      - -r requirements-dev.txt
+      - -e .

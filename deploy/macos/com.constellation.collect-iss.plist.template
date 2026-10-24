@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  LaunchDaemon for the always-on ISS collector. Rendered by
+  scripts/install_collector_service.sh, which fills in the USER, HOME, REPO and ENV
+  placeholders (written with an at sign on each side).
+
+  The collector writes its own log to collect_iss.log and reopens it when newsyslog
+  rotates it. launchd's output files below only catch what happens outside Python
+  (a crash on start-up, for example).
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.constellation.collect-iss</string>
+    <key>UserName</key>
+    <string>@USER@</string>
+    <key>WorkingDirectory</key>
+    <string>@REPO@</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>@ENV@/bin/constellation</string>
+        <string>collect</string>
+        <string>iss</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+    <key>ThrottleInterval</key>
+    <integer>30</integer>
+    <key>ExitTimeOut</key>
+    <integer>60</integer>
+    <key>ProcessType</key>
+    <string>Background</string>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>HOME</key>
+        <string>@HOME@</string>
+        <key>PATH</key>
+        <string>@ENV@/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+        <key>CONSTELLATION_DATA_DIR</key>
+        <string>@HOME@/constellation-data</string>
+        <key>CONSTELLATION_ISS_FLUSH_SECONDS</key>
+        <string>300</string>
+        <key>CONSTELLATION_LOG_LEVEL</key>
+        <string>INFO</string>
+        <key>CONSTELLATION_LOG_FILE</key>
+        <string>@HOME@/constellation-data/logs/collect_iss.log</string>
+    </dict>
+    <key>StandardOutPath</key>
+    <string>@HOME@/constellation-data/logs/collect_iss.launchd.log</string>
+    <key>StandardErrorPath</key>
+    <string>@HOME@/constellation-data/logs/collect_iss.launchd.log</string>
+</dict>
+</plist>

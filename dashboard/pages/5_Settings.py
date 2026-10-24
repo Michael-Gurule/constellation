@@ -3,26 +3,15 @@ Settings and Configuration Page
 System settings, model configuration, and about information.
 """
 
-import streamlit as st
-import sys
-from pathlib import Path
 from datetime import datetime
-import json
+from pathlib import Path
 
-project_root = Path(__file__).parent.parent.parent
-sys.path.insert(0, str(project_root))
+import streamlit as st
+from theme import COLORS, apply_theme, render_logo, render_section_header
 
-from config.settings import MODELS_DIR, PROCESSED_DATA_DIR, RAW_DATA_DIR
-from dashboard.theme import (
-    apply_theme, render_logo, COLORS,
-    render_section_header
-)
+from constellation.legacy.settings import MODELS_DIR, PROCESSED_DATA_DIR, RAW_DATA_DIR
 
-st.set_page_config(
-    page_title="CONSTELLATION | Settings",
-    page_icon="▪",
-    layout="wide"
-)
+st.set_page_config(page_title="CONSTELLATION | Settings", page_icon="▪", layout="wide")
 
 apply_theme()
 
@@ -31,11 +20,12 @@ apply_theme()
 # Helper Functions
 # ============================================================================
 
+
 def get_directory_size(path: Path) -> str:
     """Get size of directory in human readable format."""
     try:
-        total = sum(f.stat().st_size for f in path.rglob('*') if f.is_file())
-        for unit in ['B', 'KB', 'MB', 'GB']:
+        total = sum(f.stat().st_size for f in path.rglob("*") if f.is_file())
+        for unit in ["B", "KB", "MB", "GB"]:
             if total < 1024:
                 return f"{total:.1f} {unit}"
             total /= 1024
@@ -64,24 +54,32 @@ with st.sidebar:
 
     settings_section = st.radio(
         "Navigate to",
-        ["Model Configuration", "Alert Thresholds", "Data Management", "System Info", "About"],
-        index=0
+        [
+            "Model Configuration",
+            "Alert Thresholds",
+            "Data Management",
+            "System Info",
+            "About",
+        ],
+        index=0,
     )
-
 
 
 # ============================================================================
 # Main Content
 # ============================================================================
 
-st.markdown("""
+st.markdown(
+    """
 <div style="margin-bottom: 30px;">
     <h1>Settings</h1>
     <p style="color: var(--text-secondary);">
         System configuration and information
     </p>
 </div>
-""", unsafe_allow_html=True)
+""",
+    unsafe_allow_html=True,
+)
 
 
 # ============================================================================
@@ -98,22 +96,22 @@ if settings_section == "Model Configuration":
             "file": "isolation_forest.pkl",
             "description": "Anomaly detection using ensemble isolation",
             "type": "Anomaly Detection",
-            "metrics": {"Precision": "89%", "Recall": "85%"}
+            "metrics": {"Precision": "89%", "Recall": "85%"},
         },
         {
             "name": "Fault Classifier",
             "file": "fault_classifier.pkl",
             "description": "XGBoost-based fault type classification",
             "type": "Classification",
-            "metrics": {"Accuracy": "82%", "F1": "0.79"}
+            "metrics": {"Accuracy": "82%", "F1": "0.79"},
         },
         {
             "name": "LSTM Forecaster",
             "file": "degradation_forecaster_colab.pkl",
             "description": "Deep learning degradation prediction",
             "type": "Forecasting",
-            "metrics": {"R²": "0.76", "MAE": "2.3"}
-        }
+            "metrics": {"R²": "0.76", "MAE": "2.3"},
+        },
     ]
 
     col1, col2, col3 = st.columns(3)
@@ -124,15 +122,16 @@ if settings_section == "Model Configuration":
         is_loaded = model_path.exists()
 
         with col:
-            status_color = COLORS['success'] if is_loaded else COLORS['text_muted']
+            status_color = COLORS["success"] if is_loaded else COLORS["text_muted"]
             status_text = "Active" if is_loaded else "Not Found"
             status_dot = "online" if is_loaded else "offline"
 
-            st.markdown(f"""
+            st.markdown(
+                f"""
             <div class="metric-card" style="height: 100%;">
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
                     <span style="color: var(--text-primary); font-weight: 600; font-size: 1.1rem;">
-                        {model['name']}
+                        {model["name"]}
                     </span>
                     <div style="display: flex; align-items: center;">
                         <span class="status-dot {status_dot}"></span>
@@ -140,20 +139,23 @@ if settings_section == "Model Configuration":
                     </div>
                 </div>
                 <div style="color: var(--text-muted); font-size: 0.8rem; margin-bottom: 12px;">
-                    {model['type']}
+                    {model["type"]}
                 </div>
                 <div style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 15px;">
-                    {model['description']}
+                    {model["description"]}
                 </div>
                 <div style="border-top: 1px solid var(--border); padding-top: 12px;">
                     <div style="color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; margin-bottom: 8px;">
                         Performance
                     </div>
                     <div style="display: flex; gap: 15px;">
-            """, unsafe_allow_html=True)
+            """,
+                unsafe_allow_html=True,
+            )
 
-            for metric_name, metric_value in model['metrics'].items():
-                st.markdown(f"""
+            for metric_name, metric_value in model["metrics"].items():
+                st.markdown(
+                    f"""
                         <div>
                             <span style="color: var(--primary); font-family: 'JetBrains Mono', monospace; font-size: 1rem;">
                                 {metric_value}
@@ -162,13 +164,18 @@ if settings_section == "Model Configuration":
                                 {metric_name}
                             </span>
                         </div>
-                """, unsafe_allow_html=True)
+                """,
+                    unsafe_allow_html=True,
+                )
 
-            st.markdown("""
+            st.markdown(
+                """
                     </div>
                 </div>
             </div>
-            """, unsafe_allow_html=True)
+            """,
+                unsafe_allow_html=True,
+            )
 
     # Model actions
     st.markdown("<br>", unsafe_allow_html=True)
@@ -193,7 +200,10 @@ if settings_section == "Model Configuration":
         if st.button("Export Model Info", use_container_width=True):
             model_info = {
                 "timestamp": datetime.now().isoformat(),
-                "models": [{"name": m["name"], "loaded": (MODELS_DIR / m["file"]).exists()} for m in models]
+                "models": [
+                    {"name": m["name"], "loaded": (MODELS_DIR / m["file"]).exists()}
+                    for m in models
+                ],
             }
             st.json(model_info)
 
@@ -208,12 +218,15 @@ elif settings_section == "Alert Thresholds":
     col1, col2 = st.columns(2)
 
     with col1:
-        st.markdown("""
+        st.markdown(
+            """
         <div class="metric-card">
             <div style="color: var(--text-primary); font-weight: 600; font-size: 1.1rem; margin-bottom: 20px;">
                 Anomaly Detection
             </div>
-        """, unsafe_allow_html=True)
+        """,
+            unsafe_allow_html=True,
+        )
 
         anomaly_warning = st.slider(
             "Warning Threshold",
@@ -222,7 +235,7 @@ elif settings_section == "Alert Thresholds":
             value=0.80,
             step=0.05,
             help="Anomaly score above this triggers a warning",
-            key="anomaly_warning"
+            key="anomaly_warning",
         )
 
         anomaly_critical = st.slider(
@@ -232,25 +245,31 @@ elif settings_section == "Alert Thresholds":
             value=0.95,
             step=0.05,
             help="Anomaly score above this triggers a critical alert",
-            key="anomaly_critical"
+            key="anomaly_critical",
         )
 
-        st.markdown("""
+        st.markdown(
+            """
             <div style="margin-top: 15px; padding: 10px; background: var(--bg-light); border-radius: 8px;">
                 <div style="color: var(--text-muted); font-size: 0.8rem;">
                     Scores range from 0 (normal) to 1 (highly anomalous)
                 </div>
             </div>
         </div>
-        """, unsafe_allow_html=True)
+        """,
+            unsafe_allow_html=True,
+        )
 
     with col2:
-        st.markdown("""
+        st.markdown(
+            """
         <div class="metric-card">
             <div style="color: var(--text-primary); font-weight: 600; font-size: 1.1rem; margin-bottom: 20px;">
                 Health Monitoring
             </div>
-        """, unsafe_allow_html=True)
+        """,
+            unsafe_allow_html=True,
+        )
 
         health_warning = st.slider(
             "Warning Threshold",
@@ -259,7 +278,7 @@ elif settings_section == "Alert Thresholds":
             value=60,
             step=5,
             help="Health score below this triggers a warning",
-            key="health_warning"
+            key="health_warning",
         )
 
         health_critical = st.slider(
@@ -269,17 +288,20 @@ elif settings_section == "Alert Thresholds":
             value=40,
             step=5,
             help="Health score below this triggers a critical alert",
-            key="health_critical"
+            key="health_critical",
         )
 
-        st.markdown("""
+        st.markdown(
+            """
             <div style="margin-top: 15px; padding: 10px; background: var(--bg-light); border-radius: 8px;">
                 <div style="color: var(--text-muted); font-size: 0.8rem;">
                     Scores range from 0 (failed) to 100 (perfect health)
                 </div>
             </div>
         </div>
-        """, unsafe_allow_html=True)
+        """,
+            unsafe_allow_html=True,
+        )
 
     # Notification settings
     st.markdown("<br>", unsafe_allow_html=True)
@@ -288,35 +310,39 @@ elif settings_section == "Alert Thresholds":
     col1, col2 = st.columns(2)
 
     with col1:
-        st.markdown("""
+        st.markdown(
+            """
         <div class="metric-card">
-        """, unsafe_allow_html=True)
+        """,
+            unsafe_allow_html=True,
+        )
 
         enable_alerts = st.checkbox("Enable Alert Notifications", value=False)
-        enable_email = st.checkbox("Email Notifications", value=False, disabled=not enable_alerts)
+        enable_email = st.checkbox(
+            "Email Notifications", value=False, disabled=not enable_alerts
+        )
         enable_dashboard = st.checkbox("Dashboard Notifications", value=True)
 
         st.markdown("</div>", unsafe_allow_html=True)
 
     with col2:
-        st.markdown("""
+        st.markdown(
+            """
         <div class="metric-card">
-        """, unsafe_allow_html=True)
+        """,
+            unsafe_allow_html=True,
+        )
 
         refresh_interval = st.number_input(
             "Auto-refresh Interval (seconds)",
             min_value=30,
             max_value=600,
             value=60,
-            step=30
+            step=30,
         )
 
         data_retention = st.number_input(
-            "Data Retention (days)",
-            min_value=7,
-            max_value=365,
-            value=90,
-            step=7
+            "Data Retention (days)", min_value=7, max_value=365, value=90, step=7
         )
 
         st.markdown("</div>", unsafe_allow_html=True)
@@ -330,7 +356,7 @@ elif settings_section == "Alert Thresholds":
             "health_critical": health_critical,
             "enable_alerts": enable_alerts,
             "refresh_interval": refresh_interval,
-            "data_retention": data_retention
+            "data_retention": data_retention,
         }
         st.success("Configuration saved")
         st.json(config)
@@ -359,14 +385,17 @@ elif settings_section == "Data Management":
         st.metric("MODELS", model_size)
 
     with col4:
-        total_files = count_files(RAW_DATA_DIR, "*.parquet") + count_files(PROCESSED_DATA_DIR, "*.parquet")
+        total_files = count_files(RAW_DATA_DIR, "*.parquet") + count_files(
+            PROCESSED_DATA_DIR, "*.parquet"
+        )
         st.metric("TOTAL FILES", total_files)
 
     # Data paths
     st.markdown("<br>", unsafe_allow_html=True)
     render_section_header("Data Paths", "")
 
-    st.markdown(f"""
+    st.markdown(
+        f"""
     <div class="metric-card">
         <div style="display: grid; gap: 12px;">
             <div style="display: flex; justify-content: space-between; padding: 8px; background: var(--bg-light); border-radius: 6px;">
@@ -383,7 +412,9 @@ elif settings_section == "Data Management":
             </div>
         </div>
     </div>
-    """, unsafe_allow_html=True)
+    """,
+        unsafe_allow_html=True,
+    )
 
     # Data actions
     st.markdown("<br>", unsafe_allow_html=True)
@@ -406,7 +437,7 @@ elif settings_section == "Data Management":
                 "processed_data_size": get_directory_size(PROCESSED_DATA_DIR),
                 "raw_files": count_files(RAW_DATA_DIR, "*.parquet"),
                 "processed_files": count_files(PROCESSED_DATA_DIR, "*.parquet"),
-                "timestamp": datetime.now().isoformat()
+                "timestamp": datetime.now().isoformat(),
             }
             st.json(summary)
 
@@ -421,13 +452,16 @@ elif settings_section == "System Info":
     col1, col2 = st.columns(2)
 
     with col1:
-        st.markdown("""
+        st.markdown(
+            """
         <div class="metric-card">
             <div style="color: var(--text-primary); font-weight: 600; font-size: 1.1rem; margin-bottom: 20px;">
                 Application
             </div>
             <div style="display: grid; gap: 10px;">
-        """, unsafe_allow_html=True)
+        """,
+            unsafe_allow_html=True,
+        )
 
         info_items = [
             ("Version", "1.0.0"),
@@ -437,26 +471,35 @@ elif settings_section == "System Info":
         ]
 
         for label, value in info_items:
-            st.markdown(f"""
+            st.markdown(
+                f"""
                 <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border);">
                     <span style="color: var(--text-muted);">{label}</span>
                     <span style="color: var(--text-primary); font-family: 'JetBrains Mono', monospace;">{value}</span>
                 </div>
-            """, unsafe_allow_html=True)
+            """,
+                unsafe_allow_html=True,
+            )
 
-        st.markdown("""
+        st.markdown(
+            """
             </div>
         </div>
-        """, unsafe_allow_html=True)
+        """,
+            unsafe_allow_html=True,
+        )
 
     with col2:
-        st.markdown("""
+        st.markdown(
+            """
         <div class="metric-card">
             <div style="color: var(--text-primary); font-weight: 600; font-size: 1.1rem; margin-bottom: 20px;">
                 Dependencies
             </div>
             <div style="display: grid; gap: 10px;">
-        """, unsafe_allow_html=True)
+        """,
+            unsafe_allow_html=True,
+        )
 
         deps = [
             ("Pandas", "2.0.3"),
@@ -466,23 +509,30 @@ elif settings_section == "System Info":
         ]
 
         for lib, version in deps:
-            st.markdown(f"""
+            st.markdown(
+                f"""
                 <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border);">
                     <span style="color: var(--text-muted);">{lib}</span>
                     <span style="color: var(--primary); font-family: 'JetBrains Mono', monospace;">{version}</span>
                 </div>
-            """, unsafe_allow_html=True)
+            """,
+                unsafe_allow_html=True,
+            )
 
-        st.markdown("""
+        st.markdown(
+            """
             </div>
         </div>
-        """, unsafe_allow_html=True)
+        """,
+            unsafe_allow_html=True,
+        )
 
     # Monitored parameters
     st.markdown("<br>", unsafe_allow_html=True)
     render_section_header("Monitored Parameters", "")
 
-    st.markdown("""
+    st.markdown(
+        """
     <div class="metric-card">
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
             <div>
@@ -508,7 +558,9 @@ elif settings_section == "System Info":
             </div>
         </div>
     </div>
-    """, unsafe_allow_html=True)
+    """,
+        unsafe_allow_html=True,
+    )
 
 
 # ============================================================================
@@ -518,7 +570,8 @@ elif settings_section == "System Info":
 elif settings_section == "About":
     render_section_header("About CONSTELLATION", "")
 
-    st.markdown("""
+    st.markdown(
+        """
     <div class="metric-card">
         <div style="text-align: center; padding: 20px 0;">
             <div style="margin-bottom: 15px;">
@@ -543,12 +596,15 @@ elif settings_section == "About":
             </div>
         </div>
     </div>
-    """, unsafe_allow_html=True)
+    """,
+        unsafe_allow_html=True,
+    )
 
     col1, col2 = st.columns(2)
 
     with col1:
-        st.markdown("""
+        st.markdown(
+            """
         <div class="metric-card" style="height: 100%;">
             <div style="color: var(--text-primary); font-weight: 600; font-size: 1.1rem; margin-bottom: 15px;">
                 Overview
@@ -562,10 +618,13 @@ elif settings_section == "About":
                 decision support capabilities for aerospace and defense applications.
             </div>
         </div>
-        """, unsafe_allow_html=True)
+        """,
+            unsafe_allow_html=True,
+        )
 
     with col2:
-        st.markdown("""
+        st.markdown(
+            """
         <div class="metric-card" style="height: 100%;">
             <div style="color: var(--text-primary); font-weight: 600; font-size: 1.1rem; margin-bottom: 15px;">
                 Capabilities
@@ -593,7 +652,9 @@ elif settings_section == "About":
                 </div>
             </div>
         </div>
-        """, unsafe_allow_html=True)
+        """,
+            unsafe_allow_html=True,
+        )
 
     # Technology stack
     st.markdown("<br>", unsafe_allow_html=True)
@@ -603,27 +664,31 @@ elif settings_section == "About":
 
     tech_categories = [
         ("Data Processing", ["Pandas", "NumPy", "PyArrow", "SciPy"]),
-        ("Machine Learning", ["scikit-learn", "XGBoost", "PyTorch", "TensorFlow"]),
+        ("Machine Learning", ["scikit-learn", "XGBoost", "PyTorch"]),
         ("Visualization", ["Plotly", "Streamlit", "Matplotlib"]),
-        ("Operations", ["FastAPI", "PuLP", "boto3", "pytest"])
+        ("Operations", ["FastAPI", "PuLP", "pytest"]),
     ]
 
     for col, (category, techs) in zip(tech_cols, tech_categories):
         with col:
-            st.markdown(f"""
+            st.markdown(
+                f"""
             <div class="metric-card" style="height: 100%;">
                 <div style="color: var(--text-primary); font-weight: 600; margin-bottom: 12px;">
                     {category}
                 </div>
                 <div style="color: var(--text-secondary); font-size: 0.9rem; line-height: 2;">
-                    {'<br/>'.join(techs)}
+                    {"<br/>".join(techs)}
                 </div>
             </div>
-            """, unsafe_allow_html=True)
+            """,
+                unsafe_allow_html=True,
+            )
 
     # Developer info
     st.markdown("<br>", unsafe_allow_html=True)
-    st.markdown("""
+    st.markdown(
+        """
     <div style="text-align: center; padding: 30px; border-top: 1px solid var(--border);">
         <div style="color: var(--text-primary); font-weight: 600; font-size: 1.1rem;">
             Developed by Michael Gurule
@@ -635,15 +700,20 @@ elif settings_section == "About":
             MIT License | Data: NASA ISS Telemetry (Public)
         </div>
     </div>
-    """, unsafe_allow_html=True)
+    """,
+        unsafe_allow_html=True,
+    )
 
 
 # Footer
 st.markdown("<br><br>", unsafe_allow_html=True)
-st.markdown(f"""
+st.markdown(
+    f"""
 <div style="text-align: center; color: var(--text-muted); padding: 20px; border-top: 1px solid var(--border);">
     <div style="font-size: 0.75rem;">
         CONSTELLATION v1.0.0 | Last updated: {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
     </div>
 </div>
-""", unsafe_allow_html=True)
+""",
+    unsafe_allow_html=True,
+)

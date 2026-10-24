@@ -26,7 +26,7 @@ The CONSTELLATION dashboard provides a comprehensive interface for monitoring th
 ---
 
 ## Dashboard Pages
-  
+
 ### Mission Control
 <br>
 <p align="center">
@@ -179,7 +179,7 @@ System configuration, model management, and about information.
 pip install -r requirements.txt
 
 # Run data collection (optional - for live data)
-python scripts/collect_telemetry.py --duration 3600
+constellation collect iss --duration 1h
 
 # Launch dashboard
 streamlit run dashboard/app.py

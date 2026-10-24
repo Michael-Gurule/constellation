@@ -6,7 +6,7 @@
   Real-time ISS telemetry monitoring with ML-powered diagnostics
 </p>  
 <br>
-<br> 
+<br>
 
 Interactive web interface for satellite fleet health monitoring with a dark space-themed design.
 
@@ -73,7 +73,7 @@ For full functionality, run system analysis first:
 python scripts/run_system_analysis.py --subsystem attitude_control --export
 
 # Or collect live telemetry
-python scripts/collect_telemetry.py --duration 3600
+constellation collect iss --duration 1h
 ```
 
 The dashboard will display demo data if no analysis results are available.
@@ -108,7 +108,8 @@ COLORS = {
 1. Create a new file in `pages/` with numeric prefix (e.g., `6_NewPage.py`)
 2. Import and apply the theme:
    ```python
-   from dashboard.theme import apply_theme, render_logo, COLORS
+   from theme import apply_theme, render_logo, COLORS
+
    apply_theme()
    ```
 3. Use shared components like `render_section_header()` and `apply_plotly_theme()`
