@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Hourly compaction of finished days in the collector's store: one deduplicated file
+  per day instead of about 1,440 part files. Rendered by
+  scripts/install_collector_service.sh.
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.constellation.compact</string>
+    <key>UserName</key>
+    <string>@USER@</string>
+    <key>WorkingDirectory</key>
+    <string>@REPO@</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>@ENV@/bin/constellation</string>
+        <string>store</string>
+        <string>compact</string>
+    </array>
+    <key>StartInterval</key>
+    <integer>3600</integer>
+    <key>RunAtLoad</key>
+    <false/>
+    <key>ProcessType</key>
+    <string>Background</string>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>HOME</key>
+        <string>@HOME@</string>
+        <key>PATH</key>
+        <string>@ENV@/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+        <key>CONSTELLATION_DATA_DIR</key>
+        <string>@HOME@/constellation-data</string>
+        <key>CONSTELLATION_ISS_FLUSH_SECONDS</key>
+        <string>300</string>
+        <key>CONSTELLATION_LOG_LEVEL</key>
+        <string>INFO</string>
+    </dict>
+    <key>StandardOutPath</key>
+    <string>@HOME@/constellation-data/logs/compact.log</string>
+    <key>StandardErrorPath</key>
+    <string>@HOME@/constellation-data/logs/compact.log</string>
+</dict>
+</plist>

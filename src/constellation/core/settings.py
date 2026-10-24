@@ -24,6 +24,7 @@ class Settings(BaseSettings):
     reports_dir: Path = Path("reports")
     results_dir: Path = Path("data/results")
     log_level: str = "INFO"
+    log_file: Path | None = None
     api_key: SecretStr | None = None
     api_url: str = "http://127.0.0.1:8000"
     dashboard_origin: str = "http://127.0.0.1:8501"

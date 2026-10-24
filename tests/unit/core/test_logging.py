@@ -65,3 +65,26 @@ def test_reconfiguring_replaces_the_handler():
     configure_logging("DEBUG", json=True)
 
     assert len(_flagged(logging.getLogger())) == 1
+
+
+def test_file_logging_writes_records_and_survives_rotation(tmp_path):
+    log = tmp_path / "logs" / "collect.log"
+    configure_logging("INFO", file=log)
+
+    logging.getLogger("constellation.test").info("before rotation")
+    log.rename(tmp_path / "logs" / "collect.log.1")  # what newsyslog does
+    logging.getLogger("constellation.test").info("after rotation")
+
+    assert "before rotation" in (tmp_path / "logs" / "collect.log.1").read_text()
+    assert "after rotation" in log.read_text()  # the handler reopened the new file
+    assert "before rotation" not in log.read_text()
+
+
+def test_file_logging_replaces_the_stream_handler(tmp_path, capsys):
+    configure_logging("INFO")
+    configure_logging("INFO", file=tmp_path / "x.log")
+
+    logging.getLogger("constellation.test").info("only in the file")
+
+    assert capsys.readouterr().err == ""
+    assert len(_flagged(logging.getLogger())) == 1

@@ -388,6 +388,22 @@ def test_sigint_stops_the_collector_cleanly(collector, store, fake_session):
     assert signal.getsignal(signal.SIGINT) is before
 
 
+def test_sigterm_flushes_and_stops_the_collector_like_launchctl_bootout(
+    collector, store, fake_session
+):
+    collector.handle_update(FakeUpdate("Z1000009", 1.0))
+    before = signal.getsignal(signal.SIGTERM)
+    timer = threading.Timer(0.1, lambda: os.kill(os.getpid(), signal.SIGTERM))
+    timer.start()
+
+    collector.run(duration=None)  # returns once the signal arrives
+
+    timer.join()
+    assert fake_session["client"].disconnected
+    assert len(store.read_readings()) == 1  # the buffered reading was flushed
+    assert signal.getsignal(signal.SIGTERM) is before
+
+
 # -- probe -----------------------------------------------------------------------------
 
 

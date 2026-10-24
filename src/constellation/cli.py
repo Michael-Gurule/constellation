@@ -20,6 +20,8 @@ tle_app = typer.Typer(help="Orbital element sets.")
 app.add_typer(tle_app, name="tle")
 data_app = typer.Typer(help="Datasets.")
 app.add_typer(data_app, name="data")
+store_app = typer.Typer(help="Maintain the readings store.")
+app.add_typer(store_app, name="store")
 
 DEFAULT_CHANNELS = Path("configs/ingest/iss.yaml")
 STALE_AFTER = pd.Timedelta(5, unit="min")
@@ -34,7 +36,8 @@ def readings_store() -> ParquetStore:
 @app.callback()
 def main() -> None:
     """Constellation command-line interface."""
-    configure_logging(get_settings().log_level)
+    settings = get_settings()
+    configure_logging(settings.log_level, file=settings.log_file)
 
 
 @app.command()
@@ -201,3 +204,101 @@ def data_fetch(
             typer.echo(f"  {item.name}: {state} ({int(item.digests['size']):,} bytes)")
     if failed:
         raise typer.Exit(code=2)
+
+
+@store_app.command("compact")
+def store_compact(
+    before: Annotated[
+        str | None,
+        typer.Option(
+            help="Compact days before this date (YYYY-MM-DD); default today (UTC)."
+        ),
+    ] = None,
+    source: Annotated[str | None, typer.Option(help="Only this source.")] = None,
+    asset: Annotated[str | None, typer.Option(help="Only this asset.")] = None,
+    dry_run: Annotated[
+        bool, typer.Option("--dry-run", help="Report only; change nothing.")
+    ] = False,
+) -> None:
+    """Merge the part files of each finished day into one deduplicated file."""
+    from constellation.core.compact import compact
+
+    store = readings_store()
+    try:
+        report = compact(
+            store, before=before, source=source, asset=asset, dry_run=dry_run
+        )
+    except ValueError as error:
+        raise typer.BadParameter(str(error)) from error
+    verb = "would compact" if dry_run else "compacted"
+    for plan in report.partitions:
+        typer.echo(
+            f"{verb} {plan.source}/{plan.asset}/{plan.date}: {len(plan.files)} files, "
+            f"{plan.rows_before:,} rows -> 1 file, {plan.rows_after:,} rows"
+        )
+    for skipped in report.skipped_open:
+        typer.echo(f"skipped {skipped}: a writer has left a temporary file in it")
+    typer.echo(
+        f"{verb}: {report.files_before} files -> {report.files_after}, "
+        f"{report.rows_before:,} rows -> {report.rows_after:,} "
+        f"({report.rows_before - report.rows_after:,} duplicates)"
+    )
+
+
+@data_app.command("snapshot")
+def data_snapshot(
+    dataset: Annotated[str, typer.Argument(help="Only `iss` is supported.")],
+    start: Annotated[str, typer.Option(help="First date, YYYY-MM-DD.")],
+    end: Annotated[str, typer.Option(help="Last date, YYYY-MM-DD (inclusive).")],
+    name: Annotated[
+        str | None, typer.Option(help="Snapshot name; default <start>_<end>.")
+    ] = None,
+    verify: Annotated[
+        bool,
+        typer.Option("--verify", help="Check the files against the saved snapshot."),
+    ] = False,
+) -> None:
+    """Record, or verify, a checksummed snapshot of the ISS readings in a date range."""
+    import json
+
+    from constellation.data.snapshot import (
+        build_snapshot,
+        verify_snapshot,
+        write_snapshot,
+    )
+
+    if dataset != "iss":
+        raise typer.BadParameter("only `iss` is supported")
+    label = name or f"{start}_{end}"
+    store = readings_store()
+    directory = get_settings().data_dir / "manifests"
+    path = directory / f"iss_{label}.json"
+
+    if verify:
+        if not path.exists():
+            raise typer.BadParameter(f"no snapshot at {path}")
+        problems = verify_snapshot(store, json.loads(path.read_text()))
+        if problems:
+            for problem in problems:
+                typer.echo(problem)
+            typer.echo(f"snapshot {label}: {len(problems)} problems")
+            raise typer.Exit(code=1)
+        typer.echo(f"snapshot {label}: all files match")
+        return
+
+    snapshot = build_snapshot(store, start=start, end=end, name=label)
+    written = write_snapshot(directory, label, snapshot)
+    totals = snapshot["totals"]
+    typer.echo(
+        f"wrote {written}: {totals['partitions']} partitions, {totals['files']} files, "
+        f"{totals['rows_unique']:,} unique readings on {totals['channels']} channels, "
+        f"{len(snapshot['gaps'])} gaps over {int(snapshot['gap_threshold_s'])} s"
+    )
+    if not snapshot["complete"]:
+        typer.echo(
+            "warning: the range includes today's open partition; snapshot again once it is finished"
+        )
+    if not snapshot["compacted"]:
+        typer.echo(
+            "warning: some days have several files; run `constellation store compact` first, or the hashes change"
+        )

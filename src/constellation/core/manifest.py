@@ -18,6 +18,11 @@ class ManifestEntry(TypedDict):
 Manifest = dict[str, ManifestEntry]
 
 
+def file_sha256(path: Path) -> str:
+    """SHA-256 of a file, read in chunks."""
+    return _sha256(path)
+
+
 def _sha256(path: Path) -> str:
     digest = hashlib.sha256()
     with path.open("rb") as handle:

@@ -4,7 +4,7 @@ PYTHON ?= python
 ENV_NAME ?= constellation
 
 .DEFAULT_GOAL := help
-.PHONY: help env env-update hooks lint format typecheck test cov bench check collect-iss data-benchmarks clean
+.PHONY: help env env-update env-collector hooks lint format typecheck test cov bench check collect-iss data-benchmarks clean
 
 help:  ## List available targets
 	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | \
@@ -28,6 +28,11 @@ env:  ## Create the conda environment from environment.yml
 env-update:  ## Sync the conda environment with environment.yml
 	conda env update -n $(ENV_NAME) -f environment.yml --prune
 	$(LINK_OPENMP)
+
+env-collector:  ## Create the collector-only conda env (no PyTorch; for Intel Macs)
+	conda create -y -n constellation-collector --override-channels -c conda-forge python=3.12 pip
+	conda run -n constellation-collector python -m pip install -r requirements-collector.txt
+	conda run -n constellation-collector python -m pip install --no-deps -e .
 
 hooks:  ## Install pre-commit git hooks
 	$(PYTHON) -m pre_commit install

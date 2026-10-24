@@ -1,0 +1,12 @@
+# Dependencies of the ISS collector only, pinned to the versions in requirements.txt.
+# For machines that cannot run the full stack, including Intel Macs (PyTorch has no
+# macOS x86_64 wheels for the pinned version). Install with `make env-collector`,
+# which also installs the package itself with --no-deps.
+numpy==2.5.4
+pandas==2.3.3
+pyarrow==26.0.0
+pydantic==2.14.1
+pydantic-settings==2.16.0
+PyYAML==6.0.3
+typer==0.27.3
+lightstreamer-client-lib==2.2.3

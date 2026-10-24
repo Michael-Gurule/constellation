@@ -12,6 +12,7 @@ VARIABLES = [
     "REPORTS_DIR",
     "RESULTS_DIR",
     "LOG_LEVEL",
+    "LOG_FILE",
     "API_KEY",
     "API_URL",
     "DASHBOARD_ORIGIN",
@@ -95,3 +96,11 @@ def test_get_settings_is_cached_until_cleared(monkeypatch):
 
     get_settings.cache_clear()
     assert get_settings().log_level == "WARNING"
+
+
+def test_log_file_is_optional_and_read_from_the_environment(monkeypatch, tmp_path):
+    assert Settings().log_file is None
+
+    monkeypatch.setenv("CONSTELLATION_LOG_FILE", str(tmp_path / "collect.log"))
+
+    assert Settings().log_file == tmp_path / "collect.log"

@@ -36,6 +36,22 @@ _DATASET_SCHEMA = READINGS_ARROW.append(pa.field("asset", pa.string())).append(
 )
 _COLUMNS = [c.name for c in READINGS]
 _SORT_KEYS = ["source", "asset_id", "channel", "t"]
+# Two rows that agree on all of these are the same reading, however often it was written.
+DEDUPE_KEYS = [*_SORT_KEYS, "value", "value_text", "status"]
+
+
+def drop_duplicate_readings(frame: pd.DataFrame) -> pd.DataFrame:
+    """Remove repeated readings, keeping the copy with the earliest `ingested_at`.
+
+    Rows are duplicates when they are identical on `source`, `asset_id`, `channel`,
+    `t`, `value`, `value_text` and `status` (missing values compare equal). Rows
+    that differ in any of those are all kept.
+    """
+    if frame.empty:
+        return frame
+    ordered = frame.sort_values("ingested_at", kind="stable")
+    unique: pd.DataFrame = ordered.drop_duplicates(subset=DEDUPE_KEYS, keep="first")
+    return unique
 
 
 def _date_of(t: pd.Timestamp) -> str:
@@ -126,11 +142,14 @@ class ParquetStore:
         channels: Collection[str] | None = None,
         start: pd.Timestamp | str | None = None,
         end: pd.Timestamp | str | None = None,
+        dedupe: bool = True,
     ) -> pd.DataFrame:
         """Read readings matching the filters, sorted by source, asset, channel, t.
 
         `start` is inclusive and `end` is exclusive. Filters are pushed down to
-        partition pruning and Parquet statistics.
+        partition pruning and Parquet statistics. With `dedupe` (the default),
+        readings that were written more than once, for example by overlapping
+        part files in a synced copy, are returned once; see `drop_duplicate_readings`.
         """
         dataset = self._dataset()
         if dataset is None:
@@ -161,6 +180,8 @@ class ParquetStore:
         if table.num_rows == 0:
             return empty_readings()
         frame = table.to_pandas()
+        if dedupe:
+            frame = drop_duplicate_readings(frame)
         result: pd.DataFrame = frame.sort_values(_SORT_KEYS, kind="stable").reset_index(
             drop=True
         )
@@ -184,18 +205,24 @@ class ParquetStore:
                     )
         return pairs
 
-    def stats(self) -> pd.DataFrame:
-        """Rows and first/last event time for every (source, asset, channel)."""
+    def stats(self, dedupe: bool = True) -> pd.DataFrame:
+        """Rows and first/last event time for every (source, asset, channel).
+
+        Duplicate readings (see `drop_duplicate_readings`) are counted once unless
+        `dedupe` is false, which is cheaper on a large store.
+        """
         columns = ["source", "asset_id", "channel", "rows", "first_t", "last_t"]
         dataset = self._dataset()
         if dataset is None:
             return pd.DataFrame(columns=columns)
-        table = dataset.to_table(columns=["source", "asset_id", "channel", "t"])
+        table = dataset.to_table(columns=DEDUPE_KEYS if dedupe else _SORT_KEYS)
         if table.num_rows == 0:
             return pd.DataFrame(columns=columns)
+        frame = table.to_pandas()
+        if dedupe:
+            frame = frame.drop_duplicates(subset=DEDUPE_KEYS)
         grouped = (
-            table.to_pandas()
-            .groupby(["source", "asset_id", "channel"], sort=True)["t"]
+            frame.groupby(["source", "asset_id", "channel"], sort=True)["t"]
             .agg(rows="size", first_t="min", last_t="max")
             .reset_index()
         )
